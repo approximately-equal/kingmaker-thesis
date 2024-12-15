@@ -11,33 +11,15 @@
     date: datetime(year: 2025, month: 05, day: 01),
     acknowledgements: [I would like to make some acknowledgements],
     abbreviations: [Here are some abbreviations],
-    abstract: [This is an abstract],
+    abstract: [],
     dedication: [To my parents, for their ceaseless support.],
     bib: bibliography("references.bib", title: [References], full: true)
 )
 
 // document ====================================================================
-// #include "chapters/introduction.typ";
-// #include "chapters/background.typ";
-// #include "chapters/methods.typ";
-// #include "chapters/results.typ";
-// #include "chapters/discussion.typ";
-// #include "chapters/appendix.typ";
-
-= Introduction
-#lorem(500)
-
-= Background
-#lorem(1000)
-
-= Methods
-#lorem(800)
-
-= Results
-#lorem(700)
-
-= Discussion
-#lorem(600)
-
-= Afterward
-#lorem(1400)
+#include "chapters/1. Introduction.typ";
+#include "chapters/2. Background.typ";
+#include "chapters/3. Methods.typ";
+#include "chapters/4. Results.typ";
+#include "chapters/5. Discussion.typ";
+#include "chapters/6. Appendix.typ";

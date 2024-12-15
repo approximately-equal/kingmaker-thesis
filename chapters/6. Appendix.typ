@@ -1,4 +1,6 @@
 // 6. Afterward ================================================================
 #heading(level: 1, supplement: [Chapter])[
 	Afterwards
-] <chapter>
+] <afterward>
+
+...this will be written as material is introduced
