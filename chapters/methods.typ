@@ -4,6 +4,7 @@
 ] <methods>
 
 This chapter should begin by restating the thesis questions, and explaining the overarching framework by which we aim to answer them. Mainly, via monte-carlo and simulation. It should explain that in the results section, we will:
+
   + Train computational models to "optimally vote"
   + Test those models (and more well-know ones) to find the best of the best
   + Test how manipulable various `methods` are

@@ -1,15 +1,15 @@
-// core theory =================================================================
+% core theory ===================================================================
 
-// Axioms:
-// 1. Unrestricted domain:  The social welfare function is defined for every admissible pair of individual orderings i.e. all possible voting preferences are possible, so in ranked choice election with A, B, C, all configurations of A, B, C are possible (e.g. A < B < C)
-// 2. Pareto Efficiency: If all voters prefer A < B then A < B overall
-// 3. Non-dictatorship: The system does not depend on only one voter's ballot.
-// 4. Independence of irrelevant alternatives: A voters preferences of (A, B) depend only on A and B, and not whether A < C or C < A (as we'll see later, this is a very important, and _very_ contentios axiom).
+% Axioms:
+% 1. Unrestricted domain:  The social welfare function is defined for every admissible pair of individual orderings i.e. all possible voting preferences are possible, so in ranked choice election with A, B, C, all configurations of A, B, C are possible (e.g. A < B < C)
+% 2. Pareto Efficiency: If all voters prefer A < B then A < B overall
+% 3. Non-dictatorship: The system does not depend on only one voter's ballot.
+% 4. Independence of irrelevant alternatives: A voters preferences of (A, B) depend only on A and B, and not whether A < C or C < A (as we'll see later, this is a very important, and _very_ contentios axiom).
 
-// Arrows theorom that all of these axioms cannot be satisfied all at once
-// Limitations: Arrow's theorem only applies to rankings with 3+ options.
+% Arrows theorom that all of these axioms cannot be satisfied all at once
+% Limitations: Arrow's theorem only applies to rankings with 3+ options.
 
-// Def of _social welfare function: A function that aggregates voter preferences into a single society-wide prefencence, called a preference profile.
+% Def of _social welfare function: A function that aggregates voter preferences into a single society-wide prefencence, called a preference profile.
 @article{arrows-theorem,
 	title     = {A Difficulty in the Concept of Social Welfare},
 	author    = {Arrow, Kenneth J.},
@@ -27,13 +27,13 @@
 }
 
 
-// The famous Gibbard-Satterthwaite theorem: All non-dictatorial (arrow's theorem) voting systems that are non-trivial (at least 2 candidates) are manipulable i.e. there is some method of casting votes contrary to a voters true preferences such that the serure an outcome according their preferences (despite not having accurately reported as such).
+% The famous Gibbard-Satterthwaite theorem: All non-dictatorial (arrow's theorem) voting systems that are non-trivial (at least 2 candidates) are manipulable i.e. there is some method of casting votes contrary to a voters true preferences such that the serure an outcome according their preferences (despite not having accurately reported as such).
 
-// Corollary: Every voting system with at least three outcoms is either dictatorial or manipulable.
+% Corollary: Every voting system with at least three outcoms is either dictatorial or manipulable.
 
-// Def of _game forms_: any scheme which makes anoutcome depend on individual actions of some specified sort (a _strategy_)
+% Def of _game forms_: any scheme which makes anoutcome depend on individual actions of some specified sort (a _strategy_)
 
-// Def of _dominant strategy_: A strategy is dominant if, regardless of the choices of other players, the strategy achieves the specified goal at least as good as any alternative strategy.
+% Def of _dominant strategy_: A strategy is dominant if, regardless of the choices of other players, the strategy achieves the specified goal at least as good as any alternative strategy.
 @article{gibbard-satterthwaite-theorem,
 	title     = {Manipulation of Voting Schemes: A General Result},
 	author    = {Gibbard, Allan},
@@ -51,14 +51,14 @@
 	language  = {eng}
 }
 
-// secondary theory ============================================================
+% secondary theory =============================================================
 
-// FIXME: this needs to be changed to inarticle / equivalent
-// Given standard probability axioms
-// part 1: P(X,Y) = 0,1 for all x,y in T, then for R subset R subset T
-//		P_(T)(R) = P_(S)(S) P_(T)(S)
-// part 2: P(X,Y) = 0 for all x,y in T, then for some S subset T
-//		P_(T)(S) = P_(T \ {x})(S \ {x})
+% FIXME: this needs to be changed to inarticle / equivalent
+% Given standard probability axioms
+% part 1: P(X,Y) = 0,1 for all x,y in T, then for R subset R subset T
+%		P_(T)(R) = P_(S)(S) P_(T)(S)
+% part 2: P(X,Y) = 0 for all x,y in T, then for some S subset T
+%		P_(T)(S) = P_(T \ {x})(S \ {x})
 @misc{Luce's_Choice_Axiom,
 	abstract = {And conclusions. Summary ; Conclusions -- Appendix 1. Alternative forms of Axiom 1 -- Appendix 2. Form of latency distribution -- Appendix 3. Maximum likelihood equations for the two-alternative, two-outcome beta learning model -- Appendix 4. Open problems. Conceptual and empirical ; Mathematical.},
 	author = {Luce, R. Duncan (Robert Duncan)},
@@ -71,10 +71,10 @@
 	year = {1959},
 }
 
-// Given theoretical
+% Given theoretical
 @article{Plackett-Luce_Model,
 	ISSN = {00359254, 14679876},
-	URL ={http://www.jstor.org/stable/234656},
+	URL ={http:%www.jstor.org/stable/234656},
 	abstract = {A probability distributionis defined over the r! permutations of robjects in such a way as to incorporateup to r! - 1 parameters. Problems of estimation and testing are considered.The results are applied to data onvoting at elections and beanstores.},
 	author = {R. L. Plackett},
 	journal = {Journal of the Royal Statistical Society. Series C (AppliedStatistics)},
@@ -88,8 +88,8 @@
 }
 
 
-// Proposes a voting system based on creating a metric space with some specailly defined metrc d (which allows for ties)
-// This voting system bypassse allow'r theorem because (1) does not satisfy indepentence from irrelevnat alternities, and (2) not a strict ordering (allows for ties)
+% Proposes a voting system based on creating a metric space with some specailly defined metrc d (which allows for ties)
+% This voting system bypassse allow'r theorem because (1) does not satisfy indepentence from irrelevnat alternities, and (2) not a strict ordering (allows for ties)
 @article{Mathematics_Without_Numbers,
 author = {Kemeny, John G.},
 address = {Boston},
@@ -106,11 +106,11 @@ volume = {88},
 year = {1959},
 }
 
-// Discusses how the Borda method is suseptible to strategic voting
-// strategy 1: chose first pick, then invert by popularity.
+% Discusses how the Borda method is suseptible to strategic voting
+% strategy 1: chose first pick, then invert by popularity.
 @article{Borda_Method,
  ISSN = {00485829, 15737101},
- URL = {http://www.jstor.org/stable/30023023},
+ URL = {http:%www.jstor.org/stable/30023023},
  author = {William G. Ludwin},
  journal = {Public Choice},
  number = {1},
@@ -123,7 +123,7 @@ year = {1959},
 }
 
 
-// Defines a system whose MLE is the Plackett-Luce modei.
+% Defines a system whose MLE is the Plackett-Luce modei.
 @article{Mallows_Model,
 	author = {Mallows, C. L.},
 	issn = {0006-3444},
@@ -136,7 +136,7 @@ year = {1959},
 	year = {1957},
 }
 
-// discusses how scoring to crown the best cross country team breaks social choice axioms, mainly independence from irrelevant alternatives and transitivety.
+% discusses how scoring to crown the best cross country team breaks social choice axioms, mainly independence from irrelevant alternatives and transitivety.
 @article{Rank_Injustice_NCAA,
 	abstract = {The scoring method used by high schools and colleges in the U.S. to determine which team wins a cross-country meet can violate a major social choice principle, referred to here as Independence from Irrelevant Teams: whether team A is scored as defeating or losing to team B can depend on whether team C's performance is included in the calculations. In addition, if a three-way meet is scored as three dual meets, the scoring method can produce a cycle, thereby violating the principle of Transitivity: team A beats team B, team B beats team C, but team C beats team A. Real-world violations of Independ̀ence and Transitivity are reported from a high school cross-country meet held in Michigan in the U.S. in 2003. Several results are presented about the conditions under which these two principles can be violated. An alternative scoring method that will violate neither Independence nor Transitivity is also discussed and evaluated.},
 	author = {Hammond, Thomas H.},
@@ -154,14 +154,13 @@ year = {1959},
 	year = {2007},
 }
 
-# useful references ============================================================
+% useful references =============================================================
 
-// A rich guide to common (and sometimer not so common) voting systems, including their methodologies, taxonomy, and relative strengths and weaknesses.
-
-// Introduces the distinction between proportional, semi-proportional, and non-proportional voting systems.
+% A rich guide to common (and sometimer not so common) voting systems, including their methodologies, taxonomy, and relative strengths and weaknesses.
+% Introduces the distinction between proportional, semi-proportional, and non-proportional voting systems.
 @misc{voting-systems-fairvote,
 	title     = {PR Library: Types of Voting Systems},
 	author    = {FairVote},
-	url       = {https://fairvote.org/archives/types_of_voting_systems/},
+	url       = {https:%fairvote.org/archives/types_of_voting_systems/},
 	note      = {Last Accessed October 15, 2024}
 }
