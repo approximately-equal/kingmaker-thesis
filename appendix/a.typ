@@ -1,7 +1,5 @@
-// Appendix A ==================================================================
-#heading(level: 1)[
-	Appendix A
-] <appendix-A>
+// appendix ====================================================================
+= Appendix A <appendix-A>
 
 == Mathematical Symbols and Definitions
 #table(

@@ -100,6 +100,9 @@
   abstract: none,
   dedication: none,
   bib: none,
+  preview: false, 
+  // preview is only for use in drafting the paper,
+  // it should always be false when displaying the full thesis
 ) = (body) => {
   // metadata
   set document(title: title, author: author, date: date)
@@ -129,8 +132,10 @@
   show heading.where(level: 3): emph
 
   // frontmatter --
-  set page(margin: (x: 1.5in)) // frontmatter is centered and no headers
-  frontmatter(title, author, advisors, date, college, presented-to, fullfillment, approval, acknowledgements, preface, abbreviations, tables, figures, abstract, dedication)
+  if not preview {
+    set page(margin: (x: 1.5in)) // frontmatter is centered and no headers
+    frontmatter(title, author, advisors, date, college, presented-to, fullfillment, approval, acknowledgements, preface, abbreviations, tables, figures, abstract, dedication)
+  }
 
   // page setup (headers, footers, layout) --
   set page(

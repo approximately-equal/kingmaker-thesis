@@ -18,16 +18,14 @@
   bib: bibliography("references.bib", title: [References], full: true)
 )
 
-// document ====================================================================
-
-// chapters
+// chapters ====================================================================
 #include "chapters/introduction.typ";
 #include "chapters/background.typ";
 #include "chapters/methods.typ";
 #include "chapters/results.typ";
 #include "chapters/discussion.typ";
 
-// appendix
+// appendix ====================================================================
 #counter(heading).update(0)
 #set heading(numbering: "A.1", supplement: [Appendix])
-#include "appendix/appendix_a.typ";
+#include "appendix/a.typ";
