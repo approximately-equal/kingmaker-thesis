@@ -1,4 +1,4 @@
-// 2. Background ===============================================================
+// chapter =====================================================================
 = Background <background>
 In this chapter, all the background theory will be introduced. This should cover: social choice, and likely game theory and optimization as well.
 

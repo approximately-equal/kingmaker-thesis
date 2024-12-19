@@ -1,7 +1,5 @@
-// 5. Discussion ===============================================================
-#heading(level: 1, supplement: [Chapter])[
-	Discussion
-] <discussion>
+// chapter =====================================================================
+= Discussion <discussion>
 
 == Review
 In this section, we tie everything together, reviewing the work that has been done. What are the most important results? What have we build conceptually?

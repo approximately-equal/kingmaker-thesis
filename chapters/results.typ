@@ -1,8 +1,5 @@
-// 4. Results ==================================================================
-#heading(level: 1, supplement: [Chapter])[
-	Results
-] <results>
-
+// chapter =====================================================================
+= Results <results>
 This chapter should begin by introducing (1) the metrics that quantify manipulability of a voting method, and (2) the methods for judging the efficacy of a strategy (under some set of social conditions).
 
 This should follow on explanation about which social conditions and combinations of `method`, `strategy`, and `synthesizer` will be used.
