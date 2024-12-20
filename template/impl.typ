@@ -100,6 +100,7 @@
   abstract: none,
   dedication: none,
   bib: none,
+  draft: false
 ) = (body) => {
   // metadata
   set document(title: title, author: author, date: date)
@@ -129,8 +130,10 @@
   show heading.where(level: 3): emph
 
   // frontmatter --
-  set page(margin: (x: 1.5in)) // frontmatter is centered and no headers
-  frontmatter(title, author, advisors, date, college, presented-to, fullfillment, approval, acknowledgements, preface, abbreviations, tables, figures, abstract, dedication)
+  if not draft {
+    set page(margin: (x: 1.5in)) // frontmatter is centered and no headers
+    frontmatter(title, author, advisors, date, college, presented-to, fullfillment, approval, acknowledgements, preface, abbreviations, tables, figures, abstract, dedication)
+  }
 
   // page setup (headers, footers, layout) --
   set page(
@@ -181,5 +184,7 @@
   body
 
   // bibliography --
-  bib
+  if not draft {
+    bib
+  }
 }
