@@ -15,7 +15,8 @@
     ...
   ],
   dedication: [To my parents, for their ceaseless support.],
-  bib: bibliography("references.bib", title: [References], full: true)
+  bib: bibliography("references.bib", title: [References], full: true),
+  draft: true
 )
 
 // chapters ====================================================================
