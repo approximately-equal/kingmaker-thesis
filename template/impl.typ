@@ -137,7 +137,7 @@
 
   // page setup (headers, footers, layout) --
   set page(
-    paper: "a4",
+    paper: "us-letter",
     margin: (inside: 1.5in, outside: 1.0in, top: 1.5in, bottom: 1.0in),
     header: context { if is-header-page() { header-style() } }
   )
@@ -177,6 +177,10 @@
   show: thmrules
   show: gentle-clues
   show: codly.codly-init.with()
+  // drafting.set-page-properties(
+  //   left-margin: 1.5in,
+  //   right-margin: 1.5in,
+  // )
   // place(drafting.set-page-properties())
 
   // main body --
