@@ -123,19 +123,16 @@
 
   // figures --
   set figure(supplement: [Fig.])
-  set figure(placement: auto, gap: 1em)
-  show figure.caption: set text(size: 8pt)
-  show figure.where(placement: auto): set place(clearance: 1.5em)
   show figure.where(kind: table): set figure(supplement: [Table])
+  show figure.where(kind: table): set align(left)
 
   // captions --
-  set figure.caption(position: bottom)
   show figure.where(kind: table): set figure.caption(position: top)
   show figure.caption: set align(left)
   show figure.caption: set par(first-line-indent: 0em)
-  show figure.caption: (it) => [
-    *#it.supplement #it.counter.display()*#it.separator;#it.body
-  ]
+  show figure.caption: (it) => {
+    strong[#it.supplement #it.counter.display()] + it.separator + it.body
+  }
 
   // lists & enums --
   show enum: set block(spacing: 1.5em)
