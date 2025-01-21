@@ -16,7 +16,7 @@
   abstract,
   dedication,
 ) = {
-  // cover page
+  // cover page --
 
   // basic
   // page({
@@ -51,7 +51,7 @@
   })
   pagebreak(to: "odd")
 
-  // signature page
+  // signature page --
   page({
     set align(center)
   	v(50%)
@@ -61,64 +61,57 @@
     advisors.join(", ")
   })
 
-  // acknowledgements
+  // acknowledgements --
   if acknowledgements != none {
     heading(level: 1, outlined: false, numbering: none)[Acknowledgements]
     acknowledgements
   }
 
-  // preface
+  // preface --
   if preface != none {
     heading(level: 1, outlined: false, numbering: none)[Preface]
     preface
 
   }
 
-  // abbreviations
+  // abbreviations --
   if abbreviations != none {
     heading(level: 1, outlined: false, numbering: none)[Abbreviations]
     abbreviations
   }
 
-  {
-    show outline.entry: it => {
-      if (it.level == 1) {
-        smallcaps(it)
-      } else {
-        it
-      }
-    } 
-  
-    // table of contents
+  // style outline entries --
+  show outline.entry: it => if (it.level == 1) { smallcaps(it) } else { it }
+
+  // table of contents --
+  outline(
+    title: [Contents],
+    indent: true,
+  )
+
+  // list of tables --
+  if tables {
     outline(
-      title: [Contents],
-      indent: true,
+      title: [List of Tables],
+      target: figure.where(kind: table),
     )
-
-    // list of tables
-    if tables {
-      outline(
-        title: [List of Tables],
-        target: figure.where(kind: table),
-      )
-    }
-
-    // list of figures
-    if figures {
-      outline(
-        title: [List of Figures],
-        target: figure.where(kind: image),
-      )
-    }
   }
 
-  // abstract
+  // list of figures --
+  if figures {
+    outline(
+      title: [List of Figures],
+      target: figure.where(kind: image),
+    )
+  }
+
+  // abstract --
   if abstract != none {
     heading(level: 1, outlined: false, numbering: none)[Abstract]
     abstract
   }
 
-  // dedication
+  // dedication --
   if dedication != none {
     heading(level: 1, outlined: false, numbering: none)[Dedication]
     dedication
