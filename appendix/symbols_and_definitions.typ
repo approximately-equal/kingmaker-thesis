@@ -1,9 +1,3 @@
-// preview =====================================================================
-#import "../template/lib.typ" as cfg
-#import cfg.ctheorems: *
-#show: cfg.thesis(draft: true)
-
-// appendix ====================================================================
 = Mathematical Symbols and Definitions <symbols>
 #table(
  columns: 2,
