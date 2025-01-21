@@ -1,9 +1,11 @@
 // imports =====================================================================
+
 #import "packages/ctheorems.typ": *
 #import "frontmatter.typ": *
 #import "packages/gentle-clues.typ": gentle-clues
 #import "packages/drafting.typ" as drafting
 #import "packages/codly.typ" as codly
+#import "@preview/marge:0.1.0": sidenote, container
 
 // setup =======================================================================
 
@@ -13,6 +15,14 @@
 // spaces
 #let line-spacing = 0.75em
 #let heading-spacing = 1.5em
+
+// page setup
+#let (
+  inside-margin,
+  outside-margin,
+  top-margin,
+  bottom-margin
+) = (1.5in, 1.0in, 1.5in, 1.0in)
 
 // headings
 // level = 1
@@ -26,7 +36,7 @@
     let chapter-num = counter(heading).display()
     block(below: 0.5em)[#text(chapter-num, weight: "black", 60pt)];
     // v(0.2em)
-    linebreak()
+   linebreak()
   }
   text(title, style: "oblique", weight: "regular", size: 25pt)
   block(below: heading-spacing)[#line(length: 100%, stroke: 0.2pt)]
@@ -34,6 +44,7 @@
 // level > 1
 #let section-style(num, title) = {
   // universal style for sections...
+  par()[#num#h(1em)#title]
   set block(spacing: heading-spacing)
   let num = text(style: "italic", size: 10pt,
     numbering(num, ..counter(heading).at(here())) + [#h(1em)\u{200b}]
@@ -81,8 +92,8 @@
   }
 }
 
-
 // thesis ======================================================================
+
 #let thesis(
   title: [Thesis Title],
   author: "Student",
@@ -107,39 +118,40 @@
 
   // text --
   set text(size: text-size, weight: 450)
-  set par(justify: true, leading: line-spacing, first-line-indent: 1.0em, spacing: 0.8em)
+  set par(justify: true, leading: line-spacing, first-line-indent: 0.0em, spacing: 1.2em)
 
   // headings --
   set heading(numbering: "1.1")
-  show heading: set text(weight: 450, size: text-size)
-  show heading: it => context {
-    // chapter headings are handled separately
-    if it.level == 1 {
-      chapter-style(it.numbering, it.body)
-      return
+    show heading: set text(weight: 450, size: text-size)
+    show heading: it => context {
+      // chapter headings are handled separately
+      if it.level == 1 {
+        chapter-style(it.numbering, it.body)
+        return
+      }
+      // return default if numbering is zero AND level != 1,
+      // if level = 1, then its the same regardless of numbering
+      if it.numbering == none { return it }
+      // levels > 1
+      section-style(it.numbering, it.body)
     }
-    // return default if numbering is zero AND level != 1,
-    // if level = 1, then its the same regardless of numbering
-    if it.numbering == none { return it }
-    // levels > 1
-    section-style(it.numbering, it.body)
-  }
-  // these need to be precisely here to have any effect.
-  // I don't exactly understand why
-  show heading.where(level: 2): smallcaps
-  show heading.where(level: 3): emph
 
   // frontmatter --
   if not draft {
-    set page(margin: (x: 1.5in)) // frontmatter is centered and no headers
+    set page(paper: "us-letter", margin: (x: inside-margin)) // frontmatter is centered and no headers
     frontmatter(title, author, advisors, date, college, presented-to, fullfillment, approval, acknowledgements, preface, abbreviations, tables, figures, abstract, dedication)
   }
 
   // page setup (headers, footers, layout) --
   set page(
     paper: "us-letter",
-    margin: (inside: 1.5in, outside: 1.0in, top: 1.5in, bottom: 1.0in),
-    header: context { if is-header-page() { header-style() } }
+    margin: (
+      inside: inside-margin,
+      outside: outside-margin,
+      top: top-margin,
+      bottom: bottom-margin
+    ),
+    header: context { if is-header-page() { header-style() } },
   )
 
   // footnotes --
