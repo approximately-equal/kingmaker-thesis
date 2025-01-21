@@ -1,7 +1,10 @@
-// appendix ====================================================================
-= Appendix A <appendix-A>
+// preview =====================================================================
+#import "../template/lib.typ" as cfg
+#import cfg.ctheorems: *
+#show: cfg.thesis(draft: true)
 
-== Mathematical Symbols and Definitions
+// appendix ====================================================================
+= Mathematical Symbols and Definitions <symbols>
 #table(
  columns: 2,
  stroke: none,

@@ -80,26 +80,36 @@
     abbreviations
   }
 
-  // table of contents
-  outline(
-    title: [Contents],
-    indent: true,
-  )
-
-  // list of tables
-  if tables {
+  {
+    show outline.entry: it => {
+      if (it.level == 1) {
+        smallcaps(it)
+      } else {
+        it
+      }
+    } 
+  
+    // table of contents
     outline(
-      title: [List of Tables],
-      target: figure.where(kind: table),
+      title: [Contents],
+      indent: true,
     )
-  }
 
-  // list of figures
-  if figures {
-    outline(
-      title: [List of Figures],
-      target: figure.where(kind: image),
-    )
+    // list of tables
+    if tables {
+      outline(
+        title: [List of Tables],
+        target: figure.where(kind: table),
+      )
+    }
+
+    // list of figures
+    if figures {
+      outline(
+        title: [List of Figures],
+        target: figure.where(kind: image),
+      )
+    }
   }
 
   // abstract
