@@ -1,9 +1,10 @@
 // preamble ====================================================================
+
+// imports --
 #import "template/lib.typ" as cfg
 #import cfg.ctheorems: *
-#import "@preview/marge:0.1.0": sidenote
 
-
+// thesis --
 #show: cfg.thesis(
   title: [Kingmaker: A Simulation Analysis of Strategic Voting],
   author: "Chance Addis",
@@ -24,17 +25,17 @@
   ],
   dedication: [To my parents, for their ceaseless support.],
   bib: bibliography("references.bib", title: [References], full: true),
-  // draft: true
+  preview: true,
 )
 
 // chapters ====================================================================
 #include "chapters/introduction.typ";
 #include "chapters/background.typ";
-#include "chapters/methods.typ";
-#include "chapters/results.typ";
-#include "chapters/discussion.typ";
+// #include "chapters/methods.typ";
+// #include "chapters/results.typ";
+// #include "chapters/discussion.typ";
 
 // appendix ====================================================================
 #counter(heading).update(0)
-#set heading(numbering: "A.1", supplement: [Appendix])
+#set heading(numbering: "A.", supplement: [Appendix])
 #include "appendix/symbols_and_definitions.typ";
