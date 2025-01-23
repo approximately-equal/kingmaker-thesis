@@ -1,17 +1,27 @@
 // imports =====================================================================
+
 #import "packages/ctheorems.typ": *
-#import "frontmatter.typ": *
+#import "frontmatter.typ": frontmatter
 #import "packages/gentle-clues.typ": gentle-clues
 #import "packages/drafting.typ" as drafting
 #import "packages/codly.typ" as codly
 
 // functions ===================================================================
+
+// create detectable pagebreaks chapter headers
+#let sectionbreak() = {
+  [#metadata(none) <empty-page-start>]
+  pagebreak(weak: true, to: "odd")
+  [#metadata(none) <empty-page-end>]
+}
+
+// check if this page should have a header
 #let is-header-page() = {
   // setup selectors
   let matches-after = query(heading.where(level: 1,).after(here()))
   let matches-before = query(heading.where(level: 1,).before(here()))
   let current = counter(page).get()
-  // check if this page has a chapter haeder
+  // check if this page has a chapter header
   let has-chapter-header = matches-after.any(m =>
     counter(page).at(m.location()) == current
   )
@@ -27,7 +37,26 @@
   return not has-chapter-header and not is-page-break
 }
 
+#let header-style(numbering) = {
+  // get chapter for the given page
+    let matches-before = query(heading.where(level: 1,).before(here()))
+    let current-chapter = if matches-before.len() > 0 {
+      matches-before.last().body
+    }
+    // style the header
+    let dot = h(0.2em) + $dot$ + h(0.2em)
+    if calc.odd(here().page()) {
+      set align(left)
+      counter(page).display(numbering) + h(1em) + smallcaps[#current-chapter]
+    } else {
+      set align(right)
+      smallcaps[#current-chapter] + h(1em) + counter(page).display(numbering)
+    }
+  }
+}
+
 // thesis ======================================================================
+
 #let thesis(
   title: [Thesis Title],
   author: "Student",
@@ -68,9 +97,7 @@
   // headings (per level)
   show heading.where(level: 1): it => {
     // create detectable pagebreaks chapter headers
-    [#metadata(none) <empty-page-start>]
-    pagebreak(weak: true, to: "odd")
-    [#metadata(none) <empty-page-end>]
+    sectionbreak()
     // style chapter headers
     // set block(above: 0em)
     // NOTE: margin-top = 1.5in (header) + 1.0in (v)
@@ -78,36 +105,19 @@
   }
   show heading.where(level: 1): set text(30pt)
   show heading.where(level: 2): set text(20pt)
-  show heading.where(level: 3): set text(18pt)
-
-  // frontmatter --
-  if not preview {
-    // frontmatter is centered with 1.5in margins and has no headers
-    set page(paper: "us-letter", margin: (x: 1.5in, top: 1.5in, bottom: 1.0in))
-    frontmatter(title, author, advisors, date, college, presented-to, fullfillment, approval, acknowledgements, preface, abbreviations, tables, figures, abstract, dedication)
-  }
+  show heading.where(level: 3): set text(14pt)
 
   // page setup (headers, footers, layout) --
   set page(
     paper: "us-letter",
     margin: (inside: 1.5in, outside: 1.0in, top: 1.5in, bottom: 1.0in),
-    header: context { if is-header-page() {
-      // get chapter for the given page
-      let matches-before = query(heading.where(level: 1,).before(here()))
-      let current-chapter = if matches-before.len() > 0 {
-        matches-before.last().body
-      }
-      // style the header
-      let dot = h(0.2em) + $dot$ + h(0.2em)
-      if calc.odd(here().page()) {
-        set align(left)
-        counter(page).display() + dot + smallcaps[#current-chapter]
-      } else {
-        set align(right)
-        smallcaps[#current-chapter] + dot + counter(page).display()
-      }
-    }}
-  )
+    header: context { if is-header-page() { header-style("i") }
+  })
+
+  // frontmatter --
+  if not preview {
+    frontmatter(title, author, advisors, date, college, presented-to, fullfillment, approval, acknowledgements, preface, abbreviations, tables, figures, abstract, dedication)
+  }
 
   // footnotes --
   set footnote.entry(
@@ -149,7 +159,8 @@
   // place(drafting.set-page-properties())
 
   // main body --
-  // start main body at page 1 (frontmatter is not numbered)
+  // start main body at page 1 and reset heading numbering to decimal (frontmatter is numbered in roman numerals)
+  set page(header: context { if is-header-page() { header-style("1") }})
   counter(page).update(1)
   body
 
