@@ -1,4 +1,5 @@
 // frontmatter =================================================================
+
 #let frontmatter(
   title,
   author,
@@ -16,7 +17,7 @@
   abstract,
   dedication,
 ) = {
-  // cover page --
+  // cover page
 
   // basic
   // page({
@@ -34,6 +35,9 @@
   // pagebreak(to: "odd")
 
   // fancy
+  {
+  let margin = (x: 1.5in, top: 1.5in, bottom: 1.0in)
+  set page(margin: margin)
   page({
     set align(center)
     set par(justify: false)
@@ -49,10 +53,12 @@
     fullfillment
     v(1fr)
   })
-  pagebreak(to: "odd")
+  // HACK: normal header function doesn't work here for some reason. Set blank page with no header.
+  page(header: none)[]
 
-  // signature page --
-  page({
+  // signature page
+  set page(margin: margin)
+  page(margin: margin, {
     set align(center)
   	v(50%)
   	[#approval]
@@ -60,36 +66,35 @@
     v(-0.4em)
     advisors.join(", ")
   })
-
-  // acknowledgements --
+  // HACK: normal header function doesn't work here for some reason. Set blank page with no header.
+  page(header: none)[]
+}
+  // acknowledgements
   if acknowledgements != none {
     heading(level: 1, outlined: false, numbering: none)[Acknowledgements]
     acknowledgements
   }
 
-  // preface --
+  // preface
   if preface != none {
     heading(level: 1, outlined: false, numbering: none)[Preface]
     preface
 
   }
 
-  // abbreviations --
+  // abbreviations
   if abbreviations != none {
     heading(level: 1, outlined: false, numbering: none)[Abbreviations]
     abbreviations
   }
 
-  // style outline entries --
-  show outline.entry: it => if (it.level == 1) { smallcaps(it) } else { it }
-
-  // table of contents --
+  // table of contents
   outline(
     title: [Contents],
     indent: true,
   )
 
-  // list of tables --
+  // list of tables
   if tables {
     outline(
       title: [List of Tables],
@@ -97,7 +102,7 @@
     )
   }
 
-  // list of figures --
+  // list of figures
   if figures {
     outline(
       title: [List of Figures],
@@ -105,13 +110,13 @@
     )
   }
 
-  // abstract --
+  // abstract
   if abstract != none {
     heading(level: 1, outlined: false, numbering: none)[Abstract]
     abstract
   }
 
-  // dedication --
+  // dedication
   if dedication != none {
     heading(level: 1, outlined: false, numbering: none)[Dedication]
     dedication
