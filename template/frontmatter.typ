@@ -1,41 +1,6 @@
 // frontmatter =================================================================
 
-#let frontmatter(
-  title,
-  author,
-  advisors,
-  date,
-  college,
-  presented-to,
-  fullfillment,
-  approval,
-  acknowledgements,
-  preface,
-  abbreviations,
-  tables,
-  figures,
-  abstract,
-  dedication,
-) = {
-  // cover page
-
-  // basic
-  // page({
-  //   set align(center)
-  //   v(1fr)
-  //   title
-  //   v(1fr); line(length: 50%, stroke: 0.5pt); v(1fr)
-  //   presented-to
-  //   v(1fr); line(length: 50%, stroke: 0.5pt); v(1fr)
-  //   fullfillment
-  //   v(1fr); line(length: 50%, stroke: 0.5pt); v(1fr)
-  //   [#author \ #date.display("[month repr:short] [year]")]
-  //   v(1fr)
-  // })
-  // pagebreak(to: "odd")
-
-  // fancy
-  {
+#let title-page(title, author, date, presented-to, fullfillment) = {
   let margin = (x: 1.5in, top: 1.5in, bottom: 1.0in)
   set page(margin: margin)
   page({
@@ -55,8 +20,10 @@
   })
   // HACK: normal header function doesn't work here for some reason. Set blank page with no header.
   page(header: none)[]
+}
 
-  // signature page
+#let signature-page(approval, advisors) = {
+  let margin = (x: 1.5in, top: 1.5in, bottom: 1.0in)
   set page(margin: margin)
   page(margin: margin, {
     set align(center)
@@ -69,58 +36,45 @@
   // HACK: normal header function doesn't work here for some reason. Set blank page with no header.
   page(header: none)[]
 }
-  // acknowledgements
-  if acknowledgements != none {
-    heading(level: 1, outlined: false, numbering: none)[Acknowledgements]
-    acknowledgements
-  }
 
-  // preface
-  if preface != none {
-    heading(level: 1, outlined: false, numbering: none)[Preface]
-    preface
+#let acknowledgments(acknowledgements) = {
+  heading(level: 1, outlined: false, numbering: none)[Acknowledgements]
+  acknowledgements
+}
 
-  }
+#let preface(preface) = {
+  heading(level: 1, outlined: false, numbering: none)[Preface]
+  preface
+}
 
-  // abbreviations
-  if abbreviations != none {
-    heading(level: 1, outlined: false, numbering: none)[Abbreviations]
-    abbreviations
-  }
+#let abbreviations(abbreviations) = {
+  heading(level: 1, outlined: false, numbering: none)[Abbreviations]
+  abbreviations
+}
 
-  // table of contents
-  outline(
-    title: [Contents],
-    indent: true,
-  )
+#let outline() = {
+  outline(title: [Contents], indent: true)
+}
 
-  // list of tables
-  if tables {
-    outline(
-      title: [List of Tables],
-      target: figure.where(kind: table),
-    )
-  }
+#let tables() = {
+  outline(title: [List of Tables], target: figure.where(kind: table))
+}
 
-  // list of figures
-  if figures {
-    outline(
-      title: [List of Figures],
-      target: figure.where(kind: image),
-    )
-  }
+#let figures() = {
+  outline(title: [List of Figures], target: figure.where(kind: image))
+}
 
-  // abstract
-  if abstract != none {
-    heading(level: 1, outlined: false, numbering: none)[Abstract]
-    abstract
-  }
+#let abstract(abstract) = {
+  heading(level: 1, outlined: false, numbering: none)[Abstract]
+  abstract
+}
 
-  // dedication
-  if dedication != none {
-    heading(level: 1, outlined: false, numbering: none)[Dedication]
-    dedication
-  }
+#let dedication(dedication) = {
+  heading(level: 1, outlined: false, numbering: none)[Dedication]
+  dedication
+}
+
+#let frontmatter-hack() = {
   // HACK: This prevents the page number from showing up on the blank page directly after the frontmatter. Why it happens at all is a mystery, but this works.
   page(header: [])[]
 }

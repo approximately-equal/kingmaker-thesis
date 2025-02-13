@@ -1,7 +1,7 @@
 // imports =====================================================================
 
 #import "packages/ctheorems.typ": *
-#import "frontmatter.typ": frontmatter
+#import "frontmatter.typ": title-page, signature-page
 #import "packages/gentle-clues.typ": gentle-clues
 #import "packages/drafting.typ" as drafting
 #import "packages/codly.typ" as codly
@@ -66,13 +66,6 @@
   presented-to: [A Thesis \ Presented to \ (Division) \ (College)],
   fullfillment: [],
   approval: [Approved for the Division \ (Major)],
-  acknowledgements: none,
-  preface: none,
-  abbreviations: none,
-  tables: false,
-  figures: false,
-  abstract: none,
-  dedication: none,
   bib: none,
   preview: false
 ) = (body) => {
@@ -116,7 +109,8 @@
 
   // frontmatter --
   if not preview {
-    frontmatter(title, author, advisors, date, college, presented-to, fullfillment, approval, acknowledgements, preface, abbreviations, tables, figures, abstract, dedication)
+    title-page(title, author, date, presented-to, fullfillment)
+    signature-page(approval, advisors)
   }
 
   // footnotes --
