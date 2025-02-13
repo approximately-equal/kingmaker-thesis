@@ -82,7 +82,7 @@
   )
 
   // headings (general) --
-  set heading(numbering: "1.")
+  set heading(numbering: "1.", supplement: [Chapter])
   show heading: set text(style: "oblique", weight: "regular")
   show heading: set block(above: 2em, below: 1em)
   show heading: set par(justify: false) // overrides justification for headers
