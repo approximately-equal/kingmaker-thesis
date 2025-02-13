@@ -8,3 +8,7 @@ In the field of social choice theory, The _Gibbard-Satterthwaite Theorem_ tells 
   1. Synthesize optimal (in some measurable sense) strategies (for some subset of voter base),
   2. Use those novel (as well as known) voting strategies to compare the resilience of common voting methods, and
   3. ...
+
+## License
+
+Kingmaker © 2025 by Chance Addis is licensed under CC BY-SA 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by-sa/4.0/
