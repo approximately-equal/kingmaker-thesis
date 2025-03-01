@@ -27,9 +27,9 @@
   set page(margin: margin)
   page(margin: margin, {
     set align(center)
-  	v(50%)
-  	[#approval]
-   	v(1.2cm); line(length: 30%, stroke: 0.5pt)
+    v(50%)
+    [#approval]
+    v(1.2cm); line(length: 30%, stroke: 0.5pt)
     v(-0.4em)
     advisors.join(", ")
   })
@@ -52,8 +52,8 @@
   abbreviations
 }
 
-#let outline() = {
-  outline(title: [Contents], indent: true)
+#let contents() = {
+  outline(title: [Contents])
 }
 
 #let tables() = {
