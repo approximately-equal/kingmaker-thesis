@@ -1,54 +1,36 @@
 = Background <background>
 
-In this chapter, all the background theory will be introduced. This should cover: social choice, and likely game theory and optimization as well.
+#lorem(100)
 
-== Election Systems
+== A History of Social Choice
 
-This section builds the foundational ideas of voting methods and the axioms and structure that we want them to have. It should also discuss some of the theorems that already bound what is possible to have in a voting system (_Arrow_, _Gibbard-Satterwaite_). It should be structured like so:
+Social choice has been applied since humanity has existed. After all there has always been a need to make collective decisions. The theory however, is more modern. The two scholars typically credited with the development of social choice theory is Nicolas de Condorcet (1743–1794) and Kenneth Arrow (1921–2017).
 
-=== Axioms:
+== A Formalization of Social Choice
 
-There are infinite ways to convert ballots into a "winner". But what characteristics do we want this "voting function" to have. This sub-section talks about some of the axioms that voting systems should ideally have, why we want them, and what they each mean. It should impress the significant of the _social welfare function_ as a mathematical object that underpins the core of strategic voting.
+At its core, social choice theory is concerned with the analysis of _preference aggregation_, understood to be the aggregation of individual preferences, each of which compares two or more social alternatives, into a single collective preference (or choice). The basic framework, which is still standard, was introduced by _Kenneth Arrow_ in 1951.
 
-=== Social Choice Theorems:
+=== Basic Framework
 
-Having discussed some of the axioms that we'd ideally want to have, this sub-section breaks that idyllic view to discuss the boundaries of what is achievable in a voting system. Thus we introduce _Arrow's Impossibility Theorem_. We then turn to the social welfare function, and discuss the _Gibbard-Satterwaite Theorem_ and why strategic voting is inherent to all forms of voting.
+Let $N = {1, 2, dots}$ be a set of $n$ individuals ($n >= 2$), and $A = {cal(a), cal(b), dots}$ be a set of $m$ social alternatives, such as candidates, policies, goods, etc. Each individual $v_i$ has a _preference ordering_ $P_i$ over these alternatives. A _preference ordering_ is defined by a complete, total order on $X$ known as a _weak preference_. It is written with the symbol $prec.eq, succ.eq$, where $cal(a) prec.eq cal(b)$ is defined as $cal(a)$ is preferred or indifferent to $cal(b)$. There are also shorthands for _strict preference_ ($cal(a) prec cal(b) := cal(a) prec.eq cal(b) and cal(b) prec.eq.not cal(a)$) and _strict indifference_ ($cal(a) ~ cal(b) := cal(a) prec.eq cal(b) and cal(b) prec.eq cal(a)$)
 
+#footnote[
+  Here I forgo the more general formalism of _preference aggregation rule_ in favor of the more specific case of _social welfare functions_. The term _social welfare function_ is a specific type of preference aggregation rule that _always_ produces a complete social ranking of alternatives. For the scope of this thesis, social welfare functions are more suitable.
+]
+A collection of preference orderings across a set of individuals ${P_1, P_2, dots, P_n angle.r}$, is called a _profile_. A _social welfare function_ is a function $W : P -> A$
 
-=== Voting Methods:
+#highlight[continue here]
 
-With some theory under our belts, this sub-section begins to introduce some of the actual methods that are used for real voting. We discuss their implementations, their characteristics (with respect to the social choice axioms), and their usage (how they are used and what inputs and outputs they give).
+== A Model of Voting
 
-There is also room to add some less common, novel and unused methods which can then be compared to the more established methods.
+=== Conceptualization of Ballots
 
-== How Voters Vote
+So far, the only conception of voting has been with _preferences_. But do voters actually submit their ballots deterministically? No. It's unrealistic to assume that voters always vote rationally in a predefined way. There is an element of randomness in the voting process. Say that a voter has the following opinions: $cal(a) = 65% "approval"$ and $cal(b) = 35% "approval"$. The voter may submit a ballot with $cal(a) prec cal(b)$ or $cal(b) prec cal(a)$ depending on how they feel on the day of the election. Voting is a _stochastic process_.
 
-In this section, we narrow in on strategic voting and the methods by which voters vote. This section asks how voters convert their complex preferences of each candidate and convert them into concrete ballots.
+This conceptualization facilitates the need to disambiguate a _preference_ from a _ballot_.#footnote[Here I redefine preference to a new definition and define ballot in its place.] A preference is redefined as a distribution over preference orderings, and a ballot is a realization of that distribution. Think of a preference like a superposition, and when the election is held, the preference collapses into a ballot.
 
-There should be discussion of the following types of voting: honest, strategic (deterministic), strategic (stochastic / noise), and mixed models.
+Stochastic voting is a concept hardwired into the framework of this thesis, as all the methods for generating ballots are stochastic. This framing allows us to conceptualize these _synthesizers_ as voters who non-deterministically submit their ballots via some set of rules. Granted those rules might be "randomly select an ordering of candidates", but it's still of the same process as real voting.
 
-We should of course reiterate why voters strategically vote and how then tend to do so.
+=== Strategic Voting
 
-=== Preferences $->$ Ballots
-
-This sub-section should talk about how preferences, which we describe as the jumble of opinions that a voter holds of each candidate, is converted into a (honest) ballot through a stochastic process. For example, we might conceptualize a voter who needs to rank the candidates as having some abstract distribution of "likability" for each candidate. Then on election day, they "draw" from that distribution and the order of those "likability" ratings is their ranked ballot.
-
-// === Preferences $->$ Ballots
-//   + What do we know about how voters turn their preferences into ballots?
-//   + What are historical models for voter behavior, and what are their merits?
-//   + How will we model voter behavior in this thesis?
-//   + What is the difference between a preference and a ballot?
-
-=== Strategic Voting Interactions
-
-This sub-section is where we discuss how the preferences to ballots process interacts with the process of strategic voting (conceptually). How should we consider these processes given that they happen in parallel and influence each other. A true preferences are likely to be influenced by knowledge of the environment, i.e. strategic voting.
-
-=== History of Strategic Voting
-
-This section breaks down some of the history behind strategic voting. We look back into past elections to determine (1) Historically, how have voters strategically altered their votes? What strategies do they tend to use? (2) When (if ever) has strategic voting influenced elections? How?
-
-=== Optimal Strategy
-
-This is the section where we dig into the idea of optimal strategy with respect to social welfare. Before the methods section, this section introduced the fundamental goals and characteristics that optimal strategies should have. hat does it mean for a strategic voting function to be "optimal"?
-
-This section should also dovetail nicely into the methods section, which will discuss the implementation and framework that we will use the model strategic voting and analyze its efficacy.
+#highlight[continue here]
