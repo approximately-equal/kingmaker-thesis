@@ -6,14 +6,17 @@
 
 // template --
 #show: thesis-template.thesis(
-  title: [Kingmaker: A Simulation Analysis of Strategic Voting],
-  author: "Chance Addis",
-  advisors: ("Michael Pearce",),
-  presented-to: [_A thesis presented to \ The Division of Mathematical and Natural Sciences \ Reed College_],
-  fullfillment: [_Submitted in partial fulfillment of the requirements \   for the degree Bachelor of Arts_],
-  approval: [_Approved for the Division \ (Mathematics - Statistics)_],
-  date: datetime(year: 2025, month: 05, day: 01),
-  // preview: true,
+  title: [Kingmaker: A Simulation Analysis of Strategic Voting], author: "Chance Addis", advisors: ("Michael Pearce",), presented-to: [
+    _A thesis presented to_ \
+    _The Division of Mathematical and Natural Sciences_ \
+    _Reed College_
+  ], fullfillment: [
+    _Submitted in partial fulfillment of the requirements_ \
+    _for the degree Bachelor of Arts_
+  ], approval: [
+    _Approved for the Division_ \
+    _(Mathematics - Statistics)_
+  ], date: datetime(year: 2025, month: 05, day: 19),
 )
 
 // document ====================================================================
@@ -34,4 +37,4 @@
 #include "sections/appendices/symbols_and_definitions.typ"
 
 // references --
-#bibliography("references.bib", title: [References], full: true)
+#bibliography("references.yml", title: [References], full: true, style: "ieee")
