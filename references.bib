@@ -1,4 +1,4 @@
-% core theory ===================================================================
+% core theory ==================================================================
 
 % Axioms:
 % 1. Unrestricted domain:  The social welfare function is defined for every admissible pair of individual orderings i.e. all possible voting preferences are possible, so in ranked choice election with A, B, C, all configurations of A, B, C are possible (e.g. A < B < C)
@@ -59,7 +59,7 @@
 %		P_(T)(S) = P_(T \ {x})(S \ {x})
 %
 % FIXME: this needs to be changed to inarticle / equivalent
-@misc{Luce's_Choice_Axiom,
+@misc{luce's-choice-axiom,
 	title        = {Individual choice behavior; a theoretical analysis.},
 	author       = {Luce, R. Duncan (Robert Duncan)},
 	year         = 1959,
@@ -71,8 +71,8 @@
 	lccn         = 59009346
 }
 
-% Given theoretical
-@article{Plackett-Luce_Model,
+% ...
+@article{plackett-luce-model,
 	title        = {The Analysis of Permutations},
 	author       = {R. L. Plackett},
 	year         = 1975,
@@ -90,7 +90,7 @@
 % Proposes a voting system based on creating a metric space with some specailly defined metrc d (which allows for ties)
 %
 % This voting system bypassse arrow's theorem because (1) does not satisfy indepentence from irrelevnat alternities, and (2) not a strict ordering (allows for ties)
-@article{Mathematics_Without_Numbers,
+@article{mathematics-without-numbers,
 	title        = {Mathematics without Numbers},
 	author       = {Kemeny, John G.},
 	year         = 1959,
@@ -108,8 +108,8 @@
 
 % Discusses how the Borda method is suseptible to strategic voting
 %
-% strategy 1: chose first pick, then invert by popularity.
-@article{Borda_Method,
+% Strategy 1: chose first pick, then invert by popularity.
+@article{borda-method,
 	title        = {Strategic Voting and the Borda Method},
 	author       = {William G. Ludwin},
 	year         = 1978,
@@ -124,7 +124,7 @@
 }
 
 % Defines a system whose MLE is the Plackett-Luce model.
-@article{Mallows_Model,
+@article{mallows-model,
 	title        = {Non-Null Ranking Models. I},
 	author       = {Mallows, C. L.},
 	year         = 1957,
@@ -137,7 +137,7 @@
 }
 
 % Scoring to crown the best cross country team breaks social choice axioms, mainly independence from irrelevant alternatives and transitivety.
-@article{Rank_Injustice_NCAA,
+@article{rank-injustice-NCAA,
 	title        = {Rank Injustice?: How the Scoring Method for Cross-Country Running Competitions Violates Major Social Choice Principles},
 	author       = {Hammond, Thomas H.},
 	year         = 2007,
@@ -154,7 +154,35 @@
 	language     = {eng}
 }
 
-% useful references =============================================================
+% methodology ==================================================================
+
+% Breakdown of simulated ballot generators within social choice research.
+%
+% Considers both ordinal and nominal ballots, and gives recommendations for realistic voting data via simulation.
+@article{guide-numerical-experiment-selections,
+	title        = {Guide to Numerical Experiments on Elections in Computational Social Choice},
+	author       = {Niclas Boehmer, Piotr Faliszewski, Łukasz Janeczko, Andrzej Kaczmarczyk, Grzegorz Lisowski, Grzegorz Pierczyński, Simon Rey, Dariusz Stolicki, Stanisław Szufa, Tomasz Wąs},
+	year         = 2024,
+	url          = {https://arxiv.org/abs/2402.11765},
+	eprint       = {2402.11765}
+}
+
+% useful references ============================================================
+
+% A reference of social choice theory, its history, methodology, and application.
+%
+% Written as a entry in the Stanford Encyclopedia of Philosophy.
+@incollection{sep-social-choice,
+	author       =	{List, Christian},
+	title        =	{{Social Choice Theory}},
+	booktitle    =	{The {Stanford} Encyclopedia of Philosophy},
+	editor       =	{Edward N. Zalta and Uri Nodelman},
+	howpublished =	{\url{https://plato.stanford.edu/archives/win2022/entries/social-choice/}},
+	year         =	{2022},
+	edition      =	{{W}inter 2022},
+	publisher    =	{Metaphysics Research Lab, Stanford University}
+}
+
 
 % A rich guide to common (and sometimer not so common) voting systems, including their methodologies, taxonomy, and relative strengths and weaknesses.
 %

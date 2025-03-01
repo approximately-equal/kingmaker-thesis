@@ -1,0 +1,210 @@
+# core theory ==================================================================
+
+# Axioms:
+# 1. Unrestricted domain:  The social welfare function is defined for every admissible pair of individual orderings i.e. all possible voting preferences are possible, so in ranked choice election with A, B, C, all configurations of A, B, C are possible (e.g. A < B < C)
+# 2. Pareto Efficiency: If all voters prefer A < B then A < B overall
+# 3. Non-dictatorship: The system does not depend on only one voter's ballot.
+# 4. Independence of irrelevant alternatives: A voters preferences of (A, B) depend only on A and B, and not whether A < C or C < A (as we'll see later, this is a very important, and _very_ contentios axiom).
+#
+# Arrows theorom that all of these axioms cannot be satisfied all at once
+# Limitations: Arrow's theorem only applies to rankings with 3+ options.
+#
+# Def of _social welfare function: A function that aggregates voter preferences into a single society-wide prefencence, called a preference profile.
+arrows-theorem:
+  type: article
+  title: A Difficulty in the Concept of Social Welfare
+  author: Arrow, Kenneth J.
+  date: 1950
+  page-range: 328–346
+  serial-number:
+    issn: 0022-3808
+  parent:
+    type: periodical
+    title: The Journal of political economy
+    publisher: The University of Chicago Press
+    location: Chicago
+    issue: 4
+    volume: 58
+
+# The famous Gibbard-Satterthwaite theorem: All non-dictatorial (arrow's theorem) voting systems that are non-trivial (at least 2 candidates) are manipulable i.e. there is some method of casting votes contrary to a voters true preferences such that the serure an outcome according their preferences (despite not having accurately reported as such).
+#
+# Corollary: Every voting system with at least three outcoms is either dictatorial or manipulable.
+#
+# Def of _game forms_: any scheme which makes anoutcome depend on individual actions of some specified sort (a _strategy_)
+#
+# Def of _dominant strategy_: A strategy is dominant if, regardless of the choices of other players, the strategy achieves the specified goal at least as good as any alternative strategy.
+gibbard-satterthwaite-theorem:
+  type: article
+  title: "Manipulation of Voting Schemes: A General Result"
+  author: Gibbard, Allan
+  date: 1973
+  page-range: 587–601
+  serial-number:
+    issn: 0012-9682
+  abstract: "It has been conjectured that no system of voting can preclude strategic voting–the securing by a voter of an outcome he prefers through misrepresentation of his preferences. In this paper, for all significant systems of voting in which chance plays no role, the conjecture is verified. To prove the conjecture, a more general theorem in game theory is proved: a game form is a game without utilities attached to outcomes; only a trivial game form, it is shown, can guarantee that whatever the utilities of the players may be, each player will have a dominant pure strategy."
+  parent:
+    type: periodical
+    title: Econometrica
+    publisher: The Econometric Society
+    location: Menasha, Wis
+    issue: 4
+    volume: 41
+
+# secondary theory =============================================================
+
+# Given standard probability axioms
+# part 1: P(X,Y) = 0,1 for all x,y in T, then for R subset R subset T
+#		P_(T)(R) = P_(S)(S) P_(T)(S)
+# part 2: P(X,Y) = 0 for all x,y in T, then for some S subset T
+#		P_(T)(S) = P_(T \ {x})(S \ {x})
+#
+# FIXME: this needs to be changed to inarticle / equivalent
+luce's-choice-axiom:
+  type: misc
+  title: Individual choice behavior; a theoretical analysis.
+  author: Luce, R. Duncan (Robert Duncan)
+  date: 1959
+  publisher: Wiley
+  location: New York
+  abstract: And conclusions. Summary ; Conclusions – Appendix 1. Alternative forms of Axiom 1 – Appendix 2. Form of latency distribution – Appendix 3. Maximum likelihood equations for the two-alternative, two-outcome beta learning model – Appendix 4. Open problems. Conceptual and empirical ; Mathematical.
+
+# ...
+plackett-luce-model:
+  type: article
+  title: The Analysis of Permutations
+  author: Plackett, R. L.
+  date: 1975
+  page-range: 193–202
+  serial-number:
+    issn: 00359254, 14679876
+  abstract: A probability distributionis defined over the r! permutations of robjects in such a way as to incorporateup to r! - 1 parameters. Problems of estimation and testing are considered.The results are applied to data onvoting at elections and beanstores.
+  parent:
+    type: periodical
+    title: Journal of the Royal Statistical Society. Series C (AppliedStatistics)
+    publisher: "[Royal Statistical Society,Oxford University Press]"
+    issue: 2
+    volume: 24
+
+# Proposes a voting system based on creating a metric space with some specailly defined metrc d (which allows for ties)
+#
+# This voting system bypassse arrow's theorem because (1) does not satisfy indepentence from irrelevnat alternities, and (2) not a strict ordering (allows for ties)
+mathematics-without-numbers:
+  type: article
+  title: Mathematics without Numbers
+  author: Kemeny, John G.
+  date: 1959
+  page-range: 577–591
+  serial-number:
+    issn: 0011-5266
+  parent:
+    type: periodical
+    title: Daedalus (Cambridge, Mass.)
+    publisher: American Academy of Arts, Sciences
+    location: Boston
+    issue: 4
+    volume: 88
+
+# Discusses how the Borda method is suseptible to strategic voting
+#
+# Strategy 1: chose first pick, then invert by popularity.
+borda-method:
+  type: article
+  title: Strategic Voting and the Borda Method
+  author: Ludwin, William G.
+  date: 1978
+  page-range: 85–90
+  serial-number:
+    issn: 00485829, 15737101
+  parent:
+    type: periodical
+    title: Public Choice
+    publisher: Springer
+    issue: 1
+    volume: 33
+
+# Defines a system whose MLE is the Plackett-Luce model.
+mallows-model:
+  type: article
+  title: Non-Null Ranking Models. I
+  author: Mallows, C. L.
+  date: 1957
+  page-range: 114-
+  serial-number:
+    issn: 0006-3444
+  parent:
+    type: periodical
+    title: Biometrika
+    issue: 1/2
+    volume: 44
+
+# Scoring to crown the best cross country team breaks social choice axioms, mainly independence from irrelevant alternatives and transitivety.
+rank-injustice-NCAA:
+  type: article
+  title: "Rank Injustice?: How the Scoring Method for Cross-Country Running Competitions Violates Major Social Choice Principles"
+  author:
+    - Hammond
+    - Thomas H.
+  date: 2007
+  page-range: 359–375
+  serial-number:
+    issn: 0048-5829
+  abstract: "The scoring method used by high schools and colleges in the U.S. to determine which team wins a cross-country meet can violate a major social choice principle, referred to here as Independence from Irrelevant Teams: whether team A is scored as defeating or losing to team B can depend on whether team C's performance is included in the calculations. In addition, if a three-way meet is scored as three dual meets, the scoring method can produce a cycle, thereby violating the principle of Transitivity: team A beats team B, team B beats team C, but team C beats team A. Real-world violations of Independ̀ence and Transitivity are reported from a high school cross-country meet held in Michigan in the U.S. in 2003. Several results are presented about the conditions under which these two principles can be violated. An alternative scoring method that will violate neither Independence nor Transitivity is also discussed and evaluated."
+  parent:
+    type: periodical
+    title: Public choice
+    publisher: Springer
+    location: Dordrecht
+    issue: 3/4
+    volume: 133
+
+# methodology ==================================================================
+
+# Breakdown of simulated ballot generators within social choice research.
+#
+# Considers both ordinal and nominal ballots, and gives recommendations for realistic voting data via simulation.
+guide-numerical-experiment-selections:
+  type: article
+  title: Guide to Numerical Experiments on Elections in Computational Social Choice
+  author:
+    - Niclas Boehmer
+    - Łukasz Janeczko
+    - Andrzej Kaczmarczyk
+    - Grzegorz Lisowski
+    - Grzegorz Pierczyński
+    - Simon Rey
+    - Dariusz Stolicki
+    - Stanisław Szufa
+    - Tomasz Wąs
+    - Piotr Faliszewski
+  date: 2024
+  url: https://arxiv.org/abs/2402.11765
+  parent:
+    type: periodical
+
+# useful references ============================================================
+
+# A reference of social choice theory, its history, methodology, and application.
+#
+# Written as a entry in the Stanford Encyclopedia of Philosophy.
+sep-social-choice:
+  type: anthos
+  title: Social Choice Theory
+  author: List, Christian
+  date: 2022
+  editor:
+    - Zalta, Edward N.
+    - Nodelman, Uri
+  parent:
+    type: anthology
+    title: The Stanford Encyclopedia of Philosophy
+    publisher: Metaphysics Research Lab, Stanford University
+    edition: Winter2022
+    note: \\url\{https://plato.stanford.edu/archives/win2022/entries/social-choice/\}
+
+# A rich guide to common (and sometimer not so common) voting systems, including their methodologies, taxonomy, and relative strengths and weaknesses.
+#
+# Introduces the distinction between proportional, semi-proportional, and non-proportional voting systems.
+voting-systems-fairvote:
+  type: misc
+  title: "PR Library: Types of Voting Systems"
+  author: FairVote
