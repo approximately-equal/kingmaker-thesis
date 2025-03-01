@@ -60,13 +60,21 @@
 // thesis ======================================================================
 
 #let thesis(
-  title: [Thesis Title], author: "Student", advisors: ("Advisor",), date: datetime.today(), college: [Reed College], presented-to: [A Thesis \ Presented to \ (Division) \ (College)], fullfillment: [], approval: [Approved for the Division \ (Major)], bib: none, preview: false,
+  title: [Thesis Title],
+  author: "Student",
+  advisors: ("Advisor",),
+  date: datetime.today(),
+  college: [Reed College],
+  presented-to: [A Thesis \ Presented to \ (Division) \ (College)],
+  fullfillment: [],
+  approval: [Approved for the Division \ (Major)],
+  preview: false,
 ) = (body) => {
   // metadata
   set document(title: title, author: author, date: date)
 
   // text --
-  set text(size: 12pt, weight: 450)
+  set text(font: ("Crimson Pro", "Libertinus Serif"), size: 13pt, weight: 450)
   set par(
     justify: true, leading: 0.7em, spacing: 0.7em, first-line-indent: 1.5em,
   )
@@ -101,6 +109,7 @@
   if not preview {
     title-page(title, author, date, presented-to, fullfillment)
     signature-page(approval, advisors)
+    // NOTE: for structure purposes (could OPTIONALLY have have acknowledgments + preface + abbreviations in front of it) the outline is not included here, but it is a required element of the thesis and MUST be included.
   }
 
   // footnotes --
@@ -140,7 +149,5 @@
   body
 
   // bibliography --
-  if not preview {
-    bib
-  }
+  // NOTE: for structure purposes the bibliography is not an argument to thesis, but it is a required element of the thesis and MUST be included.
 }

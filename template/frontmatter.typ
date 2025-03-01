@@ -74,7 +74,7 @@
   dedication
 }
 
-#let frontmatter-hack() = {
-  // HACK: This prevents the page number from showing up on the blank page directly after the frontmatter. Why it happens at all is a mystery, but this works.
-  page(header: [])[]
-}
+// #let frontmatter-hack() = {
+//   // HACK: This prevents the page number from showing up on the blank page directly after the frontmatter. Why it happens at all is a mystery, but this works.
+//   page(header: [])[]
+// }
