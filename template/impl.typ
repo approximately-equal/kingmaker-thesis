@@ -70,7 +70,7 @@
   approval: [Approved for the Division \ (Major)],
   preview: false,
 ) = (body) => {
-  // metadata
+  // metadata --
   set document(title: title, author: author, date: date)
 
   // text --
@@ -109,7 +109,7 @@
   if not preview {
     title-page(title, author, date, presented-to, fullfillment)
     signature-page(approval, advisors)
-    // NOTE: for structure purposes (could OPTIONALLY have have acknowledgments + preface + abbreviations in front of it) the outline is not included here, but it is a required element of the thesis and MUST be included.
+    // NOTE: for structure purposes (could OPTIONALLY have have acknowledgments + preface + abbreviations in front of it) the outline is not included here, but it is a REQUIRED element of the thesis and MUST be included.
   }
 
   // footnotes --
@@ -140,7 +140,7 @@
   // packages --
   show: thmrules
   show: gentle-clues
-  show: codly.codly-init.with()
+  // show: codly.codly-init.with()
 
   // main body --
   /// start main body at page 1 and reset heading numbering to decimal (frontmatter is numbered in roman numerals)
@@ -149,5 +149,5 @@
   body
 
   // bibliography --
-  // NOTE: for structure purposes the bibliography is not an argument to thesis, but it is a required element of the thesis and MUST be included.
+  // NOTE: for structure purposes the bibliography is not an argument to thesis, but it is a REQUIRED element of the thesis and MUST be included.
 }

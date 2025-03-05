@@ -8,7 +8,6 @@ Social choice has been applied since humanity has existed. After all there has a
 
 Early social choice theory was far more concerned with voting as a procudure than of social welfare as an ideal.
 
-One such precursor, Pliny the Younger---a Roman magistrate---wrote a letter to Titius Aristo on June 24, 105 describing the a criminal trail which he presided over. Under the traditional senate procedures, there would first be a vote of innocence / guilt, and then if guilty, or punishment, to which exile or execution were proposed. Of the three proposals, aquittal, exile, or execution, aquittal held the plurality of supporters, but not the majority, although exile would have won in a direct two-way vote against either aquittal or execution. Pliny expected that guilt would be asserted, and then execution. Being himself in favor or exile, he proposed a novel three-way election. This had the disired effect; supporters of execution withdrew their proposal (since aquittal would win if they split the vote for exile), and the vote defaulted to a two-way election between aquittal and exile, which exile carried.
 
 Here we find one of the earliest recorded instances of voting manipulation. Pliny deliberately changed the voting rules so that execution would have split the vote between exile and execution, leading to aquittal. In response the voters changed strategies and voted for the second best option.
 
@@ -20,7 +19,7 @@ Jean-Charles de Borda (1733--1799) and Nicolas de Condorcet (1743--1794) are con
 
 Of the two, Borda's contributions are the more limited, writing only a few pages where he outlined the Borda count, a condercet method---which we'll discuss in just a moment---where the each candidate is assigned a score defined as the aggregate points assigned by their placement on each ballot (with $k$ options, rank 1 gets $k-1$ points, rank 2 gets $k-2$, etc). The candidates with the most points wins. In the same article, he also shows that the plurality method is flawed, given that it can select a pairwise loser to all other candidates (i.e. a condorcet loser).
 
-Condorcet alternatively devotes an entire book---along with several papers--- worth of material on voting in his _Essay on the Application of Analysis to the Probability of Majority Decisions_ [translated from the native French]. In his work, Condorcet establishes many notable results, including Condorcet's jury theorem and Condorcet's paradox.
+Condorcet alternatively devotes an entire books---along with several papers---worth of material on voting in his _Essay on the Application of Analysis to the Probability of Majority Decisions_ [translated from the native French]. In his work, Condorcet establishes many notable results, including Condorcet's jury theorem and Condorcet's paradox.
 
 Condorcet's jury theorem proves that if each jury member is more likely than not to make a correct verdict, then the probablity that the majority verdict is correct increases as the number of jury members increases.
 

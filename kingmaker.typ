@@ -41,6 +41,7 @@
 #counter(heading).update(0)
 #set heading(numbering: "A.", supplement: [Appendix])
 #include "sections/appendices/symbols_and_definitions.typ"
+#include "sections/appendices/code.typ"
 
 // references --
 #bibliography("references.yml", title: [References], full: true, style: "ieee") // NOTE: this is required
