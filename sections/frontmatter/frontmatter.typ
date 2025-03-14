@@ -2,6 +2,9 @@
 
 #frontmatter.contents() // NOTE: this is required
 
+// #frontmatter.figures()
+// #frontmatter.tables()
+
 #frontmatter.abstract[
   In the field of social choice theory, The Gibbard-Satterthwaite Theorem tells us that any all non-trivial, non-dictatorial voting methods do _not_ have a dominant strategy for any individual voter. Thus every voting system which follows these axioms (which they should) must be manipulable. Thus any voting method must consider how voters will strategically vote in order to benefit their social welfare.
 

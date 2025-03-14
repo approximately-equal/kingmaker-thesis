@@ -7,18 +7,16 @@
   },
   row-gutter: 0.2em,
 )
-#figure(
-  table(
+#figure(caption: [Symbols and Definitions])[
+  #table(
     table.header([*Symbol*], [*Definition*],),
-    [$A, B, C, ...$], [Candidates],
-    [$a, b, c, ...$], [Voters],
-    [${a, b, c, ...}$], [The set of all voters],
-    [...], [The preference of a voter $x$],
-    [...], [The ballot of a voter $x$],
-    [$prec, succ, prec.eq, succ.eq$], [$A prec B$ $=>$ $A$ is preferred to $B$, \ $A prec.eq B$ $=>$ $A$ is preferred or indifferent to $B$],
-    [$cal(W)(x)$], [Social welfare function for a voter $x$],
-    [$cal(I)(h, ...)$], [A ballot generator (synthesizer) with some hyper-parameters $h$],
-    [$cal(S)(x)$], [The strategy for a voter $x$],
-    [$cal(M)({a, b, c, ...})$], [The outcome of a method, $M$, on a set of ballots.],
+    [$C = {c_i | i in {1..n}}$], [The set of candidates],
+    [$V = {v_i | i in {1..n}}$], [The set of voters],
+    [$Pi = {pi_i | i in {1..n}}$], [The set of ballots],
+    [$prec, succ, prec.not, succ.not$ \ $prec.eq, succ.eq, prec.eq.not, succ.eq.not$], [$pi_i prec pi_j => pi_i "is preferred to" pi_j$, \ $pi_i prec.eq pi_i => pi_i "is preferred or indifferent to" pi_j$],
+    [$cal(W)(v_i)$], [The social welfare function for voter $i$],
+    [$cal(P)(v_i, theta)$], [The preferences of voter $i$ given hyperparameters $theta$],
+    [$cal(S)(v_i)$], [The strategy for voter $i$],
+    [$cal(M)(Pi)$], [The outcome of a method $M$ on a set of ballots $Pi$.],
   )
-) <symbols>
+] <symbols>

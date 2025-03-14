@@ -1,6 +1,47 @@
 = Methods <methods>
 
-... let's begin by describing the general pipeline by which (simulated) elections are conducted.
+#import "@preview/fletcher:0.5.6" as fletcher: diagram, node, edge
+#import fletcher.shapes: diamond
+
+#figure(caption: [Overview of the election pipeline])[
+  #diagram(
+  	node-stroke: 1pt,
+  	// left
+  	node((0,0), [Preferences], corner-radius: 2pt),
+  	edge("-|>", [Draw], label-side: center, label-pos: 0.5),
+  	node((0,1), [Honest Ballot], corner-radius: 2pt),
+  	edge("-|>", [Apply], label-side: center, label-pos: 0.5),
+  	node((0,2), [Strategic Ballot], corner-radius: 2pt),
+  	// center
+  	node((1,0), [Preferences], corner-radius: 2pt),
+  	edge("-|>", [Draw], label-side: center, label-pos: 0.5),
+  	node((1,1), [Honest Ballot], corner-radius: 2pt),
+  	edge("-|>", [Apply], label-side: center, label-pos: 0.5),
+  	node((1,2), [Strategic Ballot], corner-radius: 2pt),
+  	// ...
+  	node((2,1), [...], stroke: 0em),
+  	// right
+  	node((3,0), [Preferences], corner-radius: 2pt),
+  	edge("-|>", [Draw], label-side: center, label-pos: 0.5),
+  	node((3,1), [Honest Ballot], corner-radius: 2pt),
+  	edge("-|>", [Apply], label-side: center, label-pos: 0.5),
+  	node((3,2), [Strategic Ballot], corner-radius: 2pt),
+  	// method
+  	edge((0, 2), "d", (1.5, 3), "->"),
+  	edge((1, 2), "d", (1.5, 3), "->"),
+  	edge((2, 1), "d,d", (1.5, 3), "->"),
+  	edge((3, 2), "d,l", (1.5, 3), "->"),
+  	node((1.5, 3), [Method], corner-radius: 2pt),
+  	edge([Tabulate], "-|>", label-side: center, label-pos: 0.5),
+  	node((1.5, 4), [Outcome], corner-radius: 2pt),
+  	// edge("d,r,u,l", "-|>", [Yes], label-pos: 0.1)
+  )
+]
+
+- #highlight[state diagram + pipeline diagram]
+- #highlight[Give a general overview of the pipeline and state]
+- #highlight[Add and then relax constraint on the definitions of preference and ballot]
+- #highlight[Add which implementations there are for each: preferences, tactics, methods]
 
 == Candidates
 
@@ -49,7 +90,7 @@ On its surface this is precisely equal to its theoretical counterpart: bound by 
 
 The difference is that preferences are not defined on a voter by voter basis, but instead are defined for a block of voters (e.g. Democrats, Independents, etc). This means that when different voters draw from the preference, they are drawing from the same underlying distribution. Thus we should model preferences as aggregate preferences of all voters in the voting block, and that each draw is that voters individual preferences being defined. Although this notion is not entirely accurate, since grouping all voter preferences together loses information. However it is sufficient for our purposes.
 
-=== Tactics & Strategies
+== Tactics & Strategies
 
 Tactics in kingmaker correspond exactly with tactics as defines by theory, as deterministic processes that voters can engage with to increase their social welfare. Tactics are defined in the following manner:
 
@@ -105,5 +146,3 @@ where
     method: M,
 }
 ```
-
-#highlight[]
