@@ -55,7 +55,6 @@
     smallcaps[#current-chapter] + h(1em) + counter(page).display(numbering)
   }
 }
-}
 
 // thesis ======================================================================
 
@@ -78,6 +77,8 @@
   set par(
     justify: true, leading: 0.7em, spacing: 0.7em, first-line-indent: 1.5em,
   )
+  show link: underline
+  show link: set text(style: "oblique")
 
   // headings (general) --
   set heading(numbering: "1.", supplement: [Chapter])
@@ -120,27 +121,29 @@
   set math.equation(numbering: "(1)")
   show math.equation: set block(spacing: 1.5em)
 
-  // figures --
-  set figure(supplement: [Fig.])
+  // figures & tables --
+  set figure(supplement: [Fig])
   show figure.where(kind: table): set figure(supplement: [Table])
   show figure.where(kind: table): set align(left)
 
   // captions --
-  show figure.where(kind: table): set figure.caption(position: top)
   show figure.caption: set align(left)
-  show figure.caption: set par(first-line-indent: 0em)
-  show figure.caption: (it) => {
-    strong[#it.supplement #it.counter.display()] + it.separator + it.body
-  }
+  show figure.caption: emph
 
   // lists & enums --
   show enum: set block(spacing: 1.5em)
   show list: set block(above: 1.5em)
 
+  // raw text & code --
+  show raw: set block(width: 100%)
+  show raw.where(block: true): block.with(
+    fill: luma(240),
+    inset: 10pt,
+    radius: 2pt,
+  )
+
   // packages --
   show: thmrules
-  show: gentle-clues
-  // show: codly.codly-init.with()
 
   // main body --
   /// start main body at page 1 and reset heading numbering to decimal (frontmatter is numbered in roman numerals)
