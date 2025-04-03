@@ -30,18 +30,17 @@
 // frontmatter --
 #include "sections/frontmatter/frontmatter.typ"
 
-// chapters --
+// matter --
 #include "sections/chapters/introduction.typ"
 #include "sections/chapters/background.typ"
 #include "sections/chapters/methods.typ"
 #include "sections/chapters/results.typ"
 #include "sections/chapters/discussion.typ"
 
-// appendices --
-#counter(heading).update(0)
-#set heading(numbering: "A.", supplement: [Appendix])
+// backmatter --
+#counter(heading).update(0) // start at A.1
+#set heading(numbering: "A.1", supplement: [Appendix])
 #include "sections/appendices/symbols_and_definitions.typ"
 #include "sections/appendices/code.typ"
 
-// references --
 #bibliography("references.yml", title: [References], full: true, style: "ieee") // NOTE: this is required
