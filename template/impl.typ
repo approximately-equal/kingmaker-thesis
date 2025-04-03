@@ -2,9 +2,6 @@
 
 #import "packages/ctheorems.typ": *
 #import "frontmatter.typ": title-page, signature-page
-#import "packages/gentle-clues.typ": gentle-clues
-#import "packages/drafting.typ" as drafting
-#import "packages/codly.typ" as codly
 
 // functions ===================================================================
 
@@ -46,7 +43,6 @@
     matches-before.last().body
   }
   // style the header
-  let dot = h(0.2em) + $dot$ + h(0.2em)
   if calc.odd(here().page()) {
     set align(left)
     counter(page).display(numbering) + h(1em) + smallcaps[#current-chapter]
@@ -73,7 +69,7 @@
   set document(title: title, author: author, date: date)
 
   // text --
-  set text(font: ("Crimson Pro", "Libertinus Serif"), size: 13pt, weight: 450)
+  set text(font: ("Libertinus Serif"), size: 13pt, weight: 450)
   set par(
     justify: true, leading: 0.7em, spacing: 0.7em, first-line-indent: 1.5em,
   )
@@ -135,11 +131,12 @@
   show list: set block(above: 1.5em)
 
   // raw text & code --
+  show raw: set text(font: "Maple Mono", weight: "regular")
   show raw: set block(width: 100%)
   show raw.where(block: true): block.with(
     fill: luma(240),
     inset: 10pt,
-    radius: 2pt,
+    radius: 4pt,
   )
 
   // packages --
