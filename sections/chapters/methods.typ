@@ -1,42 +1,22 @@
+#import "../../assets/assest.typ": election_pipeline, election_configuration
+
 = Methods <methods>
 
-#import "@preview/fletcher:0.5.6" as fletcher: diagram, node, edge
-#import fletcher.shapes: diamond
-
-#figure(caption: [Overview of the election pipeline])[
-  #diagram(
-  	node-stroke: 1pt,
-  	// left
-  	node((0,0), [Preferences], corner-radius: 2pt),
-  	edge("-|>", [Draw], label-side: center, label-pos: 0.5),
-  	node((0,1), [Honest Ballot], corner-radius: 2pt),
-  	edge("-|>", [Apply], label-side: center, label-pos: 0.5),
-  	node((0,2), [Strategic Ballot], corner-radius: 2pt),
-  	// center
-  	node((1,0), [Preferences], corner-radius: 2pt),
-  	edge("-|>", [Draw], label-side: center, label-pos: 0.5),
-  	node((1,1), [Honest Ballot], corner-radius: 2pt),
-  	edge("-|>", [Apply], label-side: center, label-pos: 0.5),
-  	node((1,2), [Strategic Ballot], corner-radius: 2pt),
-  	// ...
-  	node((2,1), [...], stroke: 0em),
-  	// right
-  	node((3,0), [Preferences], corner-radius: 2pt),
-  	edge("-|>", [Draw], label-side: center, label-pos: 0.5),
-  	node((3,1), [Honest Ballot], corner-radius: 2pt),
-  	edge("-|>", [Apply], label-side: center, label-pos: 0.5),
-  	node((3,2), [Strategic Ballot], corner-radius: 2pt),
-  	// method
-  	edge((0, 2), "d", (1.5, 3), "->"),
-  	edge((1, 2), "d", (1.5, 3), "->"),
-  	edge((2, 1), "d,d", (1.5, 3), "->"),
-  	edge((3, 2), "d,l", (1.5, 3), "->"),
-  	node((1.5, 3), [Method], corner-radius: 2pt),
-  	edge([Tabulate], "-|>", label-side: center, label-pos: 0.5),
-  	node((1.5, 4), [Outcome], corner-radius: 2pt),
-  	// edge("d,r,u,l", "-|>", [Yes], label-pos: 0.1)
+#stack(
+  dir: ltr,
+  figure(caption: [Overview of the election pipeline])[
+    #election_pipeline
+  ],
+  h(1fr),
+  stack(
+    dir: ttb,
+    figure(caption: [Structure of an election configuration])[
+      #election_configuration
+    ],
+    // v(3em),
+    // figure(caption: [Content of election configuration])[]
   )
-]
+) #v(1em)
 
 - #highlight[state diagram + pipeline diagram]
 - #highlight[Give a general overview of the pipeline and state]
