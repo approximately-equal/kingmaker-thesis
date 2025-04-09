@@ -28,19 +28,19 @@
 // document ====================================================================
 
 // frontmatter --
-#include "sections/frontmatter/frontmatter.typ"
+#include "contents/frontmatter/frontmatter.typ"
 
 // matter --
-#include "sections/chapters/introduction.typ"
-#include "sections/chapters/background.typ"
-#include "sections/chapters/methods.typ"
-#include "sections/chapters/results.typ"
-#include "sections/chapters/discussion.typ"
+#include "contents/matter/introduction.typ"
+#include "contents/matter/background.typ"
+#include "contents/matter/methods.typ"
+#include "contents/matter/results.typ"
+#include "contents/matter/discussion.typ"
 
 // backmatter --
 #counter(heading).update(0) // start at A.1
 #set heading(numbering: "A.1", supplement: [Appendix])
-#include "sections/appendices/symbols_and_definitions.typ"
-#include "sections/appendices/code.typ"
+#include "contents/backmatter/symbols_and_definitions.typ"
+#include "contents/backmatter/code.typ"
 
 #bibliography("references.yml", title: [References], full: true, style: "ieee") // NOTE: this is required
