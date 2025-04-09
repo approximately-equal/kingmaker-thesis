@@ -30,8 +30,11 @@ Condorcet's paradox, a fundamental property of majority rule, states that with m
 
 === Welfare Economics <welfare-economics>
 
-#highlight[Add Arrow + Gibbard-Satterthwaite here]
+Thus far, we've seen discussion about particular voting systems and their properties, such as _Condorcet_ and _Borda_, but we have yet to introduce a general approach to the study of preference aggregation and social choice. This is where _Kenneth Arrow_ comes into the picture. It's Kenneth Arrow's nobel prize-worthy contributions that first formalized such a approach. Specifically, to studies a sub-class of preference aggregation methods that he called _social welfare functions_. He then proceeded to use this framework to prove the famous _Arrow's impossibility theorem_ @arrows-theorem (1963), which states that for more than 2 voters voting between 3 or more possible alternatives, there does not exist a social welfare function $cal(W)$ that satisfies a set of reasonable axioms, discussed below.
 
+This theorem sparked much debate in social choice. As the _Stanford Encyclopedia of Philosophy_ notes, "William Riker (1920–1993), who inspired the Rochester school in political science, interpreted it as a mathematical proof of the impossibility of populist democracy (e.g., Riker 1982). Others, most prominently Amartya Sen (born 1933), who won the 1998 Nobel Memorial Prize, took it to show that ordinal preferences are insufficient for making satisfactory social choices and that social decisions require a richer informational basis. Commentators also questioned whether Arrow’s desiderata on an aggregation method are as innocuous as claimed or whether they should be relaxed."
+
+But while Arrow's impossibility theorem might be _the_ social choice theorem, it's a different but no less important social choice theorem that will be the focus of our research today. That theorem being the _Gibbard-Satterthwaite theorem_ @gibbard-satterthwaite-theorem. The Gibbard-Satterthwaite theorem was first conjectured by philosopher Michael Dummett and the mathematician Robin Farquharson in 1961 and then proved independently by philosopher Allan Gibbard in 1973 and economist Mark Satterthwaite in 1975. It states, broadly, that for any non-dictatorial, non-trivial voting system, then either (1)
 
 == A Formalization of Social Choice <formalization> // =========================
 
@@ -48,6 +51,12 @@ Let $N = {1, 2, dots}$ be a set of $n$ individuals ($n >= 2$), and $A = {pi_1, p
 A collection of preference orderings across a set of individuals ${P_1, P_2, dots, P_n angle.r}$, is called a _profile_. A _social welfare function_ is a function $W : P -> A$ #highlight[...]
 
 === Classical Social Choice Rules <classical>
+
+// for more than 2 voters $V = {v_1, v_2, ...}$, voting between 3 or more possible alternatives $C = {c_1, c_2, c_3}$, then there does not exist a social welfare function $cal(W)$ that satisfies the following axioms:
+
+// - _Universal domain:_ $cal(W)$ can contain any possible complete and transitive preference ordering.
+// - _Weak pareto efficiency:_ If every individual prefers $c_1$ to $c_2$, then the social preference should also prefer $c_1$ to $c_2$.
+// - _Independence of irrelevant alternatives:_ If $cal(W)$ prefers $c_1$ to $c_2$ when $c_3$ is not present, then $cal(W)$ should also prefer $c_1$ to $c_2$ when $c_3$ is present.
 
 #highlight[...]
 
