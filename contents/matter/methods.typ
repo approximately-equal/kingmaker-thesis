@@ -1,4 +1,4 @@
-#import "../../assets/assest.typ": election_pipeline, election_configuration
+#import "../../assets/assets.typ": election_pipeline, election_configuration
 
 = Methods <methods>
 
