@@ -8,14 +8,20 @@
     set par(justify: false)
     v(1fr)
     text(size: 20pt)[#title]
-    v(0.5fr)
-    author
-    v(0.1em)
-    date.display("[month repr:short] [year]")
-    v(0.2fr)
+    v(1fr)
+    line(length: 50%)
+    v(1fr)
     presented-to
-    v(1em)
+    v(1fr)
+    line(length: 50%)
+    v(1fr)
     fullfillment
+    v(1fr)
+    line(length: 50%)
+    v(1fr)
+    text(style: "italic")[#author]
+    v(1em)
+    text(style: "italic")[#date.display("[month repr:short] [year]")]
     v(1fr)
   })
   // HACK: normal header function doesn't work here for some reason. Set blank page with no header.
