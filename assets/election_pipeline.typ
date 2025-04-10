@@ -16,8 +16,8 @@
       fill: luma(90%),
     ),
 
-    node(enclose: ((-1.5,-0.6), (+1.5,+2.2)), inset: 10pt, stroke: tan, fill: tan),
-    node(enclose:((-1.5, -0.6), (1.5, -0.5)), [For each voting block $i$], stroke: luma(60%), fill: tan),
+    node(enclose: ((-0.6,-0.6), (0.6,+2.2)), inset: 10pt, stroke: tan, fill: tan),
+    node(enclose:((-0.6, -0.6), (0.6, -0.5)), [For each voting block $i$], stroke: luma(60%), fill: tan),
     // voting block
    	node((0,0), [Preference $cal(P)_(i)(V_i, theta_i)$], shape: pill),
    	edge("-|>", [Sample $m_i$ times from \ preference model $cal(P)_(i)(V_i, theta_i)$], label-side: center),
@@ -26,6 +26,8 @@
    	node((0,2), [Strategic profile $cal(S)_(i)(Pi_i)$], shape: pill),
    	// method
    	edge("-|>", [Aggregate all $Pi_i$], label-side: center),
+    edge((0.5, 2), (0, 3), "-|>"),
+    edge((-0.5, 2), (0, 3), "-|>"),
    	node((0,3), [Aggregate profile $Pi$]),
    	edge([Tabulate with method $cal(M)$], "-|>", label-side: center),
    	node((0,4), [Outcome], shape: hexagon, extrude: (-3, 0)),

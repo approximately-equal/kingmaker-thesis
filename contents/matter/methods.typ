@@ -4,17 +4,19 @@
 
 #stack(
   dir: ltr,
-  figure(caption: [Overview of the election pipeline])[
-    #election_pipeline
+  box(width: 50%)[
+    #figure(caption: [Overview of the election pipeline.])[
+      #election_pipeline <election-pipeline>
+    ]
   ],
-  h(1fr),
   stack(
     dir: ttb,
-    figure(caption: [Structure of an election configuration])[
-      #election_configuration
-    ],
-    // v(3em),
-    // figure(caption: [Content of election configuration])[]
+    box(width: 50%)[
+      #figure(caption: [Structure of an election configuration.])[
+        #election_configuration <election_configuration>
+      ]
+      _KEY_: An election consists of candidates $C$, voting blocks $B$, and election method $cal(M)$. A voting block consists of preferences $cal(P)$ and a strategy $cal(S)$
+    ]
   )
 ) #v(1em)
 
