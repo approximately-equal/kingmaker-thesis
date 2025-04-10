@@ -70,6 +70,10 @@
   outline(title: [List of Figures], target: figure.where(kind: image))
 }
 
+#let raws() = {
+  outline(title: [List of Code], target: figure.where(kind: raw))
+}
+
 #let abstract(abstract) = {
   heading(level: 1, outlined: false, numbering: none)[Abstract]
   abstract
