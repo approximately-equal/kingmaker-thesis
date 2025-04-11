@@ -1,4 +1,5 @@
 #import "impl.typ": thesis
+#import "utilities.typ"
 #import "frontmatter.typ"
 #import "packages/cetz.typ": cetz
 #import "packages/codly.typ"

@@ -1,14 +1,9 @@
+#import "../../template/utilities.typ": description-list
+
 = Symbols and Definitions <symbols-definitions>
 
-#set table(
-  columns: 2,
-  stroke: (_, y) => {
-    if y == 0 { (bottom: 1pt + black) } else { (top: 0.5pt + black) }
-  },
-  row-gutter: 0.2em,
-)
 #figure(caption: [Symbols and Definitions])[
-  #table(
+  #description-list(
     table.header([*Symbol*], [*Definition*],),
     [$C = {c_i | i in {1..n}}$], [A set of candidates],
     [$V = {v_i | i in {1..n}}$], [A set of voters],
