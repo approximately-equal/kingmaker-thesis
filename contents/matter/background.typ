@@ -43,7 +43,7 @@ But while Arrow's impossibility theorem might be _the_ social choice theorem, it
 
 It states, broadly, that for any non-dictatorial, voting system with at least 3 alternatives, there does not exist for a voter aiming to maximize their own social welfare any _dominant strategy_, including the identity strategy---honest voting. This will be expounded upon in the following sections.
 
-== A Formalization of Social Choice <formalization> // =========================
+== Classic Social Choice <classic-social-choice> // ============================
 
 At its core, social choice theory is concerned with the analysis of _preference aggregation_, understood to be the aggregation of individual preferences, each of which compares two or more social alternatives, into a single collective preference (or choice).
 
@@ -69,7 +69,29 @@ Note here that I'm condensing several proofs into one. In reality, the classic G
 
 This is a monumental result. It proves that no matter the voting system, there is always incentive for voters to manipulate the outcome. Strategic voting is inevitable so long as voters aim to maximize their utility. The question is, how much utility can be gained by strategic voting, and which voting systems are most susceptible to manipulation?
 
-== A Statistics Of Social Choice <social-choice-statistics> // =================
+=== Historical Voting Methods
+
+There are many historical and current voting methods that are used across the world. Let's look at some of the most common ones:
+
+_Plurality_ (ordinal-adjacent, single-winner): The one that Americans are most familiar with is the plurality method, oftentimes called "first-past-the-post" (FPTP). This method involves electing the candidate with the most votes, regardless of the margin of victory. Note that this is not the same as majority voting. Consider an election where $(A: 250, B: 200, C: 150)$. The total number of votes is $250 + 200 + 150 = 600$. $A$ wins because they have the most votes, but they didn't have a majority.
+
+_Borda_ (ordinal, single-winner): An election that is not commonly used but historically significant is the Borda count. In this method, each candidate is assigned points based on their ranking in each voter's preference list. The candidate with the highest total points wins. For example, if there are three candidates $A$, $B$, and $C$, and a voter ranks them as $A prec B prec C$, then $A$ gets 2 points, $B$ gets 1 point, and $C$ gets 0 points. This method is not commonly used as it is very susceptible to strategic voting, as we'll see later.
+
+_Approval_ (nominal, single-winner): Approval is another classic and used---in the UN General Assembly for example---voting method. In this method, each candidate selects a set of candidates they approve of, and the candidate with the most approvals wins. For example, if there are three candidates $A$, $B$, and $C$, and a voter approves of $A$ and $B$, then $A$ and $B$ each get 1 point, and $C$ gets 0 points. // Approval voting is simple and effective, as well as having the fascinating property that a candidate can win even if they are not the number 1 candidate for any voter.
+
+_IRV_ (ordinal, single-winner): Now we move on to the big ones. Instant Runoff Voting (IRV) is a voting method that is used in many countries, including Australia and Ireland. In this method, each voter ranks the candidates in order of preference. The candidate with the fewest first-place votes is eliminated, and their votes are redistributed to the remaining candidates based on the voters' second choices. This process continues until one candidate has a majority of the votes. This is best explained with an example.
+
+Suppose we have 4000 ballots with preferences $A prec B prec C prec D$, 3500 ballots with preferences $B prec D prec A prec C$, 1500 ballots with preferences $C prec A prec B prec D$, 1000 ballots with preferences $D prec C prec B prec A$.
+
++ Round 1: Counting the first place votes, $A = 4000, B = 3500, C = 1500, D = 1000$. No candidate has a majority, so we elimimate the last place candidate, which is $D$, we now re-distribute the votes for $D$ to the next candidate. In this case that is $C$.
+
++ Round 2: Counting the first place votes, $A = 4000, B = 3500, C = 2500$. No candidate has a majority, so we eliminate the last place candidate, which is $C$, we now re-distribute the votes for $C$ to the next candidate. In this case that is $A$.
+
++ Round 3: Counting the first place votes, $A = 6500, B = 3500$. Candidate $A$ has a majority, so we declare $A$ the winner.
+
+_STV_ (ordinal, multi-winner): Single Transferable Vote (STV) is the first model that is multi-winner. In a multi-winner election, the goal is to elect a set of $n$ candidates that best represent the voters' preferences. STV achieves this by #highlight[...]
+
+== Statistical Social Choice <statistical-social-choice> // ====================
 
 So far, we've applied the classical philosophical and economic framework of social choice theory. This framework presupposes that preferences are the static immovable opinions of a voter. While this is fine as a framework, its categorically unrealistic. In reality, voters do not have static preferences, nor do they know precisely who they will vote for with absolute certainty. They may have a preference for one candidate over another, but they may also be influenced by external factors such as the media, their friends, or their own emotions. Say that a voter has the following opinions: $c_1 = 65% "approval"$ and $c_2 = 35% "approval"$. The voter may submit a ballot with $c_1 prec c_2$ or $c_2 prec c_1$ depending on how they feel on the day of the election. Voting is a _stochastic process_. This reality is not captured by classical theory. We need something more, we need a statistical approach to social choice.
 
@@ -83,13 +105,28 @@ This form of stochastic voting is a concept hardwired into the framework of this
 
 === Statistical Social Choice Rules <statistical>
 
+The idea of preference realization comes up in social choice theory, though they define it as a model for ballot generation, rather than a stochastic realization. These models have characteristics and parameters $theta$ which allow us to simulate voting behavior in some ways.
 
+First starting with the trivial cases, there are:
 
+_Impartial_: A model that selects a i.i.d. random preference for each voter. It can be thought of as though each voter has no information about the candidates.
 
-// =============================================================================
+_Manual_: A "model" thats just the ballots of some real-world election. In one sense this is the most realistic model, and one the other it tells us the least because we can't know what abstract model these ballots were generated from.
 
-// for more than 2 voters $V = {v_1, v_2, ...}$, voting between 3 or more possible alternatives $C = {c_1, c_2, c_3}$, then there does not exist a social welfare function $cal(W)$ that satisfies the following axioms:
+Moving on, we have the more useful models of _Plackett-Luce_, and _Mallows_.
 
-// - _Universal domain:_ $cal(W)$ can contain any possible complete and transitive preference ordering.
-// - _Weak pareto efficiency:_ If every individual prefers $c_1$ to $c_2$, then the social preference should also prefer $c_1$ to $c_2$.
-// - _Independence of irrelevant alternatives:_ If $cal(W)$ prefers $c_1$ to $c_2$ when $c_3$ is not present, then $cal(W)$ should also prefer $c_1$ to $c_2$ when $c_3$ is present.
+_Plackett–Luce_: A model that generates rankings by sequentially selecting candidates based on a fixed weight vector $(w_1, w_2, ..., w_n)$, where each $w_i > 0$ represents the relative strength or popularity of candidate $i$.
+
+The ballot is constructed one position at a time. At each step, a candidate is chosen randomly, with probability proportional to their current weight, and then removed from consideration. The remaining weights are re-normalized, and the process repeats until all candidates are ranked.
+
+For example, consider a case where the weights are $(0.5, 0.3, 0.2)$:
+
++ _First draw_: Say candidate 1 is selected (they had a 50% chance of being selected). Then the ballot is now $[1, ...]$ and the weights are $(0.3, 0.2) => (0.6, 0.4)$.
+
++ _Second draw_: Say candidate 2 is selected (they had a 60% chance of being selected). Then the ballot is now $[1, 2, ...]$ and the weights are $(0.2) => (1.0)$.
+
++ _Third draw_: Say candidate 3 is selected (they had a 100% chance of being selected). Then the ballot is now $[1, 2, 3]$. This completes the ballot generation.
+
+_Mallows_: A model that generates rankings by sampling a distance, and then re-ranking a central preference to be distance $d$ away from that central preference. For `kingmaker` we use the commonly-used kendall-tau distance metric. This metric counts the number of pairwise disagreements between two rankings. Typically the central ballot is written $pi_0$, and the probability of the Mallows model selecting a ballot $pi$ is proportional to $exp(-phi d(pi_0, pi))$, where $phi$ is a parameter that controls the cohesion of the distribution. $phi in [0, oo)$, and $phi = 0$ gives a uniform distribution over all rankings (impartial), and $phi -> oo$ gives a distribution that always selects the central preference.
+
+In practice, the Mallows model is implemented by first sampling a distance $d$, and then uniformly sampling a ballot with that distance.
