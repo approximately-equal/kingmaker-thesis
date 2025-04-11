@@ -1,6 +1,6 @@
 = Code Appendix <code>
 
-```rust
+```rs
 use kingmaker::prelude::*;
 
 fn main() {

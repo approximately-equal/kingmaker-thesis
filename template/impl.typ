@@ -44,11 +44,11 @@
   }
   // style the header
   if calc.odd(here().page()) {
-    set align(left)
-    counter(page).display(numbering) + h(1em) + smallcaps[#current-chapter]
-  } else {
     set align(right)
     smallcaps[#current-chapter] + h(1em) + counter(page).display(numbering)
+  } else {
+    set align(left)
+    counter(page).display(numbering) + h(1em) + smallcaps[#current-chapter]
   }
 }
 
@@ -60,10 +60,9 @@
   advisors: ("Advisor",),
   date: datetime.today(),
   college: [Reed College],
-  presented-to: [A Thesis \ Presented to \ (Division) \ (College)],
+  presented-to: [A Thesis \ Presented to \ [Division] \ [College]],
   fullfillment: [],
-  approval: [Approved for the Division \ (Major)],
-  preview: false,
+  approval: [Approved for the Division \ [Major]],
 ) = (body) => {
   // metadata --
   set document(title: title, author: author, date: date)
@@ -77,37 +76,38 @@
   show link: set text(style: "oblique")
 
   // headings (general) --
-  set heading(numbering: "1.", supplement: [Chapter])
-  show heading: set text(style: "oblique", weight: "regular")
+  set heading(numbering: "1.")
+  show heading: set text(style: "italic", weight: "regular")
   show heading: set block(above: 2em, below: 1em)
-  show heading: set par(justify: false) // overrides justification for headers
 
   // headings (per level)
+  show heading.where(level: 1): set heading(supplement: [Chapter])
   show heading.where(level: 1): it => {
     // create detectable pagebreaks chapter headers
     sectionbreak()
     // style chapter headers
-    // set block(above: 0em)
-    // NOTE: margin-top = 1.5in (header) + 1.0in (v)
     v(1in) + it
+    // NOTE: margin-top = 1.5in (header) + 1.0in (v)
   }
   show heading.where(level: 1): set text(30pt)
   show heading.where(level: 2): set text(20pt)
-  show heading.where(level: 3): set text(14pt)
+  show heading.where(level: 3): set text(16pt)
 
   // page setup (headers, footers, layout) --
   set page(
     paper: "us-letter", margin: (inside: 1.5in, outside: 1.0in, top: 1.5in, bottom: 1.0in), header: context{
-      if is-header-page() { header-style("i") }
+      if is-header-page() {
+        // current = counter.here()
+        // counter(page).step()
+        header-style("i")
+      }
     },
   )
 
   // frontmatter --
-  if not preview {
-    title-page(title, author, date, presented-to, fullfillment)
-    signature-page(approval, advisors)
-    // NOTE: for structure purposes (could OPTIONALLY have have acknowledgments + preface + abbreviations in front of it) the outline is not included here, but it is a REQUIRED element of the thesis and MUST be included.
-  }
+  title-page(title, author, date, presented-to, fullfillment)
+  signature-page(approval, advisors)
+  // NOTE: for structure purposes (could OPTIONALLY have have acknowledgments + preface + abbreviations in front of it) the outline is not included here, but it is a REQUIRED element of the thesis and MUST be included.
 
   // footnotes --
   set footnote.entry(indent: 0em, separator: line(length: 25%, stroke: 0.75pt), gap: 0.65em)
@@ -118,9 +118,13 @@
   show math.equation: set block(spacing: 1.5em)
 
   // figures & tables --
-  set figure(supplement: [Fig])
+  show figure: f => {[#v(1em) #f #v(1em) ]}
+  show figure: set block(breakable: true)
+  show figure.where(kind: figure): set figure(supplement: [Fig])
   show figure.where(kind: table): set figure(supplement: [Table])
   show figure.where(kind: table): set align(left)
+  show figure.where(kind: raw): set figure(supplement: [Code])
+  show figure.where(kind: raw): set align(left)
 
   // captions --
   show figure.caption: set align(left)

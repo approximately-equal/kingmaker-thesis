@@ -1,11 +1,11 @@
 // preamble ====================================================================
 
 // imports --
-#import "template/lib.typ" as thesis-template
-#import thesis-template.ctheorems: *
+#import "template/lib.typ" as reed-thesis
+#import reed-thesis.ctheorems: *
 
 // template --
-#show: thesis-template.thesis(
+#show: reed-thesis.thesis(
   title: [Kingmaker: A Simulation Analysis of Strategic Voting],
   author: "Chance Addis",
   advisors: ("Michael Pearce",),
