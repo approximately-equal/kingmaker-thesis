@@ -33,9 +33,9 @@ Preferences within `kingmaker` correspond with preferences as described in @real
   ```
 ]
 
-While preferences may be implemented the same as @realization, the way they are _utilized_ in `kingmaker` is different. In theory---and reality---preferences are defined per voter. In `kingmaker` preferences are defined once for a block of voters (e.g. Democrats, Independents, etc). This means that when different voters draw from the preference, they are drawing from the same underlying distribution. Thus we should model preferences for a voting block as aggregate preferences of all voters in the voting block, and that each draw is that voters individual preferences being defined.
+While preferences may be implemented the same as @realization, the way they are _utilized_ in `kingmaker` is different. In theory---and reality---preferences are defined per voter. In `kingmaker` preferences are defined once for a bloc of voters (e.g. Democrats, Independents, etc). This means that when different voters draw from the preference, they are drawing from the same underlying distribution. Thus we should model preferences for a voting bloc as aggregate preferences of all voters in the voting bloc, and that each draw is that voters individual preferences being defined.
 
-This notion is not entirely accurate, as this means that realization is a fixed effect that depends entirely on the average preferences of the voting block that they are a member of. In reality, preferences can vary within a voting block, and individual preferences may deviate from the average in a random way. In this way, aggregating all preferences within a voting block loses valuable information. However, it is sufficient for our purposes.
+This notion is not entirely accurate, as this means that realization is a fixed effect that depends entirely on the average preferences of the voting bloc that they are a member of. In reality, preferences can vary within a voting bloc, and individual preferences may deviate from the average in a random way. In this way, aggregating all preferences within a voting bloc loses valuable information. However, it is sufficient for our purposes.
 
 We are primarily interested in well-known and well-understood preference models, thus `kingmaker` implements a number of such preference models. These include:
 
@@ -81,24 +81,24 @@ Again, `kingmaker` implements a number of well-known tactics. These include:
   )
 ] <tactics-table>
 
-== Voters & Voting Blocks <voting-block>
+== Voters & Voting Blocs <voting-bloc>
 
-In real-world elections, voters rarely act in complete isolation. Instead, shared interests, identities, or affiliations often lead individuals to vote in coordinated ways. These voting blocks—groups of voters with similar preferences or strategies—can form around political parties, regional identities, demographic categories, or shared ideologies. Their collective behavior can significantly shape electoral outcomes, amplify certain voices, and even enable strategic voting on a larger scale.
+In real-world elections, voters rarely act in complete isolation. Instead, shared interests, identities, or affiliations often lead individuals to vote in coordinated ways. These voting blocs—groups of voters with similar preferences or strategies—can form around political parties, regional identities, demographic categories, or shared ideologies. Their collective behavior can significantly shape electoral outcomes, amplify certain voices, and even enable strategic voting on a larger scale.
 
-They are also a useful tool from the perspective of campaigns, as they can target specific voting blocks with tailored messages and strategies to influence their preferences and voting behavior. `kingmaker` also implements voting blocks, and in fact voters are entirely represented by voting blocks internally.
+They are also a useful tool from the perspective of campaigns, as they can target specific voting blocs with tailored messages and strategies to influence their preferences and voting behavior. `kingmaker` also implements voting blocs, and in fact voters are entirely represented by voting blocs internally.
 
-Voting blocks are defined as follows:
+Voting blocs are defined as follows:
 
-#figure(caption: [Voting block implementation in `kingmaker`])[
+#figure(caption: [Voting bloc implementation in `kingmaker`])[
   ```rs
-  /// A block of voters is considered to have a single aggregate preference and set of tactics. They represent the sum total distribution across all the voters in the block. When a voter draws from this distribution, that is the expression of their preferences / individuality.
+  /// A bloc of voters is considered to have a single aggregate preference and set of tactics. They represent the sum total distribution across all the voters in the bloc. When a voter draws from this distribution, that is the expression of their preferences / individuality.
   #[derive(Debug)]
-  pub struct VotingBlock<B: Ballot> {
-      /// The preference of the voting block
+  pub struct VotingBloc<B: Ballot> {
+      /// The preference of the voting bloc
       preference: Arc<dyn Preference<B>>,
-      /// The strategy of the voting block
+      /// The strategy of the voting bloc
       strategy: Vec<(Arc<dyn Tactic<B>>, f32)>,
-      /// The number of members in the voting block
+      /// The number of members in the voting bloc
       members: usize,
   }
   ```
@@ -106,11 +106,9 @@ Voting blocks are defined as follows:
 
 While this abstraction enables efficient simulation and experimentation, it also introduces several important limitations that distance the model from real-world complexity.
 
-First, _each voter is a member of exactly one voting block_. In reality, individuals may belong to overlapping social, cultural, and political groups, each influencing their preferences to varying degrees. This one-to-one assignment flattens the multidimensional nature of voter identity and suppresses potential interactions between intersecting group affiliations.
+First, _each voter is a member of exactly one voting bloc_. In reality, individuals may belong to overlapping social, cultural, and political groups, each influencing their preferences to varying degrees. This one-to-one assignment flattens the multidimensional nature of voter identity and suppresses potential interactions between intersecting group affiliations.
 
-Second, _each voting block has a single aggregate preference and strategy, shared by all of its members_. While this simplifies the sampling of preferences and strategies during simulation, it eliminates within-block heterogeneity. In reality, even tightly aligned groups exhibit variation in how strongly they hold certain views or how likely they are to support specific candidates. A more realistic might model voters with mixed-effects models, where membership to a particular voting block is a fixed effect, and individual voter preferenes is a random effect. This applies both to preferences and strategies.
-
-// Voting blocks are centrally important to understanding the trade-offs and limitations of `kingmaker`. They allow us to model the behavior of voters and their preferences, but only in certain ways. Like we mentioned earlier, preference aggregation and the difference between group and individual preferences exist because of voting blocks and constructed to have one aggregate preference. The same aggregation applies to strategy, where we aggregate the strategies of each voter in the block to determine the overall strategy of the block.
+Second, _each voting bloc has a single aggregate preference and strategy, shared by all of its members_. While this simplifies the sampling of preferences and strategies during simulation, it eliminates within-bloc heterogeneity. In reality, even tightly aligned groups exhibit variation in how strongly they hold certain views or how likely they are to support specific candidates. A more realistic might model voters with mixed-effects models, where membership to a particular voting bloc is a fixed effect, and individual voter preferences are a random effect. This applies both to preferences and strategies.
 
 == Methods & Outcomes <methods>
 
@@ -165,7 +163,7 @@ Kingmaker implements a number of well-known methods, as well as a few novel ones
   {
       conditions: C,
       candidates: Vec<Candidate>,
-      voter_pool: Vec<VotingBlock<B>>,
+      voter_pool: Vec<VotingBloc<B>>,
       method: M,
   }
   ```

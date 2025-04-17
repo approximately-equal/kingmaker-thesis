@@ -13,7 +13,7 @@
 
   This thesis expands upon this literature by simulating complex social conditions, in order to:
 
-  + Synthesize optimal (in some measurable sense) strategies for some voter block,
+  + Synthesize optimal (in some measurable sense) strategies for some voter bloc,
   + Use those novel (as well as known) voting strategies to compare the resilience of common voting methods across a range of social conditions.
 ]
 

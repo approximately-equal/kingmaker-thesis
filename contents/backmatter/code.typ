@@ -12,15 +12,15 @@ fn main() {
         Candidate::new(3, "D", None, None),
         Candidate::new(4, "E", None, None),
     ];
-    let voter_pool = [
-        VotingBlock::builder(
+    let voting_blocs = [
+        VotingBloc::builder(
             preferences::Mallows::new(vec![0, 1, 2, 3, 4], 0.2),
             5_000,
         )
         .add_tactic(tactics::Identity, 0.8)
         .add_tactic(tactics::Burial(vec![1]), 0.2)
         .build(),
-        VotingBlock::builder(
+        VotingBloc::builder(
             preferences::Mallows::new(vec![2, 1, 4, 3, 0], 0.15),
             5_000,
         )
@@ -29,7 +29,7 @@ fn main() {
         .build(),
     ];
     let election =
-        Election::new((), candidate_pool, voter_pool, methods::Plurality);
+        Election::new((), candidate_pool, voting_blocs, methods::Plurality);
     // run election(s)
     let outcomes = election.run_once(0);
     // display outcome
