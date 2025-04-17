@@ -118,12 +118,13 @@
   show math.equation: set block(spacing: 1.5em)
 
   // figures & tables --
+  show figure.where(kind: image): set figure(placement: auto)
   show figure: f => {[#v(1em) #f #v(1em) ]}
   show figure: set block(breakable: true)
   show figure.where(kind: figure): set figure(supplement: [Fig])
   show figure.where(kind: table): set figure(supplement: [Table])
-  show figure.where(kind: table): set align(left)
   show figure.where(kind: raw): set figure(supplement: [Code])
+  show figure.where(kind: table): set align(left)
   show figure.where(kind: raw): set align(left)
 
   // captions --
