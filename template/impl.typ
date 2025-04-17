@@ -119,7 +119,7 @@
 
   // figures & tables --
   show figure.where(kind: image): set figure(placement: auto)
-  show figure: f => {[#v(1em) #f #v(1em) ]}
+  show figure.where(kind: raw).or(figure.where(kind: table)): f => [#v(1em) #f #v(1em)]
   show figure: set block(breakable: true)
   show figure.where(kind: figure): set figure(supplement: [Fig])
   show figure.where(kind: table): set figure(supplement: [Table])
