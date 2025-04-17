@@ -1,6 +1,51 @@
 #import "../../assets/assets.typ": election_pipeline, election_configuration
 #import "../../template/utilities.typ": description-list
 
+= Methods <methods>
+
+#stack(
+  dir: ltr,
+  box(width: 50%)[
+    #figure(caption: [Overview of the election pipeline.])[
+      #election_pipeline <election-pipeline>
+    ]
+  ],
+  stack(
+    dir: ttb,
+    box(width: 50%)[
+      #figure(caption: [Structure of an election configuration.])[
+        #election_configuration <election_configuration>
+      ]
+      _KEY_: An election consists of candidates $C$, voting blocks $B$, and election method $cal(M)$. A voting block $i$ consists of preferences $cal(P_i)$ and a strategy $cal(S_i)$
+    ]
+  )
+)
+
+In `kingmaker`, realization, strategy-application, aggregation, and tabulation have well-defined behavior, which we will explore in-depth shortly. The above diagrams give a high-level overview of the pipeline and configuration of the election process and the particular way that `kingmaker` implements it. It is important to understand that this model is _not_ realistic and has limitations that will be discussed thoroughly.
+
+== Candidates <candidate>
+
+In a real election, candidates must be registered before voting can begin. Similarly, in `kingmaker` an election must be configured with some set of candidates. This is done by creating a `Candidate` structure. A candidate is defined as follows:
+
+#figure(caption: [Candidate implementation in `kingmaker`])[
+  ```rs
+  /// A candidate in an election.
+  #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize)]
+  pub struct Candidate {
+      /// Unique identifier for the candidate
+      id: Id,
+      /// The name of the candidate
+      name: String,
+      /// The party the candidate is associated with, if any
+      party: Option<String>,
+      /// The (spacial) positions the candidate holds, if any
+      positions: Option<Vec<NotNan<f32>>>,
+  }
+  ```
+]
+
+One may be confused about the addition of the `positions` field to the `Candidate` structure. This is ignored in most cases, but in spacial voting it represents the policy positions of the candidate in some abstract "policy space".
+
 == Preferences & Realization <preference>
 
 Preferences within `kingmaker` correspond with preferences as described in @realization, as some distribution over possible ballots. They are defined in the following manner:
