@@ -1,3 +1,6 @@
+#import "../../template/packages/ctheorems.typ": *
+
+
 = Background <background>
 
 == A History of Social Choice <history> // =====================================
@@ -73,29 +76,73 @@ This is a monumental result. It proves that no matter the voting system, there i
 
 There are many historical and current voting methods that are used across the world. Let's look at some of the most common ones:
 
-_Plurality_ (ordinal-adjacent, single-winner): The one that Americans are most familiar with is the plurality method, oftentimes called "first-past-the-post" (FPTP). This method involves electing the candidate with the most votes, regardless of the margin of victory. Note that this is not the same as majority voting. Consider an election where $(A: 250, B: 200, C: 150)$. The total number of votes is $250 + 200 + 150 = 600$. $A$ wins because they have the most votes, but they didn't have a majority.
+#definition(title: "Plurality")[
+  Plurality is an ordinal-adjacent, single-winner voting method, also known as first-past-the-post (FPTP).
 
-_Borda_ (ordinal, single-winner): An election that is not commonly used but historically significant is the Borda count. In this method, each candidate is assigned points based on their ranking in each voter's preference list. The candidate with the highest total points wins. For example, if there are three candidates $A$, $B$, and $C$, and a voter ranks them as $A prec B prec C$, then $A$ gets 2 points, $B$ gets 1 point, and $C$ gets 0 points. This method is not commonly used as it is very susceptible to strategic voting, as we'll see later.
+  Let $C$ be a set of candidates, and $Pi$ a profile of ballots. Each candidate $c$ has a score $S$, defined as the number of first-place votes they receive. $
+    S := |{pi in Pi | pi[0] = c}|.
+  $
 
-_Approval_ (nominal, single-winner): Approval is another classic and used---in the UN General Assembly for example---voting method. In this method, each candidate selects a set of candidates they approve of, and the candidate with the most approvals wins. For example, if there are three candidates $A$, $B$, and $C$, and a voter approves of $A$ and $B$, then $A$ and $B$ each get 1 point, and $C$ gets 0 points. // Approval voting is simple and effective, as well as having the fascinating property that a candidate can win even if they are not the number 1 candidate for any voter.
+  The candidate with the most first place votes wins.
+]
 
-_IRV_ (ordinal, single-winner): Now we move on to the big ones. Instant Runoff Voting (IRV) is a voting method that is used in many countries, including Australia and Ireland. In this method, each voter ranks the candidates in order of preference. The candidate with the fewest first-place votes is eliminated, and their votes are redistributed to the remaining candidates based on the voters' second choices. This process continues until one candidate has a majority of the votes. This is best explained with an example.
+Note that while plurality is sometimes called majority voting, a candidate does not need to have a majority of the votes to win. Consider an election where $(A: 250, B: 200, C: 150)$. The total number of votes is $250 + 200 + 150 = 600$. $A$ wins because they have the most votes, but they didn't have a majority.
 
-Suppose we have 4000 ballots with preferences $A prec B prec C prec D$, 3500 ballots with preferences $B prec D prec A prec C$, 1500 ballots with preferences $C prec A prec B prec D$, 1000 ballots with preferences $D prec C prec B prec A$.
+#definition(title: "Borda")[
+  Borda (count) is a ordinal, single-winner voting method.
 
-+ Round 1: Counting the first place votes, $A = 4000, B = 3500, C = 1500, D = 1000$. No candidate has a majority, so we elimimate the last place candidate, which is $D$, we now re-distribute the votes for $D$ to the next candidate. In this case that is $C$.
+  Let $C$ be a set of candidates, and $Pi$ a profile of ballots. Each candidate $c$ has a score $S$, defined as the cumulative sum of their rankings in each ballot. $
+    S := sum_(pi in Pi) sum_(i = 1)^(|pi|) i dot I(pi[i] = c).
+  $ where $I$ is the indicator function. In other words, the candidate with the highest cumulative ranking wins.
+]
 
-+ Round 2: Counting the first place votes, $A = 4000, B = 3500, C = 2500$. No candidate has a majority, so we eliminate the last place candidate, which is $C$, we now re-distribute the votes for $C$ to the next candidate. In this case that is $A$.
+#example[
+  Suppose there are three candidates $A$, $B$, and $C$, and a voter ranks them as $A prec B prec C$. Then $A$ gets 2 points, $B$ gets 1 point, and $C$ gets 0 points.
+]
 
-+ Round 3: Counting the first place votes, $A = 6500, B = 3500$. Candidate $A$ has a majority, so we declare $A$ the winner.
+#definition(title: "Approval")[
+  Approval (voting) is a nominal, single-winner voting method.
 
-_STV_ (ordinal, multi-winner): Single Transferable Vote (STV) is the first model that is multi-winner. In a multi-winner election, the goal is to elect a set of $k$ winners from a set of $n$ candidates that best represent the voters' preferences. STV achieves this by electing a candidate when their share of first-place votes exceeds some threshold, typically the _droop quota_, defined $"votes" / (k + 1)$. In a given round, either:
+  Let $C$ be a set of candidates, and $Pi$ a profile of ballots. Each candidate $c$ has a score $S$ defined as the number of voters who approve of them. $
+    S := |{pi in Pi | c in pi}|
+  $
 
-+ A candidate exceeds the droop quota, and is elected. Then their votes are redistributed to the next candidate in the voter's preference order.
+  The candidate with the most approvals wins.
+]
 
-+ No candidate exceeds the droop quota, and the candidate with the fewest votes is eliminated. Their votes are redistributed to the next candidate in the voter's preference order.
+#example[
+  Suppose there are three candidates $A$, $B$, and $C$; A voter approves of $A$ and $B$. Then $A$ and $B$ each get 1 point, and $C$ gets 0 points.
+]
 
-This continues until all $k$ seats are filled.
+#definition(title: "IRV")[
+  Instant Runoff Voting (IRV) is a ordinal, single-winner voting method.
+
+  Let $C$ be a set of candidates, and $Pi$ a profile of ballots. IRV occurs in rounds, which continue until one candidate has a majority of the votes. In each round, the candidate(s) with the fewest first-place votes is eliminated, and their votes are redistributed to the remaining candidates based on the voters' second choices.
+]
+
+#example[
+  Suppose we have 4000 ballots with preferences $A prec B prec C prec D$, 3500 ballots with preferences $B prec D prec A prec C$, 1500 ballots with preferences $C prec A prec B prec D$, 1000 ballots with preferences $D prec C prec B prec A$.
+
+  + Round 1: Counting the first place votes, $A = 4000, B = 3500, C = 1500, D = 1000$. No candidate has a majority, so we elimimate the last place candidate, which is $D$, we now re-distribute the votes for $D$ to the next candidate. In this case that is $C$.
+
+  + Round 2: Counting the first place votes, $A = 4000, B = 3500, C = 2500$. No candidate has a majority, so we eliminate the last place candidate, which is $C$, we now re-distribute the votes for $C$ to the next candidate. In this case that is $A$.
+
+  + Round 3: Counting the first place votes, $A = 6500, B = 3500$. Candidate $A$ has a majority, so we declare $A$ the winner.
+]
+
+#definition(title: "STV")[
+  Single Transferable Vote (STV) is a ordinal, multi-winner voting method.
+
+  Let $C$ be a set of candidates, $Pi$ a profile of ballots, and $k$ the number of seats to elect. In order to determine when a candadite can be elected, a quota is used, typically the droop quota, which is $
+    (|Pi|) / (k + 1)
+  $
+
+  STV occurs in rounds, which continue until all seats are filled. In each round, one of two things can happen:
+
+  - A candidate exceeds the quota, and is elected. Then their votes are redistributed to the next candidate in the voter's ranking.
+
+  - No candidate exceeds the droop quota, and the candidate(s) with the fewest votes is eliminated. Their votes are redistributed to the next candidate in the voter's ranking.
+]
 
 == Statistical Social Choice <statistical-social-choice> // ====================
 
@@ -111,28 +158,99 @@ This form of stochastic voting is a concept hardwired into the framework of this
 
 === Statistical Social Choice Rules <statistical>
 
-The idea of preference realization comes up in social choice theory, though they define it as a model for ballot generation, rather than a stochastic realization. These models have characteristics and parameters $theta$ which allow us to simulate voting behavior in some ways.
+The idea of preference realization comes up in social choice theory, though they define it as a model for ballot generation, rather than a stochastic realization. These models have characteristics and parameters $theta$ which allow us to simulate voting behavior in some ways. Below a few of the most common models are defined.
 
-First starting with the trivial cases, there are:
+#definition(title: "Impartial")[
+  Let $Pi$ be the collection of possible ballots. The impartial model randomly draws votes according to the following pmf. $
+    P[pi] = 1 / (|Pi|)
+  $
+]
 
-_Impartial_: A model that selects a i.i.d. random preference for each voter. It can be thought of as though each voter has no information about the candidates.
+In other words, the Impartial preference model samples from a uniform distribution over possible ballots.
 
-_Manual_: A "model" thats just the ballots of some real-world election. In one sense this is the most realistic model, and one the other it tells us the least because we can't know what abstract model these ballots were generated from.
+#definition(title: "Manual")[
+  Let $Pi_0$ be the collection of ballots submitted in some real election. The manual model randomly samples a subset of this collection without replacement. Therefore, the pmf of drawing a profile $pi$ with $|pi| = n$ is $
+    P[pi] = 1 / binom(|Pi_0|, n)
+  $
+]
 
-Moving on, we have the more useful models of _Plackett-Luce_, and _Mallows_.
+#example[
+  Consider a toy example where the ballots are $A prec B prec C, B prec C prec A, C prec A prec B$. To sample a profile with $2$ ballots, say ballots 1 and 3 are selected. Then the profile contains $A prec B prec C, C prec A prec B$.
+]
 
-_Plackett–Luce_: A model that generates rankings by sequentially selecting candidates based on a fixed weight vector $(w_1, w_2, ..., w_n)$, where each $w_i > 0$ represents the relative strength or popularity of candidate $i$.
+#definition(title: "Plackett-Luce")[
+  Let $theta = [w_1, w_2, ...]$ a collection of weights associated to each candidate, and $C$ the set of candidates. The Plackett-Luce model randomly draws votes according to the following pmf $
+    P[pi] = product_(r = 1)^(R) w_(pi[r]) / (sum_(s in C) w_s - sum_(t in {pi_0, ..., pi_(r-1)}) w_t)
+  $ where $R$ is the number of ranked candidates in the ballot.
+]
 
-The ballot is constructed one position at a time. At each step, a candidate is chosen randomly, with probability proportional to their current weight, and then removed from consideration. The remaining weights are re-normalized, and the process repeats until all candidates are ranked.
+The Plackett-Luce model constructs a ballot sequentially. At each step, a candidate is chosen randomly, with probability proportional to their current weight, and then removed from consideration. The remaining weights are re-normalized, and the process repeats until all candidates are ranked.
 
-For example, consider a case where the weights are $(0.5, 0.3, 0.2)$:
+#example[
+  Consider a case where the weights are $[0.5, 0.3, 0.2]$:
 
-+ _First draw_: Say candidate 1 is selected (they had a 50% chance of being selected). Then the ballot is now $[1, ...]$ and the weights are $(0.3, 0.2) => (0.6, 0.4)$.
+  + _First draw_: Say candidate 1 is selected (they had a 50% chance of being selected). Then the ballot is now $[1, ...]$ and the weights are $(0.3, 0.2) => (0.6, 0.4)$.
 
-+ _Second draw_: Say candidate 2 is selected (they had a 60% chance of being selected). Then the ballot is now $[1, 2, ...]$ and the weights are $(0.2) => (1.0)$.
+  + _Second draw_: Say candidate 2 is selected (they had a 60% chance of being selected). Then the ballot is now $[1, 2, ...]$ and the weights are $(0.2) => (1.0)$.
 
-+ _Third draw_: Say candidate 3 is selected (they had a 100% chance of being selected). Then the ballot is now $[1, 2, 3]$. This completes the ballot generation.
+  + _Third draw_: Say candidate 3 is selected (they had a 100% chance of being selected). Then the ballot is now $[1, 2, 3]$. This completes the ballot generation.
+]
 
-_Mallows_: A model that generates rankings by sampling a distance, and then re-ranking a central preference to be distance $d$ away from that central preference. For `kingmaker` we use the commonly-used kendall-tau distance metric. This metric counts the number of pairwise disagreements between two rankings. Typically the central ballot is written $pi_0$, and the probability of the Mallows model selecting a ballot $pi$ is proportional to $exp(-phi d(pi_0, pi))$, where $phi$ is a parameter that controls the cohesion of the distribution. $phi in [0, oo)$, and $phi = 0$ gives a uniform distribution over all rankings (impartial), and $phi -> oo$ gives a distribution that always selects the central preference.
+#definition(title: "Mallows")[
+  Let $pi_0$ be the central ranking of the candidates (e.g. $A prec B prec C$), and $phi.alt in [0, oo)$ be the cohesion parameters. Additionally set a distance function $d$ that measures the distance between two rankings $pi$ and $pi_0$. Typically this distance function is the Kendall Tau distance, which counts the number of pairwise disagreements between two rankings. The Mallows model randomly draws votes according to the following pmf $
+    P[pi] prop exp(-phi.alt dot d(pi, pi_0))
+  $
 
-In practice, the Mallows model is implemented by first sampling a distance $d$, and then uniformly sampling a ballot with that distance.
+  There is a known partition function $Z(phi.alt)$ to normalize the pmf.
+]
+
+While this pmf is well-defined, it doesn't tell us how to actually draw a ranking from it. Implementation-wise, drawing occurs by first sampling a distance, and then uniformly drawing a ranking from the set of rankings at that distance.
+
+The pmf of drawing a ranking with distance $l$ is given by $exp(-phi.alt dot d(pi, pi_0)) dot "# of ballots with distance" l$. The number of ballots with distance $l$ is---given that $d$ is the kendall tau distance---equivalent to the number of permutations of $n$ elements with exactly $l$ inversions. This number is given by the Mahonian distribution, which is the distribution of the number of inversions in a random permutation.
+
+With a distance $l$ drawn, uniformly draw a ranking from the set of rankings with distance $l$. This is done---again given that $d$ is the kendall tau distance---in the following way [written as python pseudocode]:
+
+#figure(caption: [Sample a uniform decomposition vector])[
+  ```python
+  def sample_decomposotion_vector(n, k, rng):
+      decomposition = []
+      inv_left = k
+
+      while inv_left > 0:
+          slots_left = n - i - 1
+
+          max_ahead_inv = (slots_left * (slots_left - 1) // 2
+          min_inv = min(inv_left - max_ahead_inv, 0)
+          max_inv = min(slots_left, inv_left)
+
+          inv = rng.uniform_int(min_inv, max_inv)
+          decomposition.append(inv)
+          inv_left = inv_left - inv
+
+      return decomposition
+  ```
+]
+
+The decomposition vector can then be easily converted to a ranking with the following algorithm [written as python pseudocode]:
+
+#figure(caption: [Convert a decomposition vector to a ranking])[
+  ```python
+  def decomposition_to_ranking(v):
+      # Unsorted indices of available candidates
+      available = [0, ..., len(v)]
+      # Initialize the permuted indices with empty vec of size |v|
+      perm = [None] * len(v)
+
+      # For each index in the decomposition vector
+      for i, sigma_i in enumerate(v):
+          # Remove the "inv #" sigma_i from available candidates
+          push = available.pop(sigma_i)
+          # Push the removed candidate to the permutation vector
+          perm[i] = push
+
+      # Return the complete permutation
+      return perm
+  ```
+]
+
+By following this process, it is possible to sample a specific ranking from the Mallows model.
