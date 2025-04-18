@@ -89,7 +89,13 @@ Suppose we have 4000 ballots with preferences $A prec B prec C prec D$, 3500 bal
 
 + Round 3: Counting the first place votes, $A = 6500, B = 3500$. Candidate $A$ has a majority, so we declare $A$ the winner.
 
-_STV_ (ordinal, multi-winner): Single Transferable Vote (STV) is the first model that is multi-winner. In a multi-winner election, the goal is to elect a set of $n$ candidates that best represent the voters' preferences. STV achieves this by #highlight[...]
+_STV_ (ordinal, multi-winner): Single Transferable Vote (STV) is the first model that is multi-winner. In a multi-winner election, the goal is to elect a set of $k$ winners from a set of $n$ candidates that best represent the voters' preferences. STV achieves this by electing a candidate when their share of first-place votes exceeds some threshold, typically the _droop quota_, defined $"votes" / (k + 1)$. In a given round, either:
+
++ A candidate exceeds the droop quota, and is elected. Then their votes are redistributed to the next candidate in the voter's preference order.
+
++ No candidate exceeds the droop quota, and the candidate with the fewest votes is eliminated. Their votes are redistributed to the next candidate in the voter's preference order.
+
+This continues until all $k$ seats are filled.
 
 == Statistical Social Choice <statistical-social-choice> // ====================
 
