@@ -82,6 +82,14 @@
   show figure.where(kind: raw): set figure(supplement: [Code])
   show figure.where(kind: table): set align(left)
   show figure.where(kind: raw): set align(left)
+  set table(
+    stroke: (_, y) => {
+      (bottom: 0.5pt + black)
+      if y == 0 { (bottom: 1pt + black) }
+      if y == 1 { (top: 0.5pt + black) }
+    },
+    row-gutter: 0.2em,
+  )
 
   // captions --
   show figure.caption: set align(left)

@@ -1,9 +1,8 @@
-#import "../../template/utilities.typ": description-list
-
 = Symbols and Definitions <symbols-definitions>
 
 #figure(caption: [Symbols and Definitions])[
-  #description-list(
+  #table(
+    columns: 2,
     table.header([*Symbol*], [*Definition*],),
     [$C = {c_i | i in {1..n}}$], [A set of candidates],
     [$V = {v_i | i in {1..n}}$], [A set of voters],

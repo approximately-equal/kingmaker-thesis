@@ -1,5 +1,4 @@
-#import "../../template/packages/ctheorems.typ": *
-
+#import "../../template/packages/theorion.typ": *
 
 = Background <background>
 

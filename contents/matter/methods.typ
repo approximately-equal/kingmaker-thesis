@@ -1,5 +1,4 @@
 #import "../../assets/assets.typ": election_pipeline, election_configuration
-#import "../../template/utilities.typ": description-list
 
 = Methods <methods>
 
@@ -85,7 +84,8 @@ This notion is not entirely accurate, as this means that realization is a fixed 
 We are primarily interested in well-known and well-understood preference models, thus `kingmaker` implements a number of such preference models. These include:
 
 #figure(caption: [List of preferences currently implemented in `kingmaker`])[
-  #description-list(
+  #table(
+    columns: 2,
     table.header([*Preference*], [*Description*],),
     [`Impartial`], [Select a ballot uniformly at random.],
     [`Manual`], [Select a ballot based on user input.],
@@ -116,7 +116,8 @@ Strategies, on the other hand, are a statistical extension that allows for stoch
 Again, `kingmaker` implements a number of well-known tactics. These include:
 
 #figure(caption: [List of tactics currently implemented in `kingmaker`])[
-  #description-list(
+  #table(
+    columns: 2,
     table.header([*Tactic*], [*Description*],),
     [`Identity`], [Default to the voter's original preference.],
     [`Random`], [Select a re-ordering uniformly at random.],
@@ -182,7 +183,8 @@ With the profile of ballots in hand, the final step is to tabulate the results a
 Kingmaker implements a number of well-known methods, as well as a few novel ones. These include:
 
 #figure(caption: [List of methods currently implemented in `kingmaker`])[
-  #description-list(
+  #table(
+    columns: 2,
     table.header([*Method*], [*Description*],),
     [`RndDictator`], [Randomly select a voter and then select their top choice.],
     [`Plurality`], [Select the candidate with the most (plurality of) first-place votes.],
