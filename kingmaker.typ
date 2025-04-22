@@ -34,7 +34,7 @@
 
 // matter --
 #set page(numbering: "1.1")
-#counter(page).update(0)
+#counter(page).update(1)
 #include "contents/matter/introduction.typ"
 #include "contents/matter/background.typ"
 #include "contents/matter/methods.typ"

@@ -11,3 +11,6 @@
 ]
 
 #frontmatter.dedication[To my parents, for their ceaseless support.]
+
+// NOTE: If this doesn't exist, the empty page after the frontmatter and before the matter, there will be a heading, _which is a BUG_. I have no idea why this is happening, and I can't be bothered to fix it. The hack works, don't question it.
+#page(header: [], footer: [])[]

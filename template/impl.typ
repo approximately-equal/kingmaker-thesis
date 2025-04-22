@@ -21,7 +21,7 @@
   set document(title: title, author: author, date: date)
 
   // text --
-  set text(font: ("Libertinus Serif"), size: 13pt, weight: 450)
+  set text(font: ("Libertinus Serif",), size: 12pt, weight: 400)
   set par(
     justify: true, leading: 0.7em, spacing: 0.7em, first-line-indent: 1.5em,
   )
@@ -37,9 +37,6 @@
   show heading.where(level: 1): set heading(supplement: [Chapter])
   show heading.where(level: 1): it => {
     sectionbreak()
-    if counter(heading.where(level: 1)).get().first() == 0 {
-      counter(page).update(n => n - 1)
-    }
     it
   }
   show heading.where(level: 1): set text(30pt)

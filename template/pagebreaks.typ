@@ -1,7 +1,7 @@
 // create detectable pagebreaks chapter headers
 #let sectionbreak() = {
   [#metadata(none) <empty-page-start>]
-  pagebreak(to: "odd")
+  pagebreak(weak: true, to: "odd")
   [#metadata(none) <empty-page-end>]
 }
 
