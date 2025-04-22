@@ -9,7 +9,7 @@ Starting with a simple demo, consider what happens when only one voting bloc has
 The election setup has 3 candidates: A (DEM), B (REP), and C (IND), with method instant runoff (IRV). There are 2 voting blocs: 5,000 Democrats and 5,000 Republicans. Each bloc has a characteristic preference order, modeled using the Mallows distribution. Democrats are centered around the ranking $A prec C prec B$ with cohesion parameter $phi.alt$, while Republicans follow $B prec C prec A$ with cohesion $1 - phi.alt$. Only Democrats have a strategy, which they use 10% of the time, the other 90% of the time using the identity strategy. @across-cohesion shows the results of running this configuration.
 
 #figure(caption: [
-  Proportion of wins for candidate $A$ across cohesion for each strategy
+  Proportion of wins for candidate $A$ across cohesion for each strategy. The burial, compromise, and pushover strategies are all the same (overlapping).
 ])[
   #image("../../assets/across_cohesion.svg")
 ] <across-cohesion>
@@ -33,7 +33,7 @@ Each voter uses a strategy 10% of the time, and defaults to the identity strateg
 @across-tactic presents the outcomes of these matchups. The columns represent the strategy used by Democrats, and the rows represent those used by Republicans.
 
 #figure(caption: [
-  Proportion of wins for each candidate across all combinations of tactics
+  Proportion of wins for each candidate across all combinations of tactics. The columns represent the strategy used by Democrats, and the rows represent those used by Republicans. Each color corresponds to a different candidate, with the x-axis the cohesion ($phi.alt$) of the Democrats ($1 - phi.alt$ for Republicans), and the y-axis the proportion of election wins (or ties) under the given conditions.
 ])[
   #image("../../assets/across_tactic.svg")
 ] <across-tactic>
@@ -71,19 +71,19 @@ Another natural question is: _How does the choice of voting method change the dy
 The strategy weight is still $0.1$ for non-identity strategies. This time, the cohesion parameter for the Democrats and Republicans are independently set, each $[0.4, 0.45, 0.5, 0.55, 0.6]$. The left labels are the tactics used by the Democrats and Republicans respectively. The rightmost label is Democrats, the leftmost for Republicans.
 
 #figure(caption: [
-  Proportion of wins for candidate $A$ across methods and tactics
+  Proportion of wins (or ties) for candidate $A$ across methods (Random dictator, Borda, Plurality, and IRV) and strategies (Identity, Burial, Compromise, Pushover), for given cohesion parameters for Democrats (x-axis) and Republicans (y-axis).
 ])[
   #image("../../assets/across_method_A.svg")
 ] <across-method-A>
 
 #figure(caption: [
-  Proportion of wins for candidate $B$ across methods and tactics
+  Proportion of wins (or ties) for candidate $B$ across methods (Random dictator, Borda, Plurality, and IRV) and strategies (Identity, Burial, Compromise, Pushover), for given cohesion parameters for Democrats (x-axis) and Republicans (y-axis).
 ])[
   #image("../../assets/across_method_B.svg")
 ] <across-method-B>
 
 #figure(caption: [
-  Proportion of wins for candidate $C$ across methods and tactics
+  Proportion of wins (or ties) for candidate $C$ across methods (Random dictator, Borda, Plurality, and IRV) and strategies (Identity, Burial, Compromise, Pushover), for given cohesion parameters for Democrats (x-axis) and Republicans (y-axis).
 ])[
   #image("../../assets/across_method_C.svg")
 ] <across-method-C>
