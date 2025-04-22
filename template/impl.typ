@@ -2,55 +2,9 @@
 
 #import "packages/ctheorems.typ": *
 #import "frontmatter.typ": title-page, signature-page
-
-// functions ===================================================================
-
-// create detectable pagebreaks chapter headers
-#let sectionbreak() = {
-  [#metadata(none) <empty-page-start>]
-  pagebreak(weak: true, to: "odd")
-  [#metadata(none) <empty-page-end>]
-}
-
-// check if this page should have a header
-#let is-header-page() = {
-  // setup selectors
-  let matches-after = query(heading.where(level: 1).after(here()))
-  let matches-before = query(heading.where(level: 1).before(here()))
-  let current = counter(page).get()
-  // check if this page has a chapter header
-  let has-chapter-header = matches-after.any(m =>
-  counter(page).at(m.location()) == current)
-  // check if the page is blank (uses the detectable pagebreaks)
-  let page-num = here().page()
-  let is-page-break = query(<empty-page-start>)
-  .zip(query(<empty-page-end>))
-  .any(
-    ((start, end)) => {
-      (
-        start.location().page() < page-num and page-num < end.location().page()
-      )
-    },
-  )
-  // determine whether the page should have a header on it
-  return not has-chapter-header and not is-page-break
-}
-
-#let header-style(numbering) = {
-  // get chapter for the given page
-  let matches-before = query(heading.where(level: 1).before(here()))
-  let current-chapter = if matches-before.len() > 0 {
-    matches-before.last().body
-  }
-  // style the header
-  if calc.odd(here().page()) {
-    set align(right)
-    smallcaps[#current-chapter] + h(1em) + counter(page).display(numbering)
-  } else {
-    set align(left)
-    counter(page).display(numbering) + h(1em) + smallcaps[#current-chapter]
-  }
-}
+#import "packages/theorion.typ": *
+#import "packages/zebraw.typ": *
+#import "pagebreaks.typ": *
 
 // thesis ======================================================================
 
@@ -83,11 +37,11 @@
   // headings (per level)
   show heading.where(level: 1): set heading(supplement: [Chapter])
   show heading.where(level: 1): it => {
-    // create detectable pagebreaks chapter headers
     sectionbreak()
-    // style chapter headers
-    v(1in) + it
-    // NOTE: margin-top = 1.5in (header) + 1.0in (v)
+    if counter(heading.where(level: 1)).get().first() == 0 {
+      counter(page).update(n => n - 1)
+    }
+    it
   }
   show heading.where(level: 1): set text(30pt)
   show heading.where(level: 2): set text(20pt)
@@ -95,16 +49,19 @@
 
   // page setup (headers, footers, layout) --
   set page(
-    paper: "us-letter", margin: (inside: 1.5in, outside: 1.0in, top: 1.5in, bottom: 1.0in), header: context{
+    paper: "us-letter",
+    margin: (inside: 1.5in, outside: 1.0in, top: 1.5in, bottom: 1.0in),
+    header: context{
       if is-header-page() {
         // current = counter.here()
         // counter(page).step()
-        header-style("i")
+        header-style()
       }
     },
+    footer: []
   )
 
-  // frontmatter --
+  // title & signature pages --
   title-page(title, author, date, presented-to, fullfillment)
   signature-page(approval, advisors)
   // NOTE: for structure purposes (could OPTIONALLY have have acknowledgments + preface + abbreviations in front of it) the outline is not included here, but it is a REQUIRED element of the thesis and MUST be included.
@@ -149,8 +106,7 @@
 
   // main body --
   /// start main body at page 1 and reset heading numbering to decimal (frontmatter is numbered in roman numerals)
-  set page(header: context{ if is-header-page() { header-style("1") } })
-  counter(page).update(1)
+  set page(header: context{ if is-header-page() { header-style() } })
   body
 
   // bibliography --

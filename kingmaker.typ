@@ -30,9 +30,11 @@
 // document ====================================================================
 
 // frontmatter --
+#set page(numbering: "i.")
 #include "contents/frontmatter/frontmatter.typ"
 
 // matter --
+#set page(numbering: "1.1")
 #counter(page).update(0)
 #include "contents/matter/introduction.typ"
 #include "contents/matter/background.typ"
