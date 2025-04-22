@@ -6,7 +6,7 @@ Recall that we wish to explore how strategic voting impacts election outcomes de
 
 Starting with a simple demo, consider what happens when only one voting bloc has a strategy (that isn't identity).
 
-The election setup has 3 candidates: A (DEM), B (REP), and C (IND), with method instant runoff (IRV). There are 2 voting blocs: 5,000 Democrats and 5,000 Republicans. Each bloc has a characteristic preference order, modeled using the Mallows distribution. Democrats are centered around the ranking $[A, C, B]$ with cohesion parameter $phi.alt$, while Republicans follow $[B, C, A]$ with cohesion $1 - phi.alt$. Only Democrats have a strategy, which they use 10% of the time, the other 90% of the time using the identity strategy. @across-cohesion shows the results of running this configuration.
+The election setup has 3 candidates: A (DEM), B (REP), and C (IND), with method instant runoff (IRV). There are 2 voting blocs: 5,000 Democrats and 5,000 Republicans. Each bloc has a characteristic preference order, modeled using the Mallows distribution. Democrats are centered around the ranking $A prec C prec B$ with cohesion parameter $phi.alt$, while Republicans follow $B prec C prec A$ with cohesion $1 - phi.alt$. Only Democrats have a strategy, which they use 10% of the time, the other 90% of the time using the identity strategy. @across-cohesion shows the results of running this configuration.
 
 #figure(caption: [
   Proportion of wins for candidate $A$ across cohesion for each strategy
@@ -14,7 +14,7 @@ The election setup has 3 candidates: A (DEM), B (REP), and C (IND), with method 
   #image("../../assets/across_cohesion.svg")
 ] <across-cohesion>
 
-The identity tactic has a 50-50 chance of A winning when the $phi.alt = 1-phi.alt = 0.5$, which is what we expect. With the cohesion parameters equal, the two voting blocs create ballots in exactly symmetric ways, making the winner an even split between $A$ and $B$. In this setup, $C$ never wins at any cohesion level.
+The identity tactic has a 50--50 chance of A winning when the $phi.alt = 1-phi.alt = 0.5$, which is what we expect. With the cohesion parameters equal, the two voting blocs create ballots in exactly symmetric ways, making the winner an even split between $A$ and $B$. In this setup, $C$ never wins at any cohesion level.
 
 Looking at the actual strategies, they do in fact work, giving Democrats an edge even with lower cohesion levels. Given that the proportion of wins is 50% at $phi.alt approx 0.45$, we can interpret these strategies as making up for a 5% weaker cohesion (with respect to the Mallows model).
 
@@ -26,7 +26,7 @@ This fact makes sense only because the election is so simple, and would not hold
 
 A natural question that arises from this analysis is: _Which tactics perform best when deployed against one another?_ To explore this, the following experimental setup is applied.
 
-We consider an election with four candidates: $A$ (DEM), $B$ (REP), $C$ (GREEN), and $D$ (IND). The election will be tabulated via instant-runoff (IRV). The electorate consists of two equally sized voting blocs: 5,000 Democrats and 5,000 Republicans. Each bloc has a characteristic preference order, modeled using the Mallows distribution. Democrats are centered around the ranking $[A, C, D, B]$ with cohesion parameter $phi.alt$, while Republicans follow $[B, C, D, A]$ with cohesion $1 - phi.alt$.
+We consider an election with four candidates: $A$ (DEM), $B$ (REP), $C$ (GREEN), and $D$ (IND). The election will be tabulated via instant-runoff (IRV). The electorate consists of two equally sized voting blocs: 5,000 Democrats and 5,000 Republicans. Each bloc has a characteristic preference order, modeled using the Mallows distribution. Democrats are centered around the ranking $A prec C prec D prec B$ with cohesion parameter $phi.alt$, while Republicans follow $B prec C prec D prec A$ with cohesion $1 - phi.alt$.
 
 Each voter uses a strategy 10% of the time, and defaults to the identity strategy the remaining 90%. We vary the strategy employed by each bloc in order to evaluate tactical interactions.
 
@@ -48,7 +48,7 @@ Suppose Democrats have low cohesion (strong preference coherence), and Republica
 
 *Compromise and Pushover*: Turning to the quadrant where both blocs use compromise or pushover, the resulting plot looks nearly identical to the one in @across-cohesion under the identity strategy. This tells us that these two strategies effectively cancel each other out in this context. But unlike identity and burial, these strategies are constructive rather than destructive---they aim to promote the bloc’s own candidate rather than harm the opponent. As a result, candidate $C$---who is not being elevated---never wins.
 
-A somewhat surprising finding is that compromise performs just as well as pushover, despite pushover being a more aggressive strategy. In the pushover strategy, a Democrat, for instance, always submits $[A, C, D, B]$ regardless of their underlying preferences. This suggests that in this context, the only meaningful impact comes from placing the bloc’s preferred candidate at the top---the rest of the ranking has little influence on the outcome.
+A somewhat surprising finding is that compromise performs just as well as pushover, despite pushover being a more aggressive strategy. In the pushover strategy, a Democrat, for instance, always submits $A prec C prec D prec B$ regardless of their underlying preferences. This suggests that in this context, the only meaningful impact comes from placing the bloc’s preferred candidate at the top---the rest of the ranking has little influence on the outcome.
 
 *Compromise and Pushover vs Identity and Burial*: Moving to the top-right, we'll find yet another surprising result: the weaker strategies (identity and burial) do better when they have a high $phi.alt$ than the stronger strategies (compromise and pushover) do. This seems counterintuitive, but the explanation lies in how these strategies interact with cohesion.
 
@@ -66,7 +66,7 @@ These kinds of unexpected dynamics will appear throughout the analysis, undersco
 
 == Across Method
 
-Another natural question is: _How does the choice of voting method change the dynamics of strategy?_ In order to test it, scenario similar---but distinct---to @across-tactic is used. The candidates are still $A$ (DEM), $B$ (REP), $C$ (GREEN), and $D$ (IND). There are still two equally-sized voting blocs, but they only have 4,500 members each, because a third voting bloc has been added. This voting block is the Independent bloc, which has a size of 1,000 members, and has central preference $D prec C prec A, B$, with $phi.alt = 0.2$. This bloc always votes honestly.
+Another natural question is: _How does the choice of voting method change the dynamics of strategy?_ In order to test it, scenario similar---but distinct---to @across-tactic is used. The candidates are still $A$ (DEM), $B$ (REP), $C$ (GREEN), and $D$ (IND). There are still two equally-sized voting blocs, but they only have 4,500 members each, because a third voting bloc has been added. This voting block is the Independent bloc, which has a size of 1,000 members, and has central preference $D prec C prec A prec B$, with $phi.alt = 0.2$. This bloc always votes honestly.
 
 The strategy weight is still $0.1$ for non-identity strategies. This time, the cohesion parameter for the Democrats and Republicans are independently set, each $[0.4, 0.45, 0.5, 0.55, 0.6]$. The left labels are the tactics used by the Democrats and Republicans respectively. The rightmost label is Democrats, the leftmost for Republicans.
 
