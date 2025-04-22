@@ -57,7 +57,7 @@ Having defined this, for the purposes of this analysis, we'll stick to the more 
 
 A collection of preference orderings across a set of voters $V$, is called a _profile_, denoted $Pi = {pi_i | i in {1..n}}$. A _social welfare function_ is a function $cal(W): Pi -> ⟨c_i_1,...,c_i_m⟩$. It creates something know as a _complete social ordering_ which ranks each pair of alternatives ${c_i, c_j} in C$.
 
-A full set of symbols can be found in @symbols-definitions
+A full set of symbols can be found in @symbols-definitions.
 
 === Strategic Voting <strategic-voting>
 
@@ -91,7 +91,7 @@ Note that while plurality is sometimes called majority voting, a candidate does 
   Borda (count) is a ordinal, single-winner voting method.
 
   Let $C$ be a set of candidates, and $Pi$ a profile of ballots. Each candidate $c$ has a score $S$, defined as the cumulative sum of their rankings in each ballot. $
-    S := sum_(pi in Pi) sum_(i = 1)^(|pi|) i dot I(pi[i] = c).
+    S := sum_(pi in Pi) sum_(i = 1)^(|pi|) (|pi| - i) dot I(pi[i] = c).
   $ where $I$ is the indicator function. In other words, the candidate with the highest cumulative ranking wins.
 ]
 
@@ -120,27 +120,33 @@ Note that while plurality is sometimes called majority voting, a candidate does 
 ]
 
 #example[
-  Suppose we have 4000 ballots with preferences $A prec B prec C prec D$, 3500 ballots with preferences $B prec D prec A prec C$, 1500 ballots with preferences $C prec A prec B prec D$, 1000 ballots with preferences $D prec C prec B prec A$.
+  Suppose we have 4000 ballots with preferences $A prec B prec C prec D$, 3500 ballots with preferences $B prec D prec A prec C$, 1500 ballots with preferences $C prec A prec B prec D$, 1000 ballots with preferences $D prec C prec B prec A$ (10,000 total ballots).
 
-  + Round 1: Counting the first place votes, $A = 4000, B = 3500, C = 1500, D = 1000$. No candidate has a majority, so we elimimate the last place candidate, which is $D$, we now re-distribute the votes for $D$ to the next candidate. In this case that is $C$.
+  + Round 1: Counting the first place votes, $A = 4000, B = 3500, C = 1500, D = 1000$. No candidate has a majority, so the last place candidate ($D$) is eliminated. Their votes are redistributed to the next candidate ($C$).
 
-  + Round 2: Counting the first place votes, $A = 4000, B = 3500, C = 2500$. No candidate has a majority, so we eliminate the last place candidate, which is $C$, we now re-distribute the votes for $C$ to the next candidate. In this case that is $A$.
+  + Round 2: Counting the first place votes, $A = 4000, B = 3500, C = 2500$. No candidate has a majority, so the last place candidate ($C$) is eliminated. Their votes are redistributed to the next candidate ($A$).
 
-  + Round 3: Counting the first place votes, $A = 6500, B = 3500$. Candidate $A$ has a majority, so we declare $A$ the winner.
+  + Round 3: Counting the first place votes, $A = 6500, B = 3500$. Candidate $A$ has a majority, so $A$ is the winner.
 ]
 
 #definition(title: "STV")[
-  Single Transferable Vote (STV) is a ordinal, multi-winner voting method.
+  Single Transferable Vote (STV) is an ordinal, multi-winner voting method.
 
-  Let $C$ be a set of candidates, $Pi$ a profile of ballots, and $k$ the number of seats to elect. In order to determine when a candadite can be elected, a quota is used, typically the droop quota, which is $
-    (|Pi|) / (k + 1)
-  $
+  Let $C$ be a set of candidates, $Pi$ a profile of ballots, and $k$ the number of seats to elect. In order to determine when a candidate can be elected, a quota is used, typically the droop quota, which is $(|Pi|) / (k + 1)$.
 
   STV occurs in rounds, which continue until all seats are filled. In each round, one of two things can happen:
 
-  - A candidate exceeds the quota, and is elected. Then their votes are redistributed to the next candidate in the voter's ranking.
+  - A candidate exceeds the quota, and is elected. Their votes are then redistributed to the next candidate in the voter's ranking.
 
-  - No candidate exceeds the droop quota, and the candidate(s) with the fewest votes is eliminated. Their votes are redistributed to the next candidate in the voter's ranking.
+  - No candidate exceeds the droop quota, and the candidate(s) with the fewest votes are eliminated. Their votes are then redistributed to the next candidate in the voter's ranking.
+]
+
+#example[
+  Suppose we want to elect $2$ seats. There are 4500 ballots with preferences $A prec C prec B prec D$, 3000 ballots with preferences $B prec D prec A prec C$, 1500 ballots with preferences $C prec A prec B prec D$, 1000 ballots with preferences $D prec C prec B prec A$ (10,000 total ballots). Thus the droop quota is $10000 / (2 + 1) = 3333$.
+
+  + Round 1: Counting the first place votes, $A = 4500, B = 3000, C = 1500, D = 1000$. Candidate $A$ exceeds the quota, and is elected. Their votes are redistributed to the next candidate ($C$).
+
+  + Round 2: Counting the first place votes, $C = 4500 + 1500 = 6000, B = 3000, D = 1000$. Candidate $C$ exceeds the quota, and is elected. There are no more seats to fill, so the election is over. Candidates $A$ and $C$ are elected.
 ]
 
 == Statistical Social Choice <statistical-social-choice> // ====================
@@ -157,7 +163,7 @@ This form of stochastic voting is a concept hardwired into the framework of this
 
 === Statistical Social Choice Rules <statistical>
 
-The idea of preference realization comes up in social choice theory, though they define it as a model for ballot generation, rather than a stochastic realization. These models have characteristics and parameters $theta$ which allow us to simulate voting behavior in some ways. Below a few of the most common models are defined.
+The idea of preference realization comes up in social choice theory, though social choice theorists (aka economists) define it as a model for ballot generation, rather than a stochastic realization. These models have characteristics and parameters $theta$ which allow us to simulate voting behavior in some ways. Below a few of the most common models are defined.
 
 #definition(title: "Impartial")[
   Let $Pi$ be the collection of possible ballots. The impartial model randomly draws votes according to the following pmf. $
@@ -196,7 +202,9 @@ The Plackett-Luce model constructs a ballot sequentially. At each step, a candid
 ]
 
 #definition(title: "Mallows")[
-  Let $pi_0$ be the central ranking of the candidates (e.g. $A prec B prec C$), and $phi.alt in [0, oo)$ be the cohesion parameters. Additionally set a distance function $d$ that measures the distance between two rankings $pi$ and $pi_0$. Typically this distance function is the Kendall Tau distance, which counts the number of pairwise disagreements between two rankings. The Mallows model randomly draws votes according to the following pmf $
+  Let $pi_0$ be the central ranking of the candidates (e.g. $A prec B prec C$), and $phi.alt in [0, oo)$ be the cohesion parameters. Additionally set a distance function $d$ that measures the distance between two rankings $pi$ and $pi_0$. Typically this distance function is the Kendall Tau distance, which counts the number of pairwise disagreements between two rankings.
+
+  The Mallows model randomly draws votes according to the following pmf $
     P[pi] prop exp(-phi.alt dot d(pi, pi_0))
   $
 
