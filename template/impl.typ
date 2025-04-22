@@ -1,6 +1,5 @@
 // imports =====================================================================
 
-#import "packages/ctheorems.typ": *
 #import "frontmatter.typ": title-page, signature-page
 #import "packages/theorion.typ": *
 #import "packages/zebraw.typ": *
@@ -93,16 +92,11 @@
   show list: set block(above: 1.5em)
 
   // raw text & code --
-  show raw: set text(font: "Maple Mono", weight: "regular")
-  show raw: set block(width: 100%)
-  show raw.where(block: true): block.with(
-    fill: luma(240),
-    inset: 10pt,
-    radius: 4pt,
-  )
+  show raw: set text(font: "Maple Mono", weight: "regular", size: 10pt)
 
   // packages --
-  show: thmrules
+  show: show-theorion
+  show: zebraw.with(indentation: 4)
 
   // main body --
   /// start main body at page 1 and reset heading numbering to decimal (frontmatter is numbered in roman numerals)

@@ -2,7 +2,6 @@
 
 // imports --
 #import "template/lib.typ" as reed-thesis
-#import reed-thesis.ctheorems: *
 
 // template --
 #show: reed-thesis.thesis(
