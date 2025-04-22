@@ -1,40 +1,30 @@
 = Code Appendix <code>
 
-```rs
-use kingmaker::prelude::*;
+All simulations were run using `kingmaker`, a modular, performant, social choice framework for the simulation, computation, and analysis of strategic voting. `kingmaker` is publicly available at #link("https://github.com/Approximately-Equal/kingmaker")[Approximately-Equal/kingmaker], dual licensed under the MIT and Apache 2.0 licenses.
 
-fn main() {
-    // configure election(s)
-    let candidate_pool = vec![
-        Candidate::new(0, "A", Some("DEM"), None),
-        Candidate::new(1, "A", Some("REP"), None),
-        Candidate::new(2, "C", Some("GREEN"), None),
-        Candidate::new(3, "D", None, None),
-        Candidate::new(4, "E", None, None),
-    ];
-    let voting_blocs = [
-        VotingBloc::builder(
-            preferences::Mallows::new(vec![0, 1, 2, 3, 4], 0.2),
-            5_000,
-        )
-        .add_tactic(tactics::Identity, 0.8)
-        .add_tactic(tactics::Burial(vec![1]), 0.2)
-        .build(),
-        VotingBloc::builder(
-            preferences::Mallows::new(vec![2, 1, 4, 3, 0], 0.15),
-            5_000,
-        )
-        .add_tactic(tactics::Identity, 0.7)
-        .add_tactic(tactics::Burial(vec![1]), 0.3)
-        .build(),
-    ];
-    let election =
-        Election::new((), candidate_pool, voting_blocs, methods::Plurality);
-    // run election(s)
-    let outcomes = election.run_once(0);
-    // display outcome
-    election.display([outcomes]);
-}
-``` <minimal-example>
+==  Code for @across-cohesion (Across Cohesion)
 
-And the code is available at #link("https://github.com/Approximately-Equal/Kingmaker")[Approximately-Equal/Kingmaker]
+#figure(caption: [Rust code for @across-cohesion])[
+  #raw(read("../../assets/code/across_cohesion.rs"), lang: "rust", block: true)
+]
+#figure(caption: [R code for @across-cohesion])[
+  #raw(read("../../assets/code/across_cohesion.R"), lang: "R", block: true)
+]
+
+== Code for @across-tactic (Across Tactic)
+
+#figure(caption: [Rust code for @across-tactic])[
+  #raw(read("../../assets/code/across_tactic.rs"), lang: "rust", block: true)
+]
+#figure(caption: [R code for @across-tactic])[
+  #raw(read("../../assets/code/across_tactic.R"), lang: "R", block: true)
+]
+
+== Code for @across-method-A, @across-method-B, @across-method-C (Across Method)
+
+#figure(caption: [Rust code for @across-method-A, @across-method-B, @across-method-C])[
+  #raw(read("../../assets/code/across_method.rs"), lang: "rust", block: true)
+]
+#figure(caption: [R code for @across-method-A, @across-method-B, @across-method-C])[
+  #raw(read("../../assets/code/across_method.R"), lang: "R", block: true)
+]
