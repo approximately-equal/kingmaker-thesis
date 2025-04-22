@@ -28,7 +28,7 @@ In `kingmaker`, realization, strategy-application, aggregation, and tabulation h
 In a real election, candidates must be registered before voting can begin. Similarly, in `kingmaker` an election must be configured with some set of candidates. This is done by creating a `Candidate` structure. A candidate is defined as follows:
 
 #figure(caption: [Candidate implementation in `kingmaker`])[
-  ```rs
+  ```rust
   /// A candidate in an election.
   #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize)]
   pub struct Candidate {
@@ -51,7 +51,7 @@ One may be confused about the addition of the `positions` field to the `Candidat
 Preferences within `kingmaker` correspond with preferences as described in @realization, as some distribution over possible ballots. They are defined in the following manner:
 
 #figure(caption: [Preference implementation in `kingmaker`])[
-  ```rs
+  ```rust
   /// A preference can be conceptualized as the preferences of the voter as they exist in their head before being written down.
   ///
   /// It is defined as a distribution over possible realizations (ballots), where at election time, one such realization is drawn.
@@ -100,7 +100,7 @@ We are primarily interested in well-known and well-understood preference models,
 Tactics in `kingmaker` correspond exactly with tactics as defines by theory, as deterministic processes that voters can engage with to increase their social welfare. Tactics are defined in the following manner:
 
 #figure(caption: [Tactic implementation in `kingmaker`])[
-  ```rs
+  ```rust
   /// A tactic is a method of altering one's ballot to maximize (or at least increase) social welfare.
   ///
   /// Note that this implementation considers tactics to be a separate process that occurs *after* realization. This is a limitation of the model.
@@ -111,7 +111,7 @@ Tactics in `kingmaker` correspond exactly with tactics as defines by theory, as 
   ```
 ]
 
-Strategies, on the other hand, are a statistical extension that allows for stochastic strategic thinking. Strategies are defined as distributions over tactics, and are defined with ```rs Vec<(Arc<dyn Tactic<B>>, f32)>```. Breaking this down, ```rs Vec``` is just a list, and each list item contains a tactic (```rs Arc<dyn Tactic<B>>```), and a likelihood of the voter choosing that tactic (```rs f32```).
+Strategies, on the other hand, are a statistical extension that allows for stochastic strategic thinking. Strategies are defined as distributions over tactics, and are defined with ```rust Vec<(Arc<dyn Tactic<B>>, f32)>```. Breaking this down, ```rust Vec``` is just a list, and each list item contains a tactic (```rust Arc<dyn Tactic<B>>```), and a likelihood of the voter choosing that tactic (```rust f32```).
 
 Again, `kingmaker` implements a number of well-known tactics. These include:
 
@@ -135,7 +135,7 @@ They are also a useful tool from the perspective of campaigns, as they can targe
 Voting blocs are defined as follows:
 
 #figure(caption: [Voting bloc implementation in `kingmaker`])[
-  ```rs
+  ```rust
   /// A bloc of voters is considered to have a single aggregate preference and set of tactics. They represent the sum total distribution across all the voters in the bloc. When a voter draws from this distribution, that is the expression of their preferences / individuality.
   #[derive(Debug)]
   pub struct VotingBloc<B: Ballot> {
@@ -160,7 +160,7 @@ Second, _each voting bloc has a single aggregate preference and strategy, shared
 With the profile of ballots in hand, the final step is to tabulate the results and determine the outcome. For this we use whichever `Method` we defined when configuring the election. An election is defined precisely the same as the theory suggests. It takes a pool of candidates and a profile of ballots and tabulates an outcome. It's a pure function with no side effects. Note that the outcomes could be a `SingleWinner` or a `MultiWinner` depending on whether the office is single-member or multi-member.
 
 #figure(caption: [Method implementation in `kingmaker`])[
-  ```rs
+  ```rust
   /// A method of tabulating votes and determining the winner of an election.
   ///
   /// A method is defined to be a set of rules (an algorithm) that determines the outcome of an election.
@@ -197,7 +197,7 @@ Kingmaker implements a number of well-known methods, as well as a few novel ones
 == Elections <election>
 
 #figure(caption: [Election implementation in `kingmaker`])[
-  ```rs
+  ```rust
   /// An election is a simulation of the voting process. It is constructed with a set of conditions, a set of candidates, a pool of voters, and a method for determining the winner.
   #[derive(Debug)]
   pub struct Election<B, C, M>
@@ -214,4 +214,4 @@ Kingmaker implements a number of well-known methods, as well as a few novel ones
   ```
 ]
 
-The `Election` simply aggregates the necessary information: `conditions`, `candidate_pool`, `voter_pool`, and `method`, and provides a convenient interface for running elections. There are two methods for running elections: ```rs election.run_once(seed: u64)``` and ```rs election.run_many(times: usize, seed: u64)```. There are also the ```rs display``` and ```rs write``` functions, which output the election results to stdout or write them to a configuration file, respectively, after the simulation has completed.
+The `Election` simply aggregates the necessary information: `conditions`, `candidate_pool`, `voter_pool`, and `method`, and provides a convenient interface for running elections. There are two methods for running elections: ```rust election.run_once(seed: u64)``` and ```rust election.run_many(times: usize, seed: u64)```. There are also the ```rust display``` and ```rust write``` functions, which output the election results to stdout or write them to a configuration file, respectively, after the simulation has completed.
