@@ -32,12 +32,17 @@ Condorcet's paradox, a fundamental property of majority rule, states that with m
 
 === Welfare Economics <welfare-economics>
 
-Thus far, we've seen discussion about particular voting systems and their properties, such as _Condorcet_ and _Borda_, but we have yet to introduce a general approach to the study of preference aggregation and social choice. This is where _Kenneth Arrow_ comes into the picture. It's Kenneth Arrow's nobel prize-worthy contributions that first formalized such a approach. Specifically, to studies a sub-class of preference aggregation methods that he called _social welfare functions_. He then proceeded to use this framework to prove the famous _Arrow's impossibility theorem_ @arrows-theorem (1963), which states that for more than 2 voters voting between 3 or more possible alternatives, there does not exist a social welfare function $cal(W)$ that satisfies a set of reasonable axioms---they are incompatible.
+Thus far, we've seen discussion about particular voting systems and their properties, such as _Condorcet_ and _Borda_, but we have yet to introduce a general approach to the study of preference aggregation and social choice. This is where _Kenneth Arrow_ comes into the picture. It's Kenneth Arrow's nobel prize-worthy contributions that first formalized such a approach. Specifically, to studies a sub-class of preference aggregation methods that he called _social welfare functions_. He then proceeded to use this framework to prove the famous _Arrow's impossibility theorem_ @arrows-theorem (1963).
+
+#theorem(title: "Arrow's Impossibility Theorem")[
+
+  For more than 2 voters voting between 3 or more possible alternatives, there does not exist a social welfare function $cal(W)$ that satisfies a set of reasonable axioms---they are incompatible.
 
   - _Universal domain:_ $cal(W)$ can contain any possible complete and transitive preference ordering.
   - _Weak pareto efficiency:_ If every individual prefers $c_1$ to $c_2$, then the social preference should also prefer $c_1$ to $c_2$.
   - _Independence of irrelevant alternatives:_ If $cal(W)$ prefers $c_1$ to $c_2$ when $c_3$ is not present, then $cal(W)$ should also prefer $c_1$ to $c_2$ when $c_3$ is present.
-  - _Non-dictatorship:_ No single individual should have the power to determine the social preference. #v(1em)
+  - _Non-dictatorship:_ No single individual should have the power to determine the social preference.
+]
 
 This theorem sparked much debate in social choice. As the _Stanford Encyclopedia of Philosophy_ notes, "William Riker (1920–1993), who inspired the Rochester school in political science, interpreted it as a mathematical proof of the impossibility of populist democracy (e.g., Riker 1982). Others, most prominently Amartya Sen (born 1933), who won the 1998 Nobel Memorial Prize, took it to show that ordinal preferences are insufficient for making satisfactory social choices and that social decisions require a richer informational basis. Commentators also questioned whether Arrow’s desiderata on an aggregation method are as innocuous as claimed or whether they should be relaxed."
 
@@ -61,11 +66,15 @@ A full set of symbols can be found in @symbols-definitions.
 
 === Strategic Voting <strategic-voting>
 
-Having discussed some theory, let's revisit the all-important Gibbard-Satterthwaite theorem. Being more specific, it states that any collective decision-making process, at least one of the following must hold:
+Having discussed some theory, let's revisit the all-important Gibbard-Satterthwaite theorem.
 
-  + _dictatorial_, i.e. there exists some voter $v_i$ who decides the winner; or
-  + _trivial_, i.e. there are only 2 possible winners; or
-  + _manipulable_, i.e. there is no single always-best strategy for any particular voter (which does not depend on the preferences of other voters).
+#theorem(title: "Gibbard-Satterthwaite")[
+  For any (reasonable) collective decision-making process, at least one of the following must hold:
+
+    + _dictatorial_, i.e. there exists some voter $v_i$ who decides the winner; or
+    + _trivial_, i.e. there are only 2 possible winners; or
+    + _manipulable_, i.e. there is no single always-best strategy for any particular voter (which does not depend on the preferences of other voters).
+]
 
 Note here that I'm condensing several proofs into one. In reality, the classic Gibbard-Satterthwaite proof applies only to deterministic, ordinal, single-winner elections. Gibbard's theorem then expanded the scope to cover processes of collective decision that may not be ordinal, such as cardinal voting. Gibbard's 1978 theorem and Hylland's theorem extend to non-deterministic processes, and Duggan–Schwartz theorem extends these results to multiwinner electoral systems.
 
