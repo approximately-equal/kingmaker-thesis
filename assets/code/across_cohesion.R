@@ -1,7 +1,10 @@
 library(jsonlite)
 library(tidyverse)
 
-across_cohesion <- fromJSON("across_cohesion/across_cohesion.json", simplifyVector = FALSE)
+across_cohesion <- fromJSON(
+  "across_cohesion/across_cohesion.json",
+  simplifyVector = FALSE
+)
 
 across_cohesion <- map_dfr(across_cohesion, function(entry) {
   map_dfr(entry$outcomes, function(outcome) {
@@ -27,7 +30,10 @@ across_cohesion <- across_cohesion %>%
     ) / sum(times),
   )
 
-across_cohesion$tactic <- factor(across_cohesion$tactic, c("identity", "burial", "compromise", "pushover"))
+across_cohesion$tactic <- factor(
+  across_cohesion$tactic,
+  c("identity", "burial", "compromise", "pushover")
+)
 
 kingmaker_theme <- function() {
   maple_mono <- element_text(family = "Maple Mono", size = 8)
@@ -44,7 +50,12 @@ kingmaker_theme <- function() {
 }
 
 plot <- across_cohesion %>%
-  ggplot(aes(x = cohesion, y = prop_A, color = tactic, group = tactic)) +
+  ggplot(aes(
+    x = cohesion,
+    y = prop_A,
+    color = tactic,
+    group = tactic
+  )) +
     geom_line(
       stat = "identity",
       position=position_jitter(w=0.001, h=0.001),

@@ -10,11 +10,14 @@ fn build_election(
         Candidate::new(1, "B", Some("REP"), None),
         Candidate::new(2, "C", None, None),
     ];
-    let voting_blocks = vec![
-        VotingBloc::builder(preferences::Mallows::new(vec![0, 2, 1], dispersion), 5_000)
-            .add_tactic(tactic, weight)
-            .add_tactic(tactics::Identity, 1.0 - weight)
-            .build(),
+    let voting_blocs = vec![
+        VotingBloc::builder(
+            preferences::Mallows::new(vec![0, 2, 1], dispersion),
+            5_000,
+        )
+        .add_tactic(tactic, weight)
+        .add_tactic(tactics::Identity, 1.0 - weight)
+        .build(),
         VotingBloc::builder(
             preferences::Mallows::new(vec![1, 2, 0], 1.0 - dispersion),
             5_000,
@@ -22,7 +25,7 @@ fn build_election(
         .add_tactic(tactics::Identity, 1.0)
         .build(),
     ];
-    Election::new((), candidate_pool, voting_blocks, methods::IRV)
+    Election::new((), candidate_pool, voting_blocs, methods::IRV)
 }
 
 fn main() {
@@ -32,9 +35,21 @@ fn main() {
             let dispersion = (1.0 / 100.0) * i as f64;
             let weight = 0.1;
             let election = match tactic {
-                "identity" => build_election(dispersion, weight, tactics::Identity),
-                "compromise" => build_election(dispersion, weight, tactics::Compromise(vec![0])),
-                "burial" => build_election(dispersion, weight, tactics::Burial(vec![1])),
+                "identity" => build_election(
+                    dispersion,
+                    weight,
+                    tactics::Identity,
+                ),
+                "compromise" => build_election(
+                    dispersion,
+                    weight,
+                    tactics::Compromise(vec![0]),
+                ),
+                "burial" => build_election(
+                    dispersion,
+                    weight,
+                    tactics::Burial(vec![1]),
+                ),
                 "pushover" => build_election(
                     dispersion,
                     weight,

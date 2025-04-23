@@ -17,7 +17,7 @@
     ),
 
     node(enclose: ((-0.6,-0.6), (0.6,+2.2)), inset: 10pt, stroke: tan, fill: tan),
-    node(enclose:((-0.6, -0.6), (0.6, -0.5)), [For each voting block $i$], stroke: luma(60%), fill: tan),
+    node(enclose:((-0.6, -0.6), (0.6, -0.5)), [For each voting bloc $i$], stroke: luma(60%), fill: tan),
     // voting bloc
    	node((0,0), [Preference $cal(P)_(i)(V_i, theta_i)$], shape: pill),
    	edge("-|>", [Sample $m_i$ times from \ preference model $cal(P)_(i)(V_i, theta_i)$], label-side: center),
