@@ -88,6 +88,12 @@ The strategy weight is still $0.1$ for non-identity strategies. This time, the c
   #image("../../assets/across_method_C.svg")
 ] <across-method-C>
 
+// #figure(caption: [
+//   Proportion of wins (or ties) for candidate $D$ across methods (Random dictator, Borda, Plurality, and IRV) and strategies (Identity, Burial, Compromise, Pushover), for given cohesion parameters for Democrats (x-axis) and Republicans (y-axis).
+// ])[
+//   #image("../../assets/across_method_D.svg")
+// ] <across-method-D>
+
 Let's take a closer look at the results of @across-method-A. Turn first to Random Dictator, this serves as a baseline. As expected, its nearly regardless of strategy, since there is only a 10% chance of actually selecting a strategic ballot in the first place. We can see a slight gradient as the cohesion of bloc $A$ increases, which is due to the increased likelihood that a random ballot will be closer to the central ballot, thus having $A$ first.
 
 Looking over to Borda, turns out $A$ never wins. Turns out that with Borda count, candidate $C$'s strong position with nearly every voter ensures a victory 100% of the time, regardless of the cohesion of either bloc.
