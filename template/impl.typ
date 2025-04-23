@@ -34,7 +34,6 @@
   show heading: set block(above: 2em, below: 1em)
 
   // headings (per level)
-  show heading.where(level: 1): set heading(supplement: [Chapter])
   show heading.where(level: 1): it => {
     sectionbreak()
     it

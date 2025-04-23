@@ -35,6 +35,7 @@
 // matter --
 #set page(numbering: "1.1")
 #counter(page).update(1)
+#set heading(supplement: [Chapter])
 #include "contents/matter/introduction.typ"
 #include "contents/matter/background.typ"
 #include "contents/matter/methods.typ"
