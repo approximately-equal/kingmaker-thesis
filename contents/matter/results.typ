@@ -14,13 +14,13 @@ The election setup has 3 candidates: A (DEM), B (REP), and C (IND), with method 
   #image("../../assets/across_cohesion.svg")
 ] <across-cohesion>
 
-The identity tactic has a 50--50 chance of A winning when the $phi.alt = 1-phi.alt = 0.5$, which is what we expect. With the cohesion parameters equal, the two voting blocs create ballots in exactly symmetric ways, making the winner an even split between $A$ and $B$. In this setup, $C$ never wins at any cohesion level.
+The identity tactic has a 50--50 chance of $A$ winning when the $phi.alt = 1-phi.alt = 0.5$, which is what we expect. With the cohesion parameters equal, the two voting blocs create ballots in exactly symmetric ways, making the winner an even split between $A$ and $B$. In this setup, $C$ never wins at any cohesion level.
 
-Looking at the actual strategies, they do in fact work, giving Democrats an edge even with lower cohesion levels. Given that the proportion of wins is 50% at $phi.alt approx 0.45$, we can interpret these strategies as making up for a 5% weaker cohesion (with respect to the Mallows model).
+Looking at the actual strategies, they do in fact work, giving Democrats an edge even with lower cohesion levels. Given that the proportion of wins is 50% at $phi.alt approx 0.45$.
 
-Also consider that these strategies all have the _same_ effect. In fact the effect is _exactly_ the same, because the RNG is seeded and deterministic. The slight difference is just added jitter for improved legibility.
+Also consider that these strategies all have the _same_ effect. In fact the effect is _exactly_ the same, because the randomness (RNG) is seeded and deterministic. The slight difference is just added jitter for improved legibility.
 
-This fact makes sense only because the election is so simple, and would not hold up in more complex scenarios. Speaking of...
+This fact makes sense only because the election is so simple, and would not hold up in more complex scenarios.
 
 == Across Tactics
 
@@ -38,27 +38,52 @@ Each voter uses a strategy 10% of the time, and defaults to the identity strateg
   #image("../../assets/across_tactic.svg")
 ] <across-tactic>
 
-Several patterns emerge from this pairwise matchup of strategies. Firstly, note the 4 quadrants. Turns out that in this scenario identity and burial have nearly identical effects, the same for compromise and pushover. Let's discuss each of these quadrants in turn.
+Several patterns emerge from this pairwise matchup of strategies. The plot naturally divides into four quadrants, each representing different combinations of bloc strategies. Interestingly, identity and burial behave similarly, as do compromise and pushover.
 
-*Identity and Burial*: Let’s begin with the quadrant where both blocs use either identity or burial. Both strategies have a similar effect: they do nothing to elevate the bloc’s preferred candidate, but instead either do nothing or attempt to hurt the opposition. As a result, neither bloc improves its own chances, and the compromise candidate $C$---who is ranked second by both blocs---is often the one who benefits most and wins the election.
+This similarity is best understood through the distinction between _constructive_ and _non-constructive_ tactics.
 
-Interestingly, the chances of candidates $A$ or $B$ (the blocs’ "true" candidates) winning increases slightly when both blocs have similar cohesion values. Recall that in the Mallows model, cohesion $phi.alt = 0$ means fully random preferences (equivalent to impartial), while $phi.alt -> oo$ corresponds to completely fixed preferences (everyone votes the central preference).
+- Non-constructive tactics---like identity and burial---do not promote the bloc’s preferred candidate. Instead, they aim to harm opposing candidates or simply express honest preferences without strategic elevation.
 
-Suppose Democrats have low cohesion (strong preference coherence), and Republicans have high cohesion (weaker coherence). In this case, Democrats’ ballots frequently rank $A$ first and $C$ second, but Republicans will vote $C$ first more often, hurting the chances of $A$ winning. Thus while $A$ might be first more often, the Republicans will bury $A$ so it has few second or third place votes. Candidate $C$ does not have this problem, with many second place votes from Democrats and some first place votes from Republicans. Thus candidate $C$ is likely to win.
+- Constructive tactics—like compromise and pushover—actively promote the bloc’s preferred candidate, often by ranking them first or manipulating the ballot to increase their chances of winning.
 
-*Compromise and Pushover*: Turning to the quadrant where both blocs use compromise or pushover, the resulting plot looks nearly identical to the one in @across-cohesion under the identity strategy. This tells us that these two strategies effectively cancel each other out in this context. But unlike identity and burial, these strategies are constructive rather than destructive---they aim to promote the bloc’s own candidate rather than harm the opponent. As a result, candidate $C$---who is not being elevated---never wins.
+As it turns out, this constructive vs. non-constructive divide accounts for most of the observed variation in electoral outcomes, at least for elections between two voting blocs. If that’s the main axis of difference, then we should expect only three substantially distinct types of strategic interactions:
 
-A somewhat surprising finding is that compromise performs just as well as pushover, despite pushover being a more aggressive strategy. In the pushover strategy, a Democrat, for instance, always submits $A prec C prec D prec B$ regardless of their underlying preferences. This suggests that in this context, the only meaningful impact comes from placing the bloc’s preferred candidate at the top---the rest of the ranking has little influence on the outcome.
++ Non-constructive vs. non-constructive
++	Constructive vs. constructive
++ Constructive vs. non-constructive
 
-*Compromise and Pushover vs Identity and Burial*: Moving to the top-right, we'll find yet another surprising result: the weaker strategies (identity and burial) do better when they have a high $phi.alt$ than the stronger strategies (compromise and pushover) do. This seems counterintuitive, but the explanation lies in how these strategies interact with cohesion.
+The presence of four quadrants, however, appears to suggest an additional category. Upon closer inspection, this discrepancy is resolved by noting that the top-right and bottom-left quadrants both represent scenarios in which one bloc employs a constructive strategy while the other adopts a non-constructive one. The apparent difference arises solely from the reversal of roles between the two blocs. While the strategies are inverted, the cohesion parameters remain fixed---the left corresponding to strong Republican cohesion and the right with strong Democratic cohesion. This means that Democrats still win more when $phi.alt$ is high (and Republicans when $phi.alt$ is low), but candidate C wins when $phi.alt$ is low, instead of high. The strategic dynamics are symmetric, and the shift in outcomes (e.g., the victory of the compromise candidate) reflects a reversal in bloc roles rather than a fundamental change in strategic interaction.
 
-When a bloc uses a weak strategy with high $phi.alt$, then they will rank candidate $C$ first or second often. The opposing block, with lower $phi.alt$ will place candidate $C$ higher more often, and its strategy will keep C in first place, as described previously. Thus the compromise candidate tends to win. This is not the case the other way around, thus the weaker strategies can end up winning over candidate $C$, while the stronger strategies fail.
+With this theoretical framework in place, it is now appropriate to examine each combination of strategies in detail, beginning with the case in which both blocs employ non-constructive tactics.
 
-Now let’s return to the plot and its structure.
+=== Non-constructive vs. Non-constructive Elections
 
-While the top-left and bottom-right quadrants of the figure may look different at first glance, they actually represent identical strategic behavior. So why do the plots look different? It's simple, the left side represents a scenario where Democrats have higher cohesion, in every plot. And the opposite for Republicans. But the tactics have swapped between Democrat and Republican, so the times where the compromise candidate win have gone from the right to the left. This explains the seeming difference. Its the tactics have inverted, but the cohesion direction hasn't.
+In cases where both blocs use non-constructive tactics, the compromise candidate $C$ ends up dominating the election, winning over 90% of all elections regardless of cohesion. There is a noticeable---and counterintuitive ---increase in wins for $A$ and $B$ when the cohesion for each bloc is balanced. To understand this, we examine a balanced and non-balanced case.
 
-*Takeaway*: This plot highlights how strategic interactions can produce outcomes that are both unintuitive and surprisingly complex. Even in a simple, symmetric setup, the interplay between voting blocs can lead to results that run counter to each bloc’s intent.
+Suppose without loss of generality that Democrats have high cohesion and Republicans have low cohesion. Both blocs vote honestly. Republican voters are more likely to rank $C$ first, undermining $B$’s chances. Meanwhile, Democrats rank $A$ first and $C$ second, unintentionally boosting $C$. Thus, attacks on the opposition can inadvertently strengthen a neutral candidate. Most elections go as follows: $A$ doesn't have a majority, $B$ is eliminated, their votes go primarily to $C$, and $C$ wins.
+
+Suppose instead that Democrats and Republicans have equal cohesion, and vote honestly. It's possible that $A$ or $B$ simply score a majority right out the gate and win, without running a second round. This happens by getting first place votes from the opposition.
+
+=== Constructive vs. Non-constructive Elections
+
+In constructive vs non-constructive elections, we find yet another counterintuitive result: weaker strategies (identity and burial) do better when they have a high $phi.alt$ than the stronger strategies (compromise and pushover) do. This occurs because the asymmetry again benefits the compromise candidate when the constructive strategy has strong cohesion.
+
+When a bloc uses a weak strategy with high $phi.alt$, then they will rank candidate $C$ first or second often. The opposing bloc, with lower $phi.alt$ will place candidate $C$ higher more often, and its strategy will keep C in first place, as described previously. Thus the compromise candidate tends to win. This is not the case the other way around, thus the weaker strategies can end up winning over candidate $C$, while the stronger strategies fail.
+
+=== Constructive vs Constructive Elections
+
+The most reasonable set of elections, the resulting plot looks nearly identical to the one in @across-cohesion under the identity strategy. This tells us that these two strategies effectively cancel each other out in this context. Additionally, since these tactics are constructive, candidate $C$---who is not being elevated---never wins.
+
+=== Considerations on Ballot Types
+
+Thus far, we've taken for granted that identity and burial have the same effect, as do compromise and pushover. It bears saying that this is not obvious, and hints that in two-party elections, the only thing that matters is where you place the preferred candidate, and where you place the compromise candidate.
+
+- Identity and burial don't push the preferred candidate.
+- Compromise and pushover push the preferred candidate to first.
+
+These are the only attributes that matter. This is not always the case.
+
+_Takeaway_: This plot highlights how strategic interactions can produce outcomes that are both unintuitive and surprisingly complex. Even in a simple, symmetric setup, the interplay between voting blocs can lead to results that run counter to each bloc’s intent.
 
 For instance, Democrats using the pushover strategy might hope to help candidate $C$ defeat the Republican candidate ($B$) only to inadvertently hand the win to $C$ instead of their own candidate ($A$). In hindsight, perhaps pushing a less competitive candidate like $D$ would have been more effective.
 
@@ -66,7 +91,7 @@ These kinds of unexpected dynamics will appear throughout the analysis, undersco
 
 == Across Method
 
-Another natural question is: _How does the choice of voting method change the dynamics of strategy?_ In order to test it, scenario similar---but distinct---to @across-tactic is used. The candidates are still $A$ (DEM), $B$ (REP), $C$ (GREEN), and $D$ (IND). There are still two equally-sized voting blocs, but they only have 4,500 members each, because a third voting bloc has been added. This voting block is the Independent bloc, which has a size of 1,000 members, and has central preference $D prec C prec A prec B$, with $phi.alt = 0.2$. This bloc always votes honestly.
+Another natural question is: _How does the choice of voting method change the dynamics of strategy?_ In order to test it, a scenario similar---but distinct---to @across-tactic is used. The candidates are still $A$ (DEM), $B$ (REP), $C$ (GREEN), and $D$ (IND). There are still two equally-sized voting blocs, but they only have 4,500 members each, because a third voting bloc has been added. This voting bloc is the Independent bloc, which has a size of 1,000 members, and has central preference $D prec C prec A prec B$, with $phi.alt = 0.2$. This bloc always votes honestly.
 
 The strategy weight is still $0.1$ for non-identity strategies. This time, the cohesion parameter for the Democrats and Republicans are independently set, each $[0.4, 0.45, 0.5, 0.55, 0.6]$. The left labels are the tactics used by the Democrats and Republicans respectively. The rightmost label is Democrats, the leftmost for Republicans.
 
@@ -96,10 +121,14 @@ The strategy weight is still $0.1$ for non-identity strategies. This time, the c
 
 Let's take a closer look at the results of @across-method-A. Turn first to Random Dictator, this serves as a baseline. As expected, its nearly regardless of strategy, since there is only a 10% chance of actually selecting a strategic ballot in the first place. We can see a slight gradient as the cohesion of bloc $A$ increases, which is due to the increased likelihood that a random ballot will be closer to the central ballot, thus having $A$ first.
 
-Looking over to Borda, turns out $A$ never wins. Turns out that with Borda count, candidate $C$'s strong position with nearly every voter ensures a victory 100% of the time, regardless of the cohesion of either bloc.
+Looking over to Borda, turns out $A$ never wins. With Borda count, candidate $C$'s strong position with nearly every voter ensures a victory 100% of the time, regardless of the cohesion of either bloc.
 
-The interesting behavior is really in plurality and IRV. In plurality, we see a massive difference between times when $A$ uses destructive strategies vs constructive ones. In destructive strategies (identity and burial), $A$ never wins, conceding mostly to $C$, but occasionally to $B$ when $B$ uses a constructive strategy. When $A$ uses constructive strategies, $A$ wins much more often, and concedes to $B$ when $B$ has higher cohesion. Notice that while $A$ wins more of the time with any combinations of pushover and compromise, the combination of pushover and burial leads $C$ to win much more often, especially for IRV, but also for plurality.
+The most notable patterns emerge under the Plurality and Instant-Runoff Voting (IRV) systems. In the case of Plurality, there is a pronounced divergence in outcomes depending on whether candidate $A$’s bloc adopts constructive or non-constructive strategies. When non-constructive strategies such as identity or burial are employed, candidate $A$ almost never wins. Instead, the election is typically conceded to candidate $C$, and occasionally to candidate $B$ when $B$’s bloc pursues a constructive tactic. In contrast, when $A$’s bloc employs constructive strategies such as compromise or pushover, the likelihood of an A victory increases substantially. In these cases, $B$ tends to prevail only when its bloc exhibits significantly higher cohesion.
 
-Notice the complete lack of wins for $A$ when using a destructive strategy against another destructive strategy. In these cases the compromise candidate always ends up winning. However we see that if $A$ uses identity against a constructive strategy, then it can tends to win if both blocs have strong cohesion, otherwise again the compromise candidate dominates.
+It is also worth highlighting the combination of pushover (by one bloc) and burial (by the other), which results in a markedly higher win rate for candidate $C$. This effect is especially pronounced under IRV, but it is also observable under Plurality.
 
-Alternatively, if instead we look at plurality, then the constructive strategy of $B$ ends up winning in cases where the Republican block is cohesive and the the Democrats less so.
+Notably, candidate A fails to secure any victories when both blocs employ non-constructive strategies. In such scenarios, the compromise candidate C consistently emerges as the winner. However, when candidate $A$’s bloc uses the identity strategy against a constructive strategy employed by the opposing bloc, $A$ can occasionally prevail-particularly when both blocs exhibit high levels of cohesion. In less cohesive settings, the advantage again shifts toward candidate $C$, who benefits from receiving broad, albeit secondary, support.
+
+== Benchmarks
+
+Each simulation, each 10,000 voters, running 1,000 times, took $approx 0.25 "seconds"$. @across-method-A, @across-method-B, @across-method-C required running $4 times 4 times 4 times 5 times 5 = 1600$ simulations. The entire computation took $approx 7 "minutes"$

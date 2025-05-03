@@ -68,7 +68,7 @@ luce's-choice-axiom:
   location: New York
   abstract: And conclusions. Summary ; Conclusions – Appendix 1. Alternative forms of Axiom 1 – Appendix 2. Form of latency distribution – Appendix 3. Maximum likelihood equations for the two-alternative, two-outcome beta learning model – Appendix 4. Open problems. Conceptual and empirical ; Mathematical.
 
-# ...
+# A formulation of the plackett luce model
 plackett-luce-model:
   type: article
   title: The Analysis of Permutations
@@ -162,7 +162,7 @@ rank-injustice-NCAA:
 # Breakdown of simulated ballot generators within social choice research.
 #
 # Considers both ordinal and nominal ballots, and gives recommendations for realistic voting data via simulation.
-guide-numerical-experiment-selections:
+guide-numerical:
   type: article
   title: Guide to Numerical Experiments on Elections in Computational Social Choice
   author:
@@ -180,6 +180,151 @@ guide-numerical-experiment-selections:
   url: https://arxiv.org/abs/2402.11765
   parent:
     type: periodical
+
+# historical ===================================================================
+
+pliny-the-younger-letters:
+  type: book
+  parent:
+    type: web
+    title: "Pliny the Younger: Letters"
+    url: "https://www.attalus.org/old/pliny8.html"
+
+brief-history-social-choice:
+  type: chapter
+  title: A Brief History of Social Choice and Welfare Theory
+  author:
+    - Fleurbaey, Marc
+    - Salles, Maurice
+  date: 2021
+  page-range: 1–16
+  serial-number:
+    doi: 10.1007/978-3-030-62769-0_1
+    isbn: 978-3-030-62768-3
+  parent:
+    type: book
+
+mclean-1995-classics:
+  type: book
+  title: Classics of Social Choice
+  author:
+    - McLean, I.
+    - Urken, A.B.
+    - Hewitt, F.
+  date: 1995
+  publisher: University of Michigan Press
+  url: https://books.google.com/books?id=0QPv9cg3g-sC
+  serial-number:
+    isbn: "9780472104505"
+copeland1951reasonable:
+  type: report
+  title: A reasonable social welfare function
+  author: Copeland, Arthur H
+  date: 1951
+  organization: mimeo, 1951. University of Michigan
+hägele2008cusa:
+  type: article
+  title: The electoral systems of Nicholas of Cusa in the ´Catholic concordance´ and beyond
+  author: Hägele, Günter
+  date: 2008
+  page-range: ""
+  parent:
+    type: periodical
+
+gibbard-satterthwaite-conjecture:
+  type: article
+  title: "An interview with Michael Dummett: from analytical philosophy to voting analysis and beyond"
+  author:
+    - Fara, Rudolf
+    - Salles, Maurice
+    - Dummett, Michael
+  date: 2006
+  page-range: 347–364
+  url:
+    value: http://www.jstor.org/stable/41106783
+    date: 2025-05-02
+  serial-number:
+    issn: 01761714, 1432217X
+  parent:
+    type: periodical
+    title: Social Choice and Welfare
+    publisher: Springer
+    issue: 2
+    volume: 27
+
+gibbard-satterthwaite-gibbard:
+  type: article
+  title: "Manipulation of Voting Schemes: A General Result"
+  author: Gibbard, Allan
+  date: 1973
+  page-range: 587–601
+  url:
+    value: http://www.jstor.org/stable/1914083
+    date: 2025-05-02
+  serial-number:
+    issn: 00129682, 14680262
+  abstract: "It has been conjectured that no system of voting can preclude strategic voting–the securing by a voter of an outcome he prefers through misrepresentation of his preferences. In this paper, for all significant systems of voting in which chance plays no role, the conjecture is verified. To prove the conjecture, a more general theorem in game theory is proved: a game form is a game without utilities attached to outcomes; only a trivial game form, it is shown, can guarantee that whatever the utilities of the players may be, each player will have a dominant pure strategy."
+  parent:
+    type: periodical
+    title: Econometrica
+    publisher: "[Wiley, Econometric Society]"
+    issue: 4
+    volume: 41
+
+gibbard-satterthwaite-satterthwaite:
+  type: article
+  title: "Strategy-proofness and Arrow's conditions: Existence and correspondence theorems for voting procedures and social welfare functions"
+  author: Satterthwaite, Mark Allen
+  date: 1975
+  page-range: 187–217
+  url: https://www.sciencedirect.com/science/article/pii/0022053175900502
+  serial-number:
+    doi: https://doi.org/10.1016/0022-0531(75)90050-2
+    issn: 0022-0531
+  abstract: Consider a committee which must select one alternative from a set of three or more alternatives. Committee members each cast a ballot which the voting procedure counts. The voting procedure is strategy-proof if it always induces every committee member to cast a ballot revealing his preference. I prove three theorems. First, every strategy-proof voting procedure is dictatorial. Second, this paper's strategy-proofness condition for voting procedures corresponds to Arrow's rationality, independence of irrelevant alternatives, non-negative response, and citizens' sovereignty conditions for social welfare functions. Third, Arrow's general possibility theorem is proven in a new manner.
+  parent:
+    type: periodical
+    title: Journal of Economic Theory
+    issue: 2
+    volume: 10
+
+gibbard-satterthwaite-non-deterministic:
+  type: article
+  title: Manipulation of Schemes that Mix Voting with Chance
+  author: Gibbard, Allan
+  date: 1977
+  page-range: 665–681
+  url:
+    value: http://www.jstor.org/stable/1911681
+    date: 2025-05-02
+  serial-number:
+    issn: 00129682, 14680262
+  abstract: A decision scheme makes the probabilities of alternatives depend on individual strong orderings of them. It is strategy-proof if it logically precludes anyone's advantageously misrepresenting his preferences. It is unilateral if only one individual can affect the outcome, and duple if it restricts the final outcome to a fixed pair of alternatives. Any strategy-proof decision scheme, it is shown, is a probability mixture of schemes each of which is unilateral or duple. If it guarantees Pareto optimal outcomes, it is a probability mixture of dictatorial schemes. If it guarantees ex ante Pareto optimal lotteries, it is dictatorial.
+  parent:
+    type: periodical
+    title: Econometrica
+    publisher: "[Wiley, Econometric Society]"
+    issue: 3
+    volume: 45
+
+duggan-2000:
+  type: article
+  title: "Strategic manipulability without resoluteness or shared beliefs: Gibbard-Satterthwaite generalized"
+  author:
+    - Duggan, John
+    - Schwartz, Thomas
+  date: 2000
+  page-range: 85–93
+  url: https://doi.org/10.1007/PL00007177
+  serial-number:
+    doi: 10.1007/PL00007177
+    issn: 1432-217X
+  abstract: "The Gibbard-Satterthwaite Theorem on the manipulability of social-choice rules assumes resoluteness: there are no ties, no multi-member choice sets. Generalizations based on a familiar lottery idea allow ties but assume perfectly shared probabilistic beliefs about their resolution. We prove a more straightforward generalization that assumes almost no limit on ties or beliefs about them."
+  parent:
+    type: periodical
+    title: Social Choice and Welfare
+    issue: 1
+    volume: 17
 
 # useful references ============================================================
 
