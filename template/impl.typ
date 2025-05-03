@@ -1,6 +1,6 @@
 // imports =====================================================================
 
-#import "frontmatter.typ": title-page, signature-page
+#import "frontmatter.typ": title-page, signature-page, frontmatter
 #import "packages/theorion.typ": *
 #import "packages/zebraw.typ": *
 #import "pagebreaks.typ": *
@@ -13,9 +13,14 @@
   advisors: ("Advisor",),
   date: datetime.today(),
   college: [Reed College],
-  presented-to: [A Thesis \ Presented to \ [Division] \ [College]],
-  fullfillment: [],
-  approval: [Approved for the Division \ [Major]],
+  program: (
+    division: [Mathematical and Natural Sciences],
+    major: [Mathematics - Statistics]
+  ),
+  frontmatter: [],
+  matter: [],
+  backmatter: [],
+  bibliography: none,
 ) = (body) => {
   // metadata --
   set document(title: title, author: author, date: date)
@@ -46,20 +51,8 @@
   set page(
     paper: "us-letter",
     margin: (inside: 1.5in, outside: 1.0in, top: 1.5in, bottom: 1.0in),
-    header: context{
-      if is-header-page() {
-        // current = counter.here()
-        // counter(page).step()
-        header-style()
-      }
-    },
-    footer: []
+    footer: [],
   )
-
-  // title & signature pages --
-  title-page(title, author, date, presented-to, fullfillment)
-  signature-page(approval, advisors)
-  // NOTE: for structure purposes (could OPTIONALLY have have acknowledgments + preface + abbreviations in front of it) the outline is not included here, but it is a REQUIRED element of the thesis and MUST be included.
 
   // footnotes --
   set footnote.entry(indent: 0em, separator: line(length: 25%, stroke: 0.75pt), gap: 0.65em)
@@ -96,17 +89,35 @@
   show list: set block(above: 1.5em)
 
   // raw text & code --
-  show raw: set text(font: "Maple Mono", weight: "regular", size: 10pt)
+  show raw: set text(font: "Maple Mono", weight: "regular", size: 9pt)
 
   // packages --
   show: show-theorion
   show: zebraw.with(indentation: 4)
 
-  // main body --
-  /// start main body at page 1 and reset heading numbering to decimal (frontmatter is numbered in roman numerals)
-  set page(header: context{ if is-header-page() { header-style() } })
-  body
+  // title & signature pages --
+  title-page(title, author, date, program)
+  signature-page(advisors, program)
+
+  // frontmatter --
+  frontmatter
+
+  // matter --
+  set page(
+    numbering: "1.1",
+    header: context{ if is-header-page() { header-style() } }
+  )
+  set heading(supplement: [Chapter])
+  counter(page).update(1)
+  matter
+
+  // backmatter --
+  counter(heading).update(0) // start at A.1
+  set heading(numbering: "A.1.", supplement: [Appendix])
+  backmatter
 
   // bibliography --
-  // NOTE: for structure purposes the bibliography is not an argument to thesis, but it is a REQUIRED element of the thesis and MUST be included.
+  if bibliography != none {
+    bibliography
+  }
 }
