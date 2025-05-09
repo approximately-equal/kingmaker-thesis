@@ -2,13 +2,7 @@
 
 ## Abstract
 
-In the field of social choice theory, The _Gibbard-Satterthwaite Theorem_ tells us that any all _non-trivial, non-dictatorial_ voting methods do _not_ have a _dominant strategy_ for any individual voter. Thus every voting system which follows these axioms (which they should) must be _manipulable_. Thus any voting method must consider how voters will _strategically vote_ in order to benefit their _social welfare_. There have been efforts such as ... that aim to measure how resilient a voting method is to certain kinds of strategic voting.
-
-  My thesis expands upon this literature by simulating complex social conditions in order to:
-
-  1. Synthesize optimal (in some measurable sense) strategies (for some subset of voter base),
-  2. Use those novel (as well as known) voting strategies to compare the resilience of common voting methods, and
-  3. ...
+The Gibbard–Satterthwaite theorem establishes that any non-dictatorial voting rule with at least three alternatives is inherently vulnerable to strategic manipulation. This thesis examines the practical consequences of the Gibbard-Satterthwaite theorem by analyzing the susceptibility of various voting methods under a range of social conditions and models of voter behavior. To support this analysis, a modular and performant simulation framework—`kingmaker`—is developed for granular modeling of electoral conditions across diverse strategic environments and preference distributions. Using `kingmaker`, this thesis offers a systematic evaluation of the frequency, impact, and structure of strategic voting across multiple electoral systems. The results yield empirical insight into the robustness of these systems and identify the conditions under which theoretical manipulability becomes operationally significant.
 
 ## License
 
