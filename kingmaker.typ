@@ -26,7 +26,7 @@
     #include "contents/backmatter/code.typ"
   ],
   bibliography: bibliography(
-    "references.bib",
+    "references.yml",
     title: [References],
     style: "ieee"
   )
