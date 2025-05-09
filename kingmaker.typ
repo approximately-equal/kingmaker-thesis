@@ -1,8 +1,8 @@
 // imports --
-#import "template/lib.typ" as reed-thesis
+#import "template/lib.typ": *
 
 // thesis --
-#show: reed-thesis.thesis(
+#show: thesis(
   title: [Kingmaker: A Simulation Analysis of Strategic Voting],
   author: "Chance Addis",
   advisors: ("Michael Pearce",),

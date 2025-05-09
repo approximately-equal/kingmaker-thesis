@@ -1,10 +1,11 @@
-#import "../../template/packages/theorion.typ": *
+#import "../../template/lib.typ": theorion
+#import theorion: *
 
 = Background <background>
 
 To understand the dynamics of strategic voting, we must first establish a formal foundation in social choice theory. This background section introduces the key concepts and terminology that underpin the rest of the analysis. It also outlines major results in voting theory---such as the Gibbard–Satterthwaite theorem and Arrows impossibility theorem---that highlight the fundamental limits of election design. In addition, we survey common strategic tactics (such as compromise and burial), models of voter preferences (such as the Impartial and Mallows models), and widely studied voting methods (such as Plurality and IRV). By grounding the discussion in this formal framework, we aim to provide the tools necessary to interpret the behavior of strategic agents in electoral settings.
 
-== A History of Social Choice <history> // =====================================
+== A History of Social Choice <history>
 
 Social choice has been applied since humanity has existed. After all there has always been a need to make collective decisions. Its theory, however, is more modern, and tracks changes in our values and methodologies around collective action and voting.
 
