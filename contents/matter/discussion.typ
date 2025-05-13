@@ -1,6 +1,6 @@
-= Discussion <discussion>
+= Discussion <chp:discussion>
 
-== Review <review>
+== Review
 
 Across all the configurations, strategies, methods, conditions, we find that strategic voting is both impactful and complex. It's hard for a voter or a bloc to know that a strategy will benefit them when considering the way that other blocs will vote. The results often end up being counterintuitive. The complexity of strategic voting is further compounded by the fact that it is often difficult to predict how other blocs will vote, and the impact of a strategy can vary depending on the specific configuration of the election. What works in some cases will not work in others.
 

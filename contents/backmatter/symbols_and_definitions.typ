@@ -1,4 +1,4 @@
-= Symbols and Definitions <symbols-definitions>
+= Symbols and Definitions <ch:symbols-definitions>
 
 #figure(caption: [Symbols and Definitions])[
   #table(

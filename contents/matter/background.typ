@@ -1,15 +1,15 @@
 #import "../../template/lib.typ": theorion
 #import theorion: *
 
-= Background <background>
+= Background <chp:background>
 
 To understand the dynamics of strategic voting, we must first establish a formal foundation in social choice theory. This background section introduces the key concepts and terminology that underpin the rest of the analysis. It also outlines major results in voting theory---such as the Gibbard–Satterthwaite theorem and Arrow's Impossibility theorem---that highlight the fundamental limits of election design. In addition, we survey common strategic tactics (such as compromise and burial), models of voter preferences (such as the Impartial and Mallows models), and widely studied voting methods (such as Plurality and IRV). By grounding the discussion in this formal framework, we aim to provide the tools necessary to interpret the behavior of strategic agents in electoral settings.
 
-== A History of Social Choice <history>
+== A History of Social Choice
 
 Social choice has been applied since humanity has existed. After all there has always been a need to make collective decisions. Its theory, however, is more modern, and tracks changes in our values and methodologies around collective action and voting.
 
-=== Precursors <precursors>
+=== Precursors
 
 Early social choice theory was far more concerned with voting as a procedure than of social welfare as an ideal.
 
@@ -19,7 +19,7 @@ This is one of the earliest recorded instances of voting manipulation. Pliny del
 
 Other notable precursors include Catalan Ramon Lull (1232--1316) and the German Nikolaus Von Kues (1401--1464). Ramon Lull produced, among other things, what is now known as Copeland (or Lull's) method, in which the winner is the candidate with the most pairwise wins against other candidates via ranked ballots @copeland1951reasonable. Von Kues is known for proposing what is now known as Borda's method @hägele2008cusa.
 
-=== The Math of Consensus <consensus>
+=== The Math of Consensus
 
 Jean-Charles de Borda (1733--1799) and Nicolas de Condorcet (1743--1794) are considered the modern founders of social choice theory. They are distinguished from their precursors by the mathematical nature of their analysis.
 
@@ -29,7 +29,7 @@ Condorcet alternatively devotes an entire book's worth of material---along with 
 
 It bears mentioning that Condorcet's jury paradox relates to Condorcet methods, a class of voting systems that are named after him. Condorcet methods are voting methods that elect the candidate who wins head-to-head elections against every other candidate, whenever such a candidate exists. When such a candidate does not exist, the method is said to be _intransitive_---it exhibits Condorcet's paradox.
 
-=== Welfare Economics <welfare-economics>
+=== Welfare Economics
 
 Up until the mid-twentieth century, social choice theory had been primarily focused on the study of voting systems and their properties, such as _Condorcet_ and _Borda_. A general approach to the study of preference aggregation and social choice had not yet been developed. This is where _Kenneth Arrow_ came into the picture. It's Kenneth Arrow's Nobel prize-worthy contributions that first formalized such an approach, formally classifying a sub-class of preference aggregation methods that he called _social welfare functions_. He then proceeded to use this framework to prove the famous _Arrow's Impossibility theorem_ @arrows-theorem in 1963.
 
@@ -50,13 +50,13 @@ This theorem sparked much debate in social choice. As the _Stanford Encyclopedia
 
 But while Arrow's Impossibility theorem might be the most well-known social choice theorem, it's a different but no less important social choice theorem that will be the focus of our research today. That theorem being the _Gibbard-Satterthwaite theorem_ @gibbard-satterthwaite-theorem, which was first conjectured by philosopher Michael Dummett and the mathematician Robin Farquharson in 1961 @gibbard-satterthwaite-conjecture and then independently proved by philosopher Allan Gibbard in 1973 @gibbard-satterthwaite-gibbard and economist Mark Satterthwaite in 1975 @gibbard-satterthwaite-satterthwaite. Gibbard's proof is more general, considering not only ordinal elections, but cardinal voting. Gibbard's 1978 theorem @gibbard-satterthwaite-non-deterministic and Hylland's theorem expands the set of processes to encompass non-deterministic ones. The Duggan–Schwartz theorem extends these results to multiwinner elections @duggan-2000.
 
-It states, broadly, that for any non-dictatorial voting system with at least 3 alternatives, there does not exist a _dominant strategy_ for any voter aiming to maximize their own social welfare, including the identity strategy (honest voting). For a more formal statement of the theorem, see @gibbard-satterthwaite-def.
+It states, broadly, that for any non-dictatorial voting system with at least 3 alternatives, there does not exist a _dominant strategy_ for any voter aiming to maximize their own social welfare, including the identity strategy (honest voting). For a more formal statement of the theorem, see @def:gibbard-satterthwaite.
 
-== Classic Social Choice <classic-social-choice> // ============================
+== Classic Social Choice
 
 At its core, social choice theory is concerned with the analysis of _preference aggregation_, understood to be the aggregation of individual preferences, each of which compares two or more social alternatives, into a single collective preference (or choice). This occurs by the following fundamental framework.
 
-=== Basic Framework <framework>
+=== Basic Framework
 
 Let $V = {v_i | i in {1,...,n}}$ be a set of $n$ voters ($n >= 2$) with preferences $Pi = {pi_i | i in {1,...,n}}$, and $C = {c_i | i in {1,...,m}}$ be a set of $m$ social alternatives (candidates). A _preference ordering_ is defined by a complete, total order on $C$ known as a _weak preference_. It is written with the symbol $prec.eq$, where $c_1 prec.eq c_2$ is defined as $c_1$ is preferred or indifferent to $c_2$. There are also shorthands for _strict preference_ ($c_1 prec c_2 := c_1 prec.eq c_2 and c_2 prec.eq.not c_1$) and _strict indifference_ ($c_1 ~ c_2 := c_1 prec.eq c_2 and c_2 prec.eq c_1$).
 
@@ -64,9 +64,9 @@ Having defined the concept of preference ordering, for the purposes of this anal
 
 A collection of preference orderings across a set of voters $V$, is called a _profile_, denoted $Pi = {pi_i | i in {1..n}}$. A _social welfare function_ is a function $cal(W): Pi -> ⟨c_i_1,...,c_i_m⟩$. It creates something know as a _complete social ordering_ which ranks each pair of alternatives ${c_i, c_j} in C$.
 
-A full set of symbols can be found in @symbols-definitions.
+A full set of symbols can be found in @ch:symbols-definitions.
 
-=== Strategic Voting <strategic-voting>
+=== Strategic Voting
 
 Having established some theory, our attention turns to strategic voting. Naturally, we begin with the all-important Gibbard-Satterthwaite theorem.
 
@@ -76,13 +76,13 @@ Having established some theory, our attention turns to strategic voting. Natural
     + _dictatorial_, i.e. there exists some voter $v_i$ who decides the winner; or
     + _trivial_, i.e. there are only 2 possible winners; or
     + _manipulable_, i.e. no voter has a _dominant strategy_---the strategy that maximizing social welfare depends on how others vote.
-] <gibbard-satterthwaite-def>
+] <def:gibbard-satterthwaite>
 
 As discussed previously, the classical Gibbard–Satterthwaite theorem pertains specifically to deterministic, ordinal, single-winner voting rules. The statement here condenses a sequence of foundational results into a unified definition. While each subsequent proof expanded the class of procedures which follow this rule, they share a common implication: under broad conditions, strategic manipulation is unavoidable.
 
 This is a monumental result. It proves that no matter the voting system, there is always incentive for voters to manipulate the outcome. Strategic voting is inevitable so long as voters aim to maximize their utility. The question is, how much utility can be gained by strategic voting, and which voting systems are most susceptible to manipulation? In order to answer that, it is necessary to establish a set of common voting methods.
 
-=== Common Tactics <common-tactics>
+=== Common Tactics
 
 On a more practical note, there are a few commonly observed tactics that voters implement. These include identity, compromise, burial, and pushover, all of which are defined below.
 
@@ -212,11 +212,11 @@ Note that while plurality is sometimes called majority voting, a candidate does 
   + Round 3: Counting the first place votes, $C = 2667 + 1000 = 3667, B = 3000$. Candidate $C$ exceeds the Droop quota, and is elected.
 ]
 
-== Statistical Social Choice <statistical-social-choice> // ====================
+== Statistical Social Choice
 
 Up to this point, the analysis has operated within the classical philosophical and economic framework of social choice theory, which presumes that voter preferences are fixed and immutable. While this is fine as a framework, it's categorically unrealistic. In reality, voters do not have static preferences, nor do they know precisely who they will vote for with absolute certainty. They may have a preference for one candidate over another, but they may also be influenced by external factors such as the media, their friends, or their own emotions. Say that a voter has the following opinions: $c_1 = 65% "approval"$ and $c_2 = 35% "approval"$. The voter may submit a ballot with $c_1 prec c_2$ or $c_2 prec c_1$ depending on how they feel on the day of the election. Voting is a _stochastic process_. This reality is not captured by classical theory. We need something more: a statistical approach to social choice.
 
-=== Preference Realization <realization>
+=== Preference Realization <sct:realization>
 
 Thus far, preferences have been treated as deterministic. However, to better align with the stochastic nature of voting, we now aim to modify this framework. The solution is simple: define preferences as _distributions_ over ballots. Instead of preferences being a preference ordering, define preferences to be a distribution over preference orderings. For each preference ordering there is associated some probability of being realized. This probability is determined by the voter's preferences and the external factors that influence their decision. The realization of a preference is called a _ballot_.
 
@@ -224,7 +224,7 @@ For notation, we'll use $Pi$ to denote a profile of ballots, and $cal(P)(v_i, th
 
 This form of stochastic voting is a concept hardwired into the framework of this thesis, as all the methods for generating ballots are stochastic. This framing allows us to conceptualize these models as voters who non-deterministically submit their ballots via some set of rules. Granted, those rules might be "randomly select an ordering of candidates", but it's still of the same process as real voting.
 
-=== Statistical Social Choice Rules <statistical>
+=== Statistical Social Choice Rules
 
 The idea of preference realization comes up in social choice theory, though some social choice theorists (e.g., economists) define it as a model for ballot generation, rather than a stochastic realization such as @guide-numerical. These models have characteristics and parameters $theta$ which allow us to simulate voting behavior in some way. Below a few of the most common models are defined.
 

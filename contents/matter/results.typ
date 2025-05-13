@@ -1,4 +1,4 @@
-= Results <results>
+= Results <chp:results>
 
 Recall that we wish to explore how strategic voting impacts election outcomes depending on the method, the social conditions (preference models and relative frequencies of voters in each voting bloc), and strategy. With the necessary background and methodology covered, we proceed to actually using `kingmaker` to simulate elections and see what results we obtain.
 
@@ -6,13 +6,13 @@ Recall that we wish to explore how strategic voting impacts election outcomes de
 
 Starting with a simple demo, consider what happens when only one voting bloc has a strategy (that isn't identity).
 
-The election setup has 3 candidates: A (DEM), B (REP), and C (IND), with method instant runoff (IRV). There are 2 voting blocs: 5,000 Democrats and 5,000 Republicans. Each bloc has a characteristic preference order, modeled using the Mallows distribution. Democrats are centered around the ranking $A prec C prec B$ with cohesion parameter $phi.alt$, while Republicans follow $B prec C prec A$ with cohesion $1 - phi.alt$. Only Democrats have a strategy, which they use 10% of the time, the other 90% of the time using the identity strategy. @across-cohesion shows the results of running this configuration.
+The election setup has 3 candidates: A (DEM), B (REP), and C (IND), with method instant runoff (IRV). There are 2 voting blocs: 5,000 Democrats and 5,000 Republicans. Each bloc has a characteristic preference order, modeled using the Mallows distribution. Democrats are centered around the ranking $A prec C prec B$ with cohesion parameter $phi.alt$, while Republicans follow $B prec C prec A$ with cohesion $1 - phi.alt$. Only Democrats have a strategy, which they use 10% of the time, the other 90% of the time using the identity strategy. @fig:across-cohesion shows the results of running this configuration.
 
 #figure(caption: [
   Proportion of wins for candidate $A$ across cohesion for each strategy. The burial, compromise, and pushover strategies are all the same (overlapping).
 ])[
   #image("../../assets/across_cohesion.svg")
-] <across-cohesion>
+] <fig:across-cohesion>
 
 The identity tactic has a 50--50 chance of $A$ winning when the $phi.alt = 1-phi.alt = 0.5$, which is what we expect. With the cohesion parameters equal, the two voting blocs create ballots in exactly symmetric ways, making the winner an even split between $A$ and $B$. In this setup, $C$ never wins at any cohesion level.
 
@@ -38,15 +38,15 @@ The Mallows model will produce a ranking with some number of inversions for each
 
 
   )
-] <tbl:inversions-from-mallows>
+]
 
-@across-tactic presents the outcomes of these matchups. The columns represent the strategy used by Democrats, and the rows represent those used by Republicans. Several patterns emerge from this pairwise matchup of strategies. The plot naturally divides into four quadrants, each representing different combinations of bloc strategies. Interestingly, identity and burial behave similarly, as do compromise and pushover.
+@fig:across-tactics presents the outcomes of these matchups. The columns represent the strategy used by Democrats, and the rows represent those used by Republicans. Several patterns emerge from this pairwise matchup of strategies. The plot naturally divides into four quadrants, each representing different combinations of bloc strategies. Interestingly, identity and burial behave similarly, as do compromise and pushover.
 
 #figure(caption: [
   Proportion of wins for each candidate across all combinations of tactics. The columns represent the strategy used by Democrats, and the rows represent those used by Republicans. Each color corresponds to a different candidate, with the x-axis the cohesion ($phi.alt$) of the Democrats ($1 - phi.alt$ for Republicans), and the y-axis the proportion of election wins (or ties) under the given conditions.
 ])[
   #image("../../assets/across_tactic.svg")
-] <across-tactic>
+] <fig:across-tactics>
 
 This similarity is best understood through the distinction between _constructive_ and _non-constructive_ tactics.
 
@@ -80,7 +80,7 @@ When a bloc uses a weak strategy with high $phi.alt$, then they will rank candid
 
 === Constructive vs Constructive Elections
 
-The most reasonable set of elections, the resulting plot looks nearly identical to the one in @across-cohesion under the identity strategy. This tells us that these two strategies effectively cancel each other out in this context. Additionally, since these tactics are constructive, candidate $C$---who is not being elevated---never wins.
+The most reasonable set of elections, the resulting plot looks nearly identical to the one in @fig:across-cohesion under the identity strategy. This tells us that these two strategies effectively cancel each other out in this context. Additionally, since these tactics are constructive, candidate $C$---who is not being elevated---never wins.
 
 === Considerations on Ballot Types
 
@@ -99,7 +99,7 @@ These kinds of unexpected dynamics will appear throughout the analysis, undersco
 
 == Across Methods
 
-Another natural question is: _How does the choice of voting method change the dynamics of strategy?_ In order to test it, a scenario similar---but distinct---to @across-tactic is used. The candidates are still $A$ (DEM), $B$ (REP), $C$ (GREEN), and $D$ (IND). There are still two equally-sized voting blocs, but they only have 4,500 members each, because a third voting bloc has been added. This voting bloc is the Independent bloc, which has a size of 1,000 members, and has central preference $D prec C prec A prec B$, with $phi.alt = 0.2$. This bloc always votes honestly.
+Another natural question is: _How does the choice of voting method change the dynamics of strategy?_ In order to test it, a scenario similar---but distinct---to @fig:across-tactics is used. The candidates are still $A$ (DEM), $B$ (REP), $C$ (GREEN), and $D$ (IND). There are still two equally-sized voting blocs, but they only have 4,500 members each, because a third voting bloc has been added. This voting bloc is the Independent bloc, which has a size of 1,000 members, and has central preference $D prec C prec A prec B$, with $phi.alt = 0.2$. This bloc always votes honestly.
 
 The strategy weight is still $0.1$ for non-identity strategies. This time, the cohesion parameter for the Democrats and Republicans are independently set, each $[0.4, 0.45, 0.5, 0.55, 0.6]$. The left labels are the tactics used by the Democrats and Republicans respectively. The rightmost label is Democrats, the leftmost for Republicans.
 
@@ -107,27 +107,27 @@ The strategy weight is still $0.1$ for non-identity strategies. This time, the c
   Proportion of wins (or ties) for candidate $A$ across methods (Random dictator, Borda, Plurality, and IRV) and strategies (Identity, Burial, Compromise, Pushover), for given cohesion parameters for Democrats (x-axis) and Republicans (y-axis).
 ])[
   #image("../../assets/across_method_A.svg")
-] <across-method-A>
+] <fig:across-method-A>
 
 #figure(caption: [
   Proportion of wins (or ties) for candidate $B$ across methods (Random dictator, Borda, Plurality, and IRV) and strategies (Identity, Burial, Compromise, Pushover), for given cohesion parameters for Democrats (x-axis) and Republicans (y-axis).
 ])[
   #image("../../assets/across_method_B.svg")
-] <across-method-B>
+] <fig:across-method-B>
 
 #figure(caption: [
   Proportion of wins (or ties) for candidate $C$ across methods (Random dictator, Borda, Plurality, and IRV) and strategies (Identity, Burial, Compromise, Pushover), for given cohesion parameters for Democrats (x-axis) and Republicans (y-axis).
 ])[
   #image("../../assets/across_method_C.svg")
-] <across-method-C>
+] <fig:across-method-C>
 
 // #figure(caption: [
 //   Proportion of wins (or ties) for candidate $D$ across methods (Random dictator, Borda, Plurality, and IRV) and strategies (Identity, Burial, Compromise, Pushover), for given cohesion parameters for Democrats (x-axis) and Republicans (y-axis).
 // ])[
 //   #image("../../assets/across_method_D.svg")
-// ] <across-method-D>
+// ] <fig:across-method-D>
 
-Let's take a closer look at the results of @across-method-A. Turn first to Random Dictator which serves as a baseline. As expected, it's nearly regardless of strategy, since there is only a 10% chance of actually selecting a strategic ballot in the first place. We can see a slight gradient as the cohesion of bloc $A$ increases, which is due to the increased likelihood that a random ballot will be closer to the central ballot, thus having $A$ first.
+Let's take a closer look at the results of @fig:across-method-A. Turn first to Random Dictator which serves as a baseline. As expected, it's nearly regardless of strategy, since there is only a 10% chance of actually selecting a strategic ballot in the first place. We can see a slight gradient as the cohesion of bloc $A$ increases, which is due to the increased likelihood that a random ballot will be closer to the central ballot, thus having $A$ first.
 
 With Borda, $A$ never wins. With Borda count, candidate $C$'s strong position with nearly every voter ensures a victory 100% of the time, regardless of the cohesion of either bloc.
 
@@ -139,4 +139,4 @@ Notably, candidate A fails to secure any victories when both blocs employ non-co
 
 == Benchmarks
 
-Each simulation, each 10,000 voters, running 1,000 times, took $approx 0.25 "seconds"$. @across-method-A, @across-method-B, @across-method-C required running $4 times 4 times 4 times 5 times 5 = 1600$ simulations. The entire computation took $approx 7 "minutes"$
+Each simulation, each 10,000 voters, running 1,000 times, took $approx 0.25 "seconds"$. @fig:across-method-A, @fig:across-method-B, @fig:across-method-C required running $4 times 4 times 4 times 5 times 5 = 1600$ simulations. The entire computation took $approx 7 "minutes"$

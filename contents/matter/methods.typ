@@ -1,6 +1,6 @@
 #import "../../assets/assets.typ": election_pipeline, election_configuration
 
-= Methods <methods>
+= Methods <chp:methods>
 
 In this chapter, I describe each component of `kingmaker`, my framework for simulating strategic elections. In `kingmaker` an election is composed of a few core parts: a set of candidates, a set of voting blocs, and a method. A voting bloc has a preference and a strategy. The structure of an election is shown in @election-configuration. `kingmaker` also sets an election pipeline (see @election-pipeline) that specifies how ballots are generated, and how elections are tabulated and decided. It is important to understand that this model is _not_ realistic and has limitations that will be discussed thoroughly.
 
@@ -22,7 +22,7 @@ In this chapter, I describe each component of `kingmaker`, my framework for simu
   )
 )
 
-== Candidates <candidate>
+== Candidate
 
 In a real election, candidates must be registered before voting can begin. Similarly, in `kingmaker` an election must be configured with some set of candidates. This is done by creating a `Candidate` structure. A candidate is defined as follows:
 
@@ -45,9 +45,9 @@ In a real election, candidates must be registered before voting can begin. Simil
 
 One may be confused about the addition of the `positions` field to the `Candidate` structure. This is ignored in most cases, but in spatial voting it represents the policy positions of the candidate in some abstract "policy space".
 
-== Preferences & Realization <preference>
+== Preferences & Realization
 
-Preferences within `kingmaker` correspond with preferences as described in @realization, as some distribution over possible ballots. They are defined in the following manner:
+Preferences within `kingmaker` correspond with preferences as described in @sct:realization, as some distribution over possible ballots. They are defined in the following manner:
 
 #figure(caption: [Preference implementation in `kingmaker`])[
   ```Rust
@@ -77,7 +77,7 @@ Preferences within `kingmaker` correspond with preferences as described in @real
   ```
 ]
 
-While preferences may be implemented the same as @realization, the way they are _utilized_ in `kingmaker` is different. In theory---and reality---preferences are defined per voter. In `kingmaker`, preferences are defined once for a bloc of voters (e.g., Democrats, Independents, etc). This means that when different voters draw from the preference, they are drawing from the same underlying distribution. Thus we should model preferences for a voting bloc as aggregate preferences of all voters in the voting bloc, and that each draw is that voter's individual preferences being defined.
+While preferences may be implemented the same as @sct:realization, the way they are _utilized_ in `kingmaker` is different. In theory---and reality---preferences are defined per voter. In `kingmaker`, preferences are defined once for a bloc of voters (e.g., Democrats, Independents, etc). This means that when different voters draw from the preference, they are drawing from the same underlying distribution. Thus we should model preferences for a voting bloc as aggregate preferences of all voters in the voting bloc, and that each draw is that voter's individual preferences being defined.
 
 This notion is not entirely accurate, as this means that realization depends entirely on the average preferences of the voting bloc that they are a member of, with no intra-bloc differentiation. In reality, preferences can vary within a voting bloc, and individual preferences may deviate from the average in a random way. In this way, aggregating all preferences within a voting bloc loses valuable information. However, it is sufficient for our purposes.
 
@@ -93,9 +93,9 @@ We are primarily interested in well-known and well-understood preference models,
     [`Mallows`], [Select a ballot based on a Mallows distribution.],
     // [Spacial], [Select a ballot based on a spatial distribution.],
   )
-] <preferences-table>
+]
 
-== Tactics & Strategies <strategy>
+== Tactics & Strategies
 
 Tactics in `kingmaker` correspond exactly with tactics as defined by theory: deterministic processes that voters can engage with to increase their social welfare. Tactics are defined in the following manner.
 
@@ -125,9 +125,9 @@ Again, `kingmaker` implements a number of well-known tactics. These include:
     [`Burial`], [Place candidates with a higher likelihood of being elected last, over less preferred candidates.],
     [`Pushover`], [Place pushover candidates higher in the ranking, not to increase the likelihood of winning, but to eliminate stronger more preferred candidates early in tabulation rounds to then be defeated later by more preferred candidates.]
   )
-] <tactics-table>
+]
 
-== Voters & Voting Blocs <voting-bloc>
+== Voters & Voting Blocs
 
 In real-world elections, voters rarely act in complete isolation. Instead, shared interests, identities, or affiliations often lead individuals to vote in coordinated ways. These voting blocs—groups of voters with similar preferences or strategies—can form around political parties, regional identities, demographic categories, or shared ideologies. Their collective behavior can significantly shape electoral outcomes, amplify certain voices, and even enable strategic voting on a larger scale.
 
@@ -158,7 +158,7 @@ First, _each voter is a member of exactly one voting bloc_. In reality, individu
 
 Second, _each voting bloc has a single aggregate preference and strategy, shared by all of its members_. While this simplifies the sampling of preferences and strategies during simulation, it eliminates within-bloc heterogeneity at the preference level (but there is heterogeneity at the ballot level because each voter randomly realizes a ballot). In reality, even tightly aligned groups exhibit variation in how strongly they hold certain views or how likely they are to support specific candidates. A more realistic model might consider voters as having their own preferences, which are modified by the voting blocs that they are members of. This makes voting blocs function as some preference mode, but allows individuals to have their own preferences or strategies. It also allows for voters to be part of multiple voting blocs, which better models real voters, who are members of various social groups that holistically influence their preferences. Note that this applies to strategies as well as preferences.
 
-== Methods & Outcomes <methods-outcomes>
+== Methods & Outcomes
 
 With the profile of ballots in hand, the final step is to tabulate the results and determine the outcome. For this we use whichever `Method` we defined when configuring the election. An election is defined precisely the same as the theory suggests. It takes a pool of candidates and a profile of ballots and tabulates an outcome. It's a pure function with no side effects. Note that the outcomes could be a `SingleWinner` or a `MultiWinner` depending on whether the office is single-member or multi-member.
 
@@ -196,9 +196,9 @@ Kingmaker implements a number of well-known methods, as well as a few novel ones
     [`STV`], [Select $n$ candidates by eliminating the candidate with the fewest first-place, transferring votes from candidates who get elected, and redistributing votes until $n$ candidates have a majority of first-place votes.],
     [`STAR`], [Standing for "score then automatic runoff", there are two rounds of scoring. In the first round, the total scores given to each candidate are tallied, and the top 2 candidates move to the second round. In the second round, count the times each of the two candidates is preferred to the other. Whichever candidate is the more preferred wins.]
   )
-] <methods-table>
+]
 
-== Elections <election>
+== Elections
 
 The `Election` simply aggregates the necessary information: `conditions`, `candidate_pool`, `voter_pool`, and `method`, and provides a convenient interface for running elections. There are two methods for running elections: ```Rust election.run_once(seed: u64)``` and ```Rust election.run_many(times: usize, seed: u64)```. There are also the ```Rust display``` and ```Rust write``` functions, which output the election results to stdout or write them to a configuration file, respectively, after the simulation has completed.
 
