@@ -2,7 +2,7 @@
 
 = Methods <methods>
 
-In this chapter, I describe each component of `kingmaker` my framework for simulating strategic elections. In `kingmaker` an election is composed of a few core parts: a set of candidates, a set of voting blocs, and a method. A voting bloc has a preference and a strategy. The structure of an election is shown in @election-configuration. `kingmaker` also sets an election pipeline (see @election-pipeline) that species how ballots are generated, and elections tabulated and decided. It is important to understand that this model is _not_ realistic and has limitations that will be discussed thoroughly.
+In this chapter, I describe each component of `kingmaker`, my framework for simulating strategic elections. In `kingmaker` an election is composed of a few core parts: a set of candidates, a set of voting blocs, and a method. A voting bloc has a preference and a strategy. The structure of an election is shown in @election-configuration. `kingmaker` also sets an election pipeline (see @election-pipeline) that specifies how ballots are generated, and how elections are tabulated and decided. It is important to understand that this model is _not_ realistic and has limitations that will be discussed thoroughly.
 
 #stack(
   dir: ltr,
@@ -37,7 +37,7 @@ In a real election, candidates must be registered before voting can begin. Simil
       name: String,
       /// The party the candidate is associated with, if any
       party: Option<String>,
-      /// The (spacial) positions the candidate holds, if any
+      /// The (spatial) positions the candidate holds, if any
       positions: Option<Vec<NotNan<f32>>>,
   }
   ```
@@ -77,9 +77,9 @@ Preferences within `kingmaker` correspond with preferences as described in @real
   ```
 ]
 
-While preferences may be implemented the same as @realization, the way they are _utilized_ in `kingmaker` is different. In theory---and reality---preferences are defined per voter. In `kingmaker`, preferences are defined once for a bloc of voters (e.g. Democrats, Independents, etc). This means that when different voters draw from the preference, they are drawing from the same underlying distribution. Thus we should model preferences for a voting bloc as aggregate preferences of all voters in the voting bloc, and that each draw is that voters individual preferences being defined.
+While preferences may be implemented the same as @realization, the way they are _utilized_ in `kingmaker` is different. In theory---and reality---preferences are defined per voter. In `kingmaker`, preferences are defined once for a bloc of voters (e.g., Democrats, Independents, etc). This means that when different voters draw from the preference, they are drawing from the same underlying distribution. Thus we should model preferences for a voting bloc as aggregate preferences of all voters in the voting bloc, and that each draw is that voter's individual preferences being defined.
 
-This notion is not entirely accurate, as this means that realization is depends entirely on the average preferences of the voting bloc that they are a member of, with no intra-bloc differentiation. In reality, preferences can vary within a voting bloc, and individual preferences may deviate from the average in a random way. In this way, aggregating all preferences within a voting bloc loses valuable information. However, it is sufficient for our purposes.
+This notion is not entirely accurate, as this means that realization depends entirely on the average preferences of the voting bloc that they are a member of, with no intra-bloc differentiation. In reality, preferences can vary within a voting bloc, and individual preferences may deviate from the average in a random way. In this way, aggregating all preferences within a voting bloc loses valuable information. However, it is sufficient for our purposes.
 
 We are primarily interested in well-known and well-understood preference models, thus `kingmaker` implements a number of such preference models. These include:
 
@@ -97,7 +97,7 @@ We are primarily interested in well-known and well-understood preference models,
 
 == Tactics & Strategies <strategy>
 
-Tactics in `kingmaker` correspond exactly with tactics as defines by theory, as deterministic processes that voters can engage with to increase their social welfare. Tactics are defined in the following manner:
+Tactics in `kingmaker` correspond exactly with tactics as defined by theory: deterministic processes that voters can engage with to increase their social welfare. Tactics are defined in the following manner.
 
 #figure(caption: [Tactic implementation in `kingmaker`])[
   ```Rust
@@ -156,7 +156,7 @@ While this abstraction enables efficient simulation and experimentation, it also
 
 First, _each voter is a member of exactly one voting bloc_. In reality, individuals may belong to overlapping social, cultural, and political groups, each influencing their preferences to varying degrees. This one-to-one assignment flattens the multidimensional nature of voter identity and suppresses potential interactions between intersecting group affiliations.
 
-Second, _each voting bloc has a single aggregate preference and strategy, shared by all of its members_. While this simplifies the sampling of preferences and strategies during simulation, it eliminates within-bloc heterogeneity at the preference level (but there is heterogeneity at the ballot level because each voter randomly realizes a ballot). In reality, even tightly aligned groups exhibit variation in how strongly they hold certain views or how likely they are to support specific candidates. A more realistic might model voters might consider voters as having their own preferences, which are modified by the voting blocs that they are members of. This makes voting blocs function as influences with some preference mode, but allows individuals to have their own preferences or strategies. It also allows for voters to be part of multiple voting blocs, which better models real voters, who are members of various social groups that holistically influence their preferences. Note that this applies to strategies as well as preferences.
+Second, _each voting bloc has a single aggregate preference and strategy, shared by all of its members_. While this simplifies the sampling of preferences and strategies during simulation, it eliminates within-bloc heterogeneity at the preference level (but there is heterogeneity at the ballot level because each voter randomly realizes a ballot). In reality, even tightly aligned groups exhibit variation in how strongly they hold certain views or how likely they are to support specific candidates. A more realistic model might consider voters as having their own preferences, which are modified by the voting blocs that they are members of. This makes voting blocs function as some preference mode, but allows individuals to have their own preferences or strategies. It also allows for voters to be part of multiple voting blocs, which better models real voters, who are members of various social groups that holistically influence their preferences. Note that this applies to strategies as well as preferences.
 
 == Methods & Outcomes <methods-outcomes>
 

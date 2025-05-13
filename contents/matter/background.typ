@@ -3,7 +3,7 @@
 
 = Background <background>
 
-To understand the dynamics of strategic voting, we must first establish a formal foundation in social choice theory. This background section introduces the key concepts and terminology that underpin the rest of the analysis. It also outlines major results in voting theory---such as the Gibbard–Satterthwaite theorem and Arrows impossibility theorem---that highlight the fundamental limits of election design. In addition, we survey common strategic tactics (such as compromise and burial), models of voter preferences (such as the Impartial and Mallows models), and widely studied voting methods (such as Plurality and IRV). By grounding the discussion in this formal framework, we aim to provide the tools necessary to interpret the behavior of strategic agents in electoral settings.
+To understand the dynamics of strategic voting, we must first establish a formal foundation in social choice theory. This background section introduces the key concepts and terminology that underpin the rest of the analysis. It also outlines major results in voting theory---such as the Gibbard–Satterthwaite theorem and Arrow's Impossibility theorem---that highlight the fundamental limits of election design. In addition, we survey common strategic tactics (such as compromise and burial), models of voter preferences (such as the Impartial and Mallows models), and widely studied voting methods (such as Plurality and IRV). By grounding the discussion in this formal framework, we aim to provide the tools necessary to interpret the behavior of strategic agents in electoral settings.
 
 == A History of Social Choice <history>
 
@@ -13,9 +13,9 @@ Social choice has been applied since humanity has existed. After all there has a
 
 Early social choice theory was far more concerned with voting as a procedure than of social welfare as an ideal.
 
-One such precursor, Pliny the Younger---a Roman magistrate---wrote a letter to Titius Aristo on June 24, 105 @mclean-1995-classics, describing the a criminal trial which he presided over. Under the traditional senate procedures, there would first be a vote of innocence or guilt, and then if guilty, vote on a punishment, either exile or execution. Of the three proposals, acquittal, exile, or execution, acquittal held the plurality of supporters, but not the majority, although exile would have won in a direct two-way vote against either acquittal or execution. Pliny expected that guilt would won, and then execution. Being in favor of exile, he proposed a novel three-way election. This had the desired effect; supporters of execution withdrew their proposal, as acquittal would win if they split the vote for exile. The vote defaulted to a two-way election between acquittal and exile, which exile won.
+One such precursor, Pliny the Younger---a Roman magistrate---wrote a letter to Titius Aristo on June 24, 105 @mclean-1995-classics, describing a criminal trial which he presided over. Under the traditional senate procedures, there would first be a vote of innocence or guilt, and then if guilty, vote on a punishment, either exile or execution. Of the three proposals, acquittal, exile, or execution, acquittal held the plurality of supporters, but not the majority, although exile would have won in a direct two-way vote against either acquittal or execution. Pliny expected that guilt would win, and then execution. Being in favor of exile, he proposed a novel three-way election. This had the desired effect; supporters of execution withdrew their proposal, as acquittal would win if they split the vote for exile. The vote defaulted to a two-way election between acquittal and exile, which exile won.
 
-This is one of the earliest recorded instances of voting manipulation. Pliny deliberately changed the voting rules so that execution would have split the vote between exile and execution, leading to acquittal. In response the voters changed strategies and voted for the second best option.
+This is one of the earliest recorded instances of voting manipulation. Pliny deliberately changed the voting rules so that execution would split the vote between exile and execution, leading to acquittal. In response the voters changed strategies and voted for the second-best option.
 
 Other notable precursors include Catalan Ramon Lull (1232--1316) and the German Nikolaus Von Kues (1401--1464). Ramon Lull produced, among other things, what is now known as Copeland (or Lull's) method, in which the winner is the candidate with the most pairwise wins against other candidates via ranked ballots @copeland1951reasonable. Von Kues is known for proposing what is now known as Borda's method @hägele2008cusa.
 
@@ -23,15 +23,15 @@ Other notable precursors include Catalan Ramon Lull (1232--1316) and the German 
 
 Jean-Charles de Borda (1733--1799) and Nicolas de Condorcet (1743--1794) are considered the modern founders of social choice theory. They are distinguished from their precursors by the mathematical nature of their analysis.
 
-Of the two, Borda's contributions are the more limited, having only written few pages. In that space he outlined the Borda count, a Condorcet method where the each candidate is assigned a score defined as the aggregate points assigned by their placement on each ballot. (With $k$ options, rank 1 gets $k-1$ points, rank 2 gets $k-2$, etc.) The candidates with the most points wins. In the same article, he also shows that the plurality method is flawed, given that it can select a pairwise loser to all other candidates (i.e. a Condorcet loser).
+Of the two, Borda's contributions are the more limited, having only written few pages. In that space he outlined the Borda count, a Condorcet method where each candidate is assigned a score defined as the aggregate points assigned by their placement on each ballot. (With $k$ options, rank 1 gets $k-1$ points, rank 2 gets $k-2$, etc.) The candidates with the most points wins. In the same article, he also shows that the plurality method is flawed, given that it can select a pairwise loser to all other candidates (i.e. a Condorcet loser).
 
-Condorcet alternatively devotes an entire books---along with several papers---worth of material on voting in his _Essay on the Application of Analysis to the Probability of Majority Decisions_ [translated from the native French]. In his work, Condorcet establishes many notable results, including Condorcet's jury theorem and Condorcet's paradox. Condorcet's jury theorem proves that if each jury member is more likely than not to make a correct verdict, then the probability that the majority verdict is correct increases as the number of jury members increases. Condorcet's paradox, a fundamental property of majority rule, states that with more than 2 candidates plurality methods can become intransitive (_not_ transitive)---it's possible for $A$ to pairwise beat $B$, $B$ to pairwise beat $C$, _and_ $C$ to pairwise beat $A$.
+Condorcet alternatively devotes an entire book's worth of material---along with several papers---on voting in his _Essay on the Application of Analysis to the Probability of Majority Decisions_ [translated from the native French]. In his work, Condorcet establishes many notable results, including Condorcet's jury theorem and Condorcet's paradox. Condorcet's jury theorem proves that if each jury member is more likely than not to make a correct verdict, then the probability that the majority verdict is correct increases as the number of jury members increases. Condorcet's paradox, a fundamental property of majority rule, states that with more than 2 candidates plurality methods can become intransitive (_not_ transitive)---it's possible for $A$ to pairwise beat $B$, $B$ to pairwise beat $C$, _and_ $C$ to pairwise beat $A$.
 
 It bears mentioning that Condorcet's jury paradox relates to Condorcet methods, a class of voting systems that are named after him. Condorcet methods are voting methods that elect the candidate who wins head-to-head elections against every other candidate, whenever such a candidate exists. When such a candidate does not exist, the method is said to be _intransitive_---it exhibits Condorcet's paradox.
 
 === Welfare Economics <welfare-economics>
 
-Up until the mid-twentieth century, social choice theory had been primarily focused on the study of voting systems and their properties, such as _Condorcet_ and _Borda_. A general approach to the study of preference aggregation and social choice has not yet been developed. This is where _Kenneth Arrow_ came into the picture. It's Kenneth Arrow's Nobel prize-worthy contributions that first formalized such an approach, formally classifying a sub-class of preference aggregation methods that he called _social welfare functions_. He then proceeded to use this framework to prove the famous _Arrow's impossibility theorem_ @arrows-theorem in 1963.
+Up until the mid-twentieth century, social choice theory had been primarily focused on the study of voting systems and their properties, such as _Condorcet_ and _Borda_. A general approach to the study of preference aggregation and social choice had not yet been developed. This is where _Kenneth Arrow_ came into the picture. It's Kenneth Arrow's Nobel prize-worthy contributions that first formalized such an approach, formally classifying a sub-class of preference aggregation methods that he called _social welfare functions_. He then proceeded to use this framework to prove the famous _Arrow's Impossibility theorem_ @arrows-theorem in 1963.
 
 #theorem(title: "Arrow's Impossibility Theorem")[
   For a collection of 2 or more voters choosing between 3 or more possible alternatives, there does not exist a social welfare function $cal(W)$ that satisfies a set of reasonable axioms---they are incompatible.
@@ -48,9 +48,9 @@ This theorem sparked much debate in social choice. As the _Stanford Encyclopedia
   William Riker (1920–1993), who inspired the Rochester school in political science, interpreted it as a mathematical proof of the impossibility of populist democracy (e.g., Riker 1982). Others, most prominently Amartya Sen (born 1933), who won the 1998 Nobel Memorial Prize, took it to show that ordinal preferences are insufficient for making satisfactory social choices and that social decisions require a richer informational basis. Commentators also questioned whether Arrow’s desiderata on an aggregation method are as innocuous as claimed or whether they should be relaxed.
 ]
 
-But while Arrow's impossibility theorem might be the most well-known social choice theorem, it's a different but no less important social choice theorem that will be the focus of our research today. That theorem being the _Gibbard-Satterthwaite theorem_ @gibbard-satterthwaite-theorem. The Gibbard-Satterthwaite theorem was first conjectured by philosopher Michael Dummett and the mathematician Robin Farquharson in 1961 @gibbard-satterthwaite-conjecture and then independently proved by philosopher Allan Gibbard in 1973 @gibbard-satterthwaite-gibbard and economist Mark Satterthwaite in 1975 @gibbard-satterthwaite-satterthwaite. Gibbard's proof is more general, considering not only ordinal elections, but cardinal voting. Gibbard's 1978 theorem @gibbard-satterthwaite-non-deterministic and Hylland's theorem expand the set of processes to encompass non-deterministic processes . The Duggan–Schwartz theorem extends these results to multiwinner elections @duggan-2000.
+But while Arrow's Impossibility theorem might be the most well-known social choice theorem, it's a different but no less important social choice theorem that will be the focus of our research today. That theorem being the _Gibbard-Satterthwaite theorem_ @gibbard-satterthwaite-theorem, which was first conjectured by philosopher Michael Dummett and the mathematician Robin Farquharson in 1961 @gibbard-satterthwaite-conjecture and then independently proved by philosopher Allan Gibbard in 1973 @gibbard-satterthwaite-gibbard and economist Mark Satterthwaite in 1975 @gibbard-satterthwaite-satterthwaite. Gibbard's proof is more general, considering not only ordinal elections, but cardinal voting. Gibbard's 1978 theorem @gibbard-satterthwaite-non-deterministic and Hylland's theorem expands the set of processes to encompass non-deterministic ones. The Duggan–Schwartz theorem extends these results to multiwinner elections @duggan-2000.
 
-It states, broadly, that for any non-dictatorial, voting system with at least 3 alternatives, there does not exist for a _dominant strategy_ for any voter aiming to maximize their own social welfare, including the identity strategy (honest voting). For a more formal statement of the theorem, see @gibbard-satterthwaite-def.
+It states, broadly, that for any non-dictatorial voting system with at least 3 alternatives, there does not exist a _dominant strategy_ for any voter aiming to maximize their own social welfare, including the identity strategy (honest voting). For a more formal statement of the theorem, see @gibbard-satterthwaite-def.
 
 == Classic Social Choice <classic-social-choice> // ============================
 
@@ -125,12 +125,12 @@ Pushover is a tactic on ordinal ballots, which typically is employed in multi-ro
 ]
 
 #example[
-  Let $pi = ⟨A, B, C, D, E, F⟩, k = ⟨A, B⟩, l = ⟨E, F⟩$. Then $"Burial"(pi, k) = ⟨A, B, E, F, C, D⟩$
+  Let $pi = ⟨A, B, C, D, E, F⟩, k = ⟨A, B⟩, l = ⟨E, F⟩$. Then $"Pushover"(pi, k) = ⟨A, B, E, F, C, D⟩$
 ]
 
 === Historical Voting Methods
 
-Along with tactics, there are many historical and current voting methods that are used across the world. Voting methods can be broken down by which type of ballots they use. The three most common are: ordinal, cardinal, and norminal. Ordinal ballots are rankings, (e.g. $⟨A, B, C⟩$). Cardinal ballots are scores, (e.g. $A = 3, B = 4, C = 2$. Nominal ballots are sets, ${A, B}$. Below are a few of the most common ones.
+Along with tactics, there are many historical and current voting methods that are used across the world. Voting methods can be broken down by which type of ballots they use. The three most common are: ordinal, cardinal, and norminal. Ordinal ballots are rankings, (e.g., $⟨A, B, C⟩$). Cardinal ballots are scores, (e.g., $A = 3, B = 4, C = 2$). Nominal ballots are sets, ${A, B}$. Below are a few of the most common ones.
 
 #definition(title: "Plurality")[
   Plurality is an ordinal-adjacent, single-winner voting method, also known as first-past-the-post (FPTP).
@@ -181,11 +181,11 @@ Note that while plurality is sometimes called majority voting, a candidate does 
 #example[
   Suppose we have 4000 ballots with preferences $A prec B prec C prec D$, 3500 ballots with preferences $B prec D prec A prec C$, 1500 ballots with preferences $C prec A prec B prec D$, 1000 ballots with preferences $D prec C prec B prec A$ (10,000 total ballots).
 
-  + Round 1: Counting the first place votes, $A = 4000, B = 3500, C = 1500, D = 1000$. No candidate has a majority, so the last place candidate ($D$) is eliminated. Their votes are redistributed to the next candidate ($C$).
+  + Round 1: Counting the first place votes, $A = 4000, B = 3500, C = 1500, D = 1000$. No candidate has a majority, so the last place candidate ($D$) is eliminated. Their 1000 votes are redistributed to the next candidate ($C$).
 
-  + Round 2: Counting the first place votes, $A = 4000, B = 3500, C = 2500$. No candidate has a majority, so the last place candidate ($C$) is eliminated. Their votes are redistributed to the next candidate ($A$).
+  + Round 2: Counting the first place votes, $A = 4000, B = 3500, C = 2500$. No candidate has a majority, so the last place candidate ($C$) is eliminated. Their 2500 votes are redistributed to the next candidates (1500 for $A$ and 1000 for $B$).
 
-  + Round 3: Counting the first place votes, $A = 6500, B = 3500$. Candidate $A$ has a majority, so $A$ is the winner.
+  + Round 3: Counting the first place votes, $A = 5500, B = 4500$. Candidate $A$ has a majority, so $A$ is the winner.
 ]
 
 #definition(title: "STV")[
@@ -199,15 +199,17 @@ Note that while plurality is sometimes called majority voting, a candidate does 
 
   - If a candidate exceeds the quota, they are elected. Their excess votes are then redistributed to the next candidate in the voter's ranking. This redistribution is proportional: each ballot contributing to the surplus is transferred at a fractional weight such that the total transferred equals the surplus.
 
-  - If no candidate exceeds the droop quota, then the candidate(s) with the fewest votes are eliminated. Their votes are then redistributed to the next candidate in the voter's ranking, if any.
+  - If no candidate exceeds the Droop quota, then the candidate(s) with the fewest votes are eliminated. Their votes are then redistributed to the next candidate in the voter's ranking, if any.
 ]
 
 #example[
   Suppose we want to elect $2$ seats. There are 4,500 ballots with preferences $A prec C prec B prec D$, 3000 ballots with preferences $B prec D prec A prec C$, 1500 ballots with preferences $C prec A prec B prec D$, 1000 ballots with preferences $D prec C prec B prec A$ (10,000 total ballots). Thus the droop quota is $10000 / (2 + 1) = 3333$.
 
-  + Round 1: Counting the first place votes, $A = 4500, B = 3000, C = 1500, D = 1000$. Candidate $A$ exceeds the quota, and is elected. Their votes are redistributed to the next candidate ($C$).
+  + Round 1: Counting the first place votes, $A = 4500, B = 3000, C = 1500, D = 1000$. Candidate $A$ exceeds the quota, and is elected. Their 1167 votes in excess of the Droop quota are redistributed to the next candidate ($C$).
 
-  + Round 2: Counting the first place votes, $C = 4500 + 1500 = 6000, B = 3000, D = 1000$. Candidate $C$ exceeds the quota, and is elected. There are no more seats to fill, so the election is over. Candidates $A$ and $C$ are elected.
+  + Round 2: Counting the first place votes, $C = 1500 + 1167 = 2667, B = 3000, D = 1000$. No candidate exceeds the Droop quota, so the candidate with the fewest votes is eliminated ($D$). Their votes are redistributed to $C$.
+
+  + Round 3: Counting the first place votes, $C = 2667 + 1000 = 3667, B = 3000$. Candidate $C$ exceeds the Droop quota, and is elected.
 ]
 
 == Statistical Social Choice <statistical-social-choice> // ====================
@@ -224,7 +226,7 @@ This form of stochastic voting is a concept hardwired into the framework of this
 
 === Statistical Social Choice Rules <statistical>
 
-The idea of preference realization comes up in social choice theory, though social choice theorists (aka economists) define it as a model for ballot generation, rather than a stochastic realization (e.g. @guide-numerical). These models have characteristics and parameters $theta$ which allow us to simulate voting behavior in some ways. Below a few of the most common models are defined.
+The idea of preference realization comes up in social choice theory, though some social choice theorists (e.g., economists) define it as a model for ballot generation, rather than a stochastic realization such as @guide-numerical. These models have characteristics and parameters $theta$ which allow us to simulate voting behavior in some way. Below a few of the most common models are defined.
 
 #definition(title: "Impartial")[
   Let $Pi$ be the collection of possible ballots. The impartial model randomly realizes some ballot $pi$ with probability according to: $
@@ -263,7 +265,7 @@ The Plackett-Luce model constructs a ballot sequentially. At each step, a candid
 ]
 
 #definition(title: "Mallows")[
-  Let $pi_0$ be the central ranking of the candidates (e.g. $A prec B prec C$), and $phi.alt in [0, oo)$ be the cohesion parameter. Additionally set a distance function $d$ that measures the distance between two rankings $pi$ and $pi_0$. Typically this distance function is the Kendall Tau distance, which counts the number of pairwise disagreements between two rankings.
+  Let $pi_0$ be the central ranking of the candidates (e.g., $A prec B prec C$), and $phi.alt in [0, oo)$ be the cohesion parameter. Additionally set a distance function $d$ that measures the distance between two rankings $pi$ and $pi_0$. Typically this distance function is the Kendall Tau distance, which counts the number of pairwise disagreements between two rankings.
 
   The Mallows model randomly realizes some ballot $pi$ with probability according to: $
     P[pi] prop exp(-phi.alt dot d(pi, pi_0))
@@ -274,8 +276,8 @@ The Plackett-Luce model constructs a ballot sequentially. At each step, a candid
 
 While this pmf is well-defined, it doesn't tell us how to actually draw a ranking from it. Implementation-wise, drawing occurs by first sampling a distance, and then uniformly drawing a ranking from the set of rankings at that distance. Assuming that the distance function $d$ is the Kendall Tau distance, the following approach is sufficient to realize a ballot.
 
-The pmf of drawing a ranking with distance $k$ is given by: $
-  exp(-phi.alt dot d(pi, pi_0)) dot "# of ballots with distance" k.
+The pmf of drawing a ranking with distance $k$ is proportional to: $
+  exp(-phi.alt dot k) dot "# of ballots with distance" k.
 $ The number of ballots with distance $k$ is equivalent to the number of permutations (rankings) of $n$ elements with exactly $k$ inversions. This number is given by the Mahonian distribution, which is the distribution of the number of inversions in a random permutation.
 
 Second, with a distance $k$ drawn, uniformly draw a ranking from the set of rankings with distance $k$. This is done by constructing a decomposition vector where the number at a given index $i$ corresponds to the number of inversions---numbers bigger than $i$ but which are before $i$ in the permutation. The following is the commented algorithm [written as python pseudocode]:

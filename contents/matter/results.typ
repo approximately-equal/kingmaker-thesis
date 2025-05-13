@@ -1,6 +1,6 @@
 = Results <results>
 
-Recall that we wish to explore how strategic voting impacts election outcomes depending on the method, the social conditions (preference models and relative frequencies of voters in each voting bloc), and strategy. With the necessary background and methodology covered, we proceed to actually using `kingmaker` to simulate election and see what results we obtain.
+Recall that we wish to explore how strategic voting impacts election outcomes depending on the method, the social conditions (preference models and relative frequencies of voters in each voting bloc), and strategy. With the necessary background and methodology covered, we proceed to actually using `kingmaker` to simulate elections and see what results we obtain.
 
 == Across Cohesion
 
@@ -16,29 +16,37 @@ The election setup has 3 candidates: A (DEM), B (REP), and C (IND), with method 
 
 The identity tactic has a 50--50 chance of $A$ winning when the $phi.alt = 1-phi.alt = 0.5$, which is what we expect. With the cohesion parameters equal, the two voting blocs create ballots in exactly symmetric ways, making the winner an even split between $A$ and $B$. In this setup, $C$ never wins at any cohesion level.
 
-Looking at the actual strategies, they do in fact work, giving Democrats an edge even with lower cohesion levels. Given that the proportion of wins is 50% at $phi.alt approx 0.45$.
-
-Also consider that these strategies all have the _same_ effect. In fact the effect is _exactly_ the same, because the randomness (RNG) is seeded and deterministic. The slight difference is just added jitter for improved legibility.
-
-This fact makes sense only because the election is so simple, and would not hold up in more complex scenarios.
+Looking at the actual strategies, they do in fact work, giving Democrats an edge even with lower cohesion: the proportion of wins is 50% at $phi.alt approx 0.45$. Also consider that these strategies all have the _same_ effect. In fact the effect is _exactly_ the same, because the randomness (RNG) is seeded and deterministic. The slight difference is just added jitter for improved legibility. This fact makes sense only because the election is so simple, and would not hold up in more complex scenarios.
 
 == Across Tactics
 
 A natural question that arises from this analysis is: _Which tactics perform best when deployed against one another?_ To explore this, the following experimental setup is applied.
 
-We consider an election with four candidates: $A$ (DEM), $B$ (REP), $C$ (GREEN), and $D$ (IND). The election will be tabulated via instant-runoff (IRV). The electorate consists of two equally sized voting blocs: 5,000 Democrats and 5,000 Republicans. Each bloc has a characteristic preference order, modeled using the Mallows distribution. Democrats are centered around the ranking $A prec C prec D prec B$ with cohesion parameter $phi.alt$, while Republicans follow $B prec C prec D prec A$ with cohesion $1 - phi.alt$.
+We consider an election with four candidates: $A$ (DEM), $B$ (REP), $C$ (GREEN), and $D$ (IND). The election will be tabulated via instant-runoff (IRV). The electorate consists of two equally sized voting blocs: 5,000 Democrats and 5,000 Republicans. Each bloc has a characteristic preference order, modeled using the Mallows distribution. Democrats are centered around the ranking $A prec C prec D prec B$ with cohesion parameter $phi.alt$, while Republicans follow $B prec C prec D prec A$ with cohesion $1 - phi.alt$. Each voter uses a strategy 10% of the time, and defaults to the identity strategy the remaining 90%. We vary the strategy employed by each bloc in order to evaluate tactical interactions.
 
-Each voter uses a strategy 10% of the time, and defaults to the identity strategy the remaining 90%. We vary the strategy employed by each bloc in order to evaluate tactical interactions.
+The Mallows model will produce a ranking with some number of inversions for each ballot, depending on the number of candidates $n$ and the cohesion parameter $phi.alt$. We use $n = 4$, giving a distribution as shown.
 
-@across-tactic presents the outcomes of these matchups. The columns represent the strategy used by Democrats, and the rows represent those used by Republicans.
+#figure(caption: [Distribution of inversions for $n = 4$])[
+  #table(
+    columns: 8,
+    table.header([$phi.alt$], [0 Inv], [1 Inv], [2 Inv], [3 Inv], [4 Inv], [5 Inv], [6 Inv]),
+    [$0.00$], [$4.17%$], [$12.50%$], [$20.83%$], [$25.00%$], [$20.83%$], [$12.50%$], [$4.17%$],
+    [$0.25$], [$8.25%$], [$19.27%$], [$25.01%$], [$23.37%$], [$15.17%$], [$7.09%$], [$1.84%$],
+    [$0.50$], [$14.35%$], [$26.10%$], [$26.39%$], [$19.21%$], [$9.71%$], [$3.53%$], [$0.71%$],
+    [$0.75$], [$22.24%$], [$31.52%$], [$24.82%$], [$14.07%$], [$5.54%$], [$1.57%$], [$0.25%$],
+    [$1.00$], [$31.32%$], [$34.56%$], [$21.19%$], [$9.35%$], [$2.87%$], [$0.63%$], [$0.08%$],
+
+
+  )
+] <tbl:inversions-from-mallows>
+
+@across-tactic presents the outcomes of these matchups. The columns represent the strategy used by Democrats, and the rows represent those used by Republicans. Several patterns emerge from this pairwise matchup of strategies. The plot naturally divides into four quadrants, each representing different combinations of bloc strategies. Interestingly, identity and burial behave similarly, as do compromise and pushover.
 
 #figure(caption: [
   Proportion of wins for each candidate across all combinations of tactics. The columns represent the strategy used by Democrats, and the rows represent those used by Republicans. Each color corresponds to a different candidate, with the x-axis the cohesion ($phi.alt$) of the Democrats ($1 - phi.alt$ for Republicans), and the y-axis the proportion of election wins (or ties) under the given conditions.
 ])[
   #image("../../assets/across_tactic.svg")
 ] <across-tactic>
-
-Several patterns emerge from this pairwise matchup of strategies. The plot naturally divides into four quadrants, each representing different combinations of bloc strategies. Interestingly, identity and burial behave similarly, as do compromise and pushover.
 
 This similarity is best understood through the distinction between _constructive_ and _non-constructive_ tactics.
 
@@ -89,7 +97,7 @@ For instance, Democrats using the pushover strategy might hope to help candidate
 
 These kinds of unexpected dynamics will appear throughout the analysis, underscoring how strategic voting often has ripple effects that are difficult to predict in isolation.
 
-== Across Method
+== Across Methods
 
 Another natural question is: _How does the choice of voting method change the dynamics of strategy?_ In order to test it, a scenario similar---but distinct---to @across-tactic is used. The candidates are still $A$ (DEM), $B$ (REP), $C$ (GREEN), and $D$ (IND). There are still two equally-sized voting blocs, but they only have 4,500 members each, because a third voting bloc has been added. This voting bloc is the Independent bloc, which has a size of 1,000 members, and has central preference $D prec C prec A prec B$, with $phi.alt = 0.2$. This bloc always votes honestly.
 
@@ -119,15 +127,15 @@ The strategy weight is still $0.1$ for non-identity strategies. This time, the c
 //   #image("../../assets/across_method_D.svg")
 // ] <across-method-D>
 
-Let's take a closer look at the results of @across-method-A. Turn first to Random Dictator, this serves as a baseline. As expected, its nearly regardless of strategy, since there is only a 10% chance of actually selecting a strategic ballot in the first place. We can see a slight gradient as the cohesion of bloc $A$ increases, which is due to the increased likelihood that a random ballot will be closer to the central ballot, thus having $A$ first.
+Let's take a closer look at the results of @across-method-A. Turn first to Random Dictator which serves as a baseline. As expected, it's nearly regardless of strategy, since there is only a 10% chance of actually selecting a strategic ballot in the first place. We can see a slight gradient as the cohesion of bloc $A$ increases, which is due to the increased likelihood that a random ballot will be closer to the central ballot, thus having $A$ first.
 
-Looking over to Borda, turns out $A$ never wins. With Borda count, candidate $C$'s strong position with nearly every voter ensures a victory 100% of the time, regardless of the cohesion of either bloc.
+With Borda, $A$ never wins. With Borda count, candidate $C$'s strong position with nearly every voter ensures a victory 100% of the time, regardless of the cohesion of either bloc.
 
 The most notable patterns emerge under the Plurality and Instant-Runoff Voting (IRV) systems. In the case of Plurality, there is a pronounced divergence in outcomes depending on whether candidate $A$’s bloc adopts constructive or non-constructive strategies. When non-constructive strategies such as identity or burial are employed, candidate $A$ almost never wins. Instead, the election is typically conceded to candidate $C$, and occasionally to candidate $B$ when $B$’s bloc pursues a constructive tactic. In contrast, when $A$’s bloc employs constructive strategies such as compromise or pushover, the likelihood of an A victory increases substantially. In these cases, $B$ tends to prevail only when its bloc exhibits significantly higher cohesion.
 
 It is also worth highlighting the combination of pushover (by one bloc) and burial (by the other), which results in a markedly higher win rate for candidate $C$. This effect is especially pronounced under IRV, but it is also observable under Plurality.
 
-Notably, candidate A fails to secure any victories when both blocs employ non-constructive strategies. In such scenarios, the compromise candidate C consistently emerges as the winner. However, when candidate $A$’s bloc uses the identity strategy against a constructive strategy employed by the opposing bloc, $A$ can occasionally prevail-particularly when both blocs exhibit high levels of cohesion. In less cohesive settings, the advantage again shifts toward candidate $C$, who benefits from receiving broad, albeit secondary, support.
+Notably, candidate A fails to secure any victories when both blocs employ non-constructive strategies. In such scenarios, the compromise candidate ($C$) consistently emerges as the winner. However, when candidate $A$’s bloc uses the identity strategy against a constructive strategy employed by the opposing bloc, $A$ can occasionally prevail---particularly when both blocs exhibit high levels of cohesion. In less cohesive settings, the advantage again shifts toward candidate $C$, who benefits from receiving broad, albeit secondary, support.
 
 == Benchmarks
 
